@@ -1,8 +1,37 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import {
+  siGo, siPython, siTypescript, siDocker,
+  siGooglecloud, siTerraform, siVault, siGithubactions,
+  siPostgresql, siMysql, siMongodb, siRedis,
+  siClaude, siClaudecode, siGooglegemini, siOllama,
+  siLinux, siSelenium, siWhatsapp, siOpenid,
+} from 'simple-icons';
 
 const LASTFM_USER = import.meta.env.PUBLIC_LASTFM_USER ?? "RobotDogger";
 const LASTFM_KEY  = import.meta.env.PUBLIC_LASTFM_API_KEY ?? "";
+
+const iconMap: Record<string, string> = {
+  'Go':             siGo.path,
+  'Python':         siPython.path,
+  'TypeScript':     siTypescript.path,
+  'GCP':            siGooglecloud.path,
+  'Docker':         siDocker.path,
+  'Terraform':      siTerraform.path,
+  'Vault':          siVault.path,
+  'GitHub Actions': siGithubactions.path,
+  'PostgreSQL':     siPostgresql.path,
+  'MySQL':          siMysql.path,
+  'MongoDB':        siMongodb.path,
+  'Redis':          siRedis.path,
+  'Claude':         siClaude.path,
+  'Ollama':         siOllama.path,
+  'Gemini':         siGooglegemini.path,
+  'Linux':          siLinux.path,
+  'Selenium':       siSelenium.path,
+  'WhatsApp API':   siWhatsapp.path,
+  'OAuth2':         siOpenid.path,
+};
 
 const roles = ["Backend Engineer", "IAM Specialist", "Go Developer", "Python Dev"];
 
@@ -98,28 +127,28 @@ const projects = [
 ];
 
 const stack = [
-  { label: "Go",         cls: "go"    },
-  { label: "Python",     cls: "python"},
-  { label: "TypeScript", cls: "ts"    },
-  { label: "SQL",        cls: "db"    },
-  { label: "Bash",       cls: ""      },
-  { label: "OAuth2",     cls: "iam"   },
-  { label: "JWT",        cls: "iam"   },
-  { label: "RBAC",       cls: "iam"   },
-  { label: "SOX / PCI",  cls: "iam"   },
-  { label: "GCP",        cls: "infra" },
-  { label: "AWS",        cls: "infra" },
-  { label: "Docker",     cls: "infra" },
-  { label: "Terraform",  cls: "infra" },
-  { label: "Vault",      cls: "infra" },
-  { label: "GitHub Actions", cls: "infra" },
-  { label: "PostgreSQL", cls: "db"    },
-  { label: "MySQL",      cls: "db"    },
-  { label: "MongoDB",    cls: "db"    },
-  { label: "Redis",      cls: "db"    },
-  { label: "Claude",     cls: "ai"    },
-  { label: "Ollama",     cls: "ai"    },
-  { label: "Gemini",     cls: "ai"    },
+  { label: "Go",             cls: "go",    icon: siGo.path          },
+  { label: "Python",         cls: "python",icon: siPython.path       },
+  { label: "TypeScript",     cls: "ts",    icon: siTypescript.path   },
+  { label: "SQL",            cls: "db",    icon: null                },
+  { label: "Bash",           cls: "",      icon: null                },
+  { label: "OAuth2",         cls: "iam",   icon: siOpenid.path       },
+  { label: "JWT",            cls: "iam",   icon: null                },
+  { label: "RBAC",           cls: "iam",   icon: null                },
+  { label: "SOX / PCI",      cls: "iam",   icon: null                },
+  { label: "GCP",            cls: "infra", icon: siGooglecloud.path  },
+  { label: "AWS",            cls: "infra", icon: null                },
+  { label: "Docker",         cls: "infra", icon: siDocker.path       },
+  { label: "Terraform",      cls: "infra", icon: siTerraform.path    },
+  { label: "Vault",          cls: "infra", icon: siVault.path        },
+  { label: "GitHub Actions", cls: "infra", icon: siGithubactions.path},
+  { label: "PostgreSQL",     cls: "db",    icon: siPostgresql.path   },
+  { label: "MySQL",          cls: "db",    icon: siMysql.path        },
+  { label: "MongoDB",        cls: "db",    icon: siMongodb.path      },
+  { label: "Redis",          cls: "db",    icon: siRedis.path        },
+  { label: "Claude",         cls: "ai",    icon: siClaude.path       },
+  { label: "Ollama",         cls: "ai",    icon: siOllama.path       },
+  { label: "Gemini",         cls: "ai",    icon: siGooglegemini.path },
 ];
 ---
 
@@ -128,13 +157,30 @@ const stack = [
     <div class="hero-glow"></div>
 
     <!-- Nav -->
-    <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 md:px-8 py-4 backdrop-blur-sm" style="background: rgba(8,8,8,0.85); border-bottom: 1px solid rgba(255,255,255,0.04);">
-      <span class="text-[#00d9ff] text-xs tracking-widest font-bold">gabotachak<span style="color:#3a3a3a">.dev</span></span>
-      <div class="flex gap-3 md:gap-6">
+    <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 md:px-8 py-4 backdrop-blur-sm" style="background: var(--nav-bg); border-bottom: 1px solid var(--nav-border);">
+      <span class="text-xs tracking-widest font-bold" style="color: var(--accent);">gabotachak<span style="color: var(--muted);">.dev</span></span>
+      <div class="flex gap-3 md:gap-6 items-center">
         <a href="#experience" class="nav-link hidden sm:inline">exp</a>
         <a href="#projects"   class="nav-link hidden sm:inline">projects</a>
         <a href="#stack"      class="nav-link hidden sm:inline">stack</a>
-        <a href="mailto:hi@gabotachak.dev" class="nav-link" style="color:#00d9ff">contact</a>
+        <a href="#uses"       class="nav-link hidden sm:inline">uses</a>
+        <a href="mailto:hi@gabotachak.dev" class="nav-link" style="color: var(--accent);">contact</a>
+        <button id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+          <!-- dark mode: show moon -->
+          <svg id="icon-moon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+          <!-- light mode: show sun -->
+          <svg id="icon-sun" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <!-- system mode: show auto label -->
+          <span id="icon-auto" style="display:none; font-size:10px; letter-spacing:0.05em;">auto</span>
+        </button>
       </div>
     </nav>
 
@@ -154,23 +200,26 @@ const stack = [
 
         <!-- Text -->
         <div class="flex-1">
-          <div class="text-xs tracking-[0.25em] uppercase mb-3" style="color:#3a3a3a">
-            <span style="color:#00d9ff66">▶</span> identity verified
+          <div class="inline-flex items-center gap-2 text-[10px] tracking-[0.18em] uppercase mb-4 px-2.5 py-1 rounded-sm" style="color: var(--dim); border: 1px solid var(--border); background: var(--surface);">
+            <span style="color: var(--accent);">✓</span> identity_verified
           </div>
 
-          <h1 id="hero-name" class="text-4xl md:text-5xl font-bold text-white mb-2 tracking-tight" style="letter-spacing:-0.5px;">
+          <h1 id="hero-name" class="text-4xl md:text-5xl font-bold mb-2 tracking-tight" style="letter-spacing:-0.5px; color: var(--text);">
             Gabriel Anzola Tachak
           </h1>
 
           <div class="flex items-center gap-3 mb-5" style="height:28px;">
-            <span style="color:#00d9ff; opacity:0.5; font-size:14px;">~/</span>
-            <span id="role-text" class="cursor text-lg font-medium" style="color:#00d9ff; min-width:220px;"></span>
+            <span style="color: var(--accent); opacity:0.5; font-size:14px;">~/</span>
+            <span id="role-text" class="cursor text-lg font-medium" style="color: var(--accent); min-width:220px; font-family: var(--font), 'Noto Color Emoji';"></span>
           </div>
 
-          <p class="text-sm leading-relaxed mb-6 max-w-lg" style="color:#888;">
+          <p class="text-sm leading-relaxed mb-3 max-w-lg" style="color: var(--hero-subdesc);">
             Backend engineer with 4+ years at MercadoLibre in Identity & Access Management.
             Go and Python. Now building at Workstate for Compass, US real estate at scale.
             UNAL Systems Engineering.
+          </p>
+          <p class="text-xs mb-6" style="color: var(--dim); font-family: var(--font), 'Noto Color Emoji';">
+            Coffee-flavored backend ☕ · Bogotá, Colombia 🇨🇴
           </p>
 
           <div class="flex gap-5 text-xs">
@@ -199,24 +248,31 @@ const stack = [
         <div class="timeline-line"></div>
 
         <div class="space-y-10">
-          {experience.map((job, i) => (
+          {experience.map((job) => (
             <div class="relative flex gap-6 items-start">
               <div class={`timeline-dot ${job.active ? '' : 'inactive'}`} style="flex-shrink:0; margin-top:2px;"></div>
               <div class="flex-1 min-w-0">
                 <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
                   <div>
-                    <span class="text-white font-semibold text-sm">{job.role}</span>
-                    <span style="color:#444"> @ </span>
-                    <span class="text-sm" style="color:#00d9ff">{job.company}</span>
-                    {job.client && <span class="text-xs" style="color:#555"> · {job.client}</span>}
-                    {job.active && <span class="ml-2 text-[10px] px-1.5 py-0.5 rounded" style="background:#00d9ff12; color:#00d9ff; border:1px solid #00d9ff22;">active</span>}
+                    <span class="font-semibold text-sm" style="color: var(--text);">{job.role}</span>
+                    <span style="color: var(--exp-at);"> @ </span>
+                    <span class="text-sm" style="color: var(--accent);">{job.company}</span>
+                    {job.client && <span class="text-xs" style="color: var(--tag-color);"> · {job.client}</span>}
+                    {job.active && <span class="ml-2 text-[10px] px-1.5 py-0.5 rounded" style="background: var(--badge-bg); color: var(--accent); border: 1px solid var(--badge-border);">active</span>}
                   </div>
-                  <span class="text-xs shrink-0" style="color:#444; font-family:inherit;">{job.period}</span>
+                  <span class="text-xs shrink-0" style="color: var(--exp-period); font-family:inherit;">{job.period}</span>
                 </div>
-                <p class="text-xs leading-relaxed mb-3" style="color:#666;">{job.desc}</p>
+                <p class="text-xs leading-relaxed mb-3" style="color: var(--exp-desc);">{job.desc}</p>
                 <div class="flex flex-wrap gap-1.5">
                   {job.tags.map(tag => (
-                    <span class="text-[10px] px-2 py-0.5 rounded" style="background:#ffffff06; color:#555; border:1px solid #1f1f1f;">{tag}</span>
+                    <span class="text-[10px] px-2 py-0.5 rounded inline-flex items-center gap-1" style="background: var(--tag-bg); color: var(--tag-color); border: 1px solid var(--tag-border);">
+                      {iconMap[tag] && (
+                        <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0; opacity:0.8;">
+                          <path d={iconMap[tag]}/>
+                        </svg>
+                      )}
+                      {tag}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -235,13 +291,20 @@ const stack = [
           <a href={p.url} target="_blank" class="project-card group" style={`--card-accent: ${p.accent};`}>
             <div class="flex items-start justify-between mb-3">
               <span class="text-lg">{p.emoji}</span>
-              <svg class="opacity-0 group-hover:opacity-100 transition-opacity" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <svg class="opacity-0 group-hover:opacity-100 transition-opacity" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </div>
-            <h3 class="text-sm font-semibold text-white mb-2 group-hover:text-[var(--card-accent)] transition-colors font-mono">{p.name}</h3>
-            <p class="text-xs leading-relaxed mb-3" style="color:#555;">{p.desc}</p>
+            <h3 class="text-sm font-semibold mb-2 group-hover:text-[var(--card-accent)] transition-colors font-mono" style="color: var(--text);">{p.name}</h3>
+            <p class="text-xs leading-relaxed mb-3" style="color: var(--project-desc);">{p.desc}</p>
             <div class="flex flex-wrap gap-1">
               {p.tags.map(tag => (
-                <span class="text-[10px] px-1.5 py-0.5 rounded" style="background:#0a0a0a; color:#3a3a3a; border:1px solid #161616;">{tag}</span>
+                <span class="text-[10px] px-1.5 py-0.5 rounded inline-flex items-center gap-1" style="background: var(--project-tag-bg); color: var(--project-tag-color); border: 1px solid var(--project-tag-border);">
+                  {iconMap[tag] && (
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0; opacity:0.8;">
+                      <path d={iconMap[tag]}/>
+                    </svg>
+                  )}
+                  {tag}
+                </span>
               ))}
             </div>
           </a>
@@ -255,16 +318,167 @@ const stack = [
 
       <div class="flex flex-wrap gap-2">
         {stack.map(s => (
-          <span class={`chip ${s.cls}`}>{s.label}</span>
+          <span class={`chip ${s.cls}`}>
+            {s.icon && (
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;">
+                <path d={s.icon}/>
+              </svg>
+            )}
+            {s.label}
+          </span>
         ))}
+      </div>
+    </section>
+
+    <!-- Uses -->
+    <section id="uses" class="relative z-10 max-w-4xl mx-auto px-4 md:px-8 pb-24 reveal">
+      <div class="section-label">uses</div>
+
+      <!-- Machines -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+
+        <!-- MacBook Air -->
+        <div class="uses-card">
+          <div class="flex items-center gap-3 mb-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.7;">
+              <rect x="2" y="4" width="20" height="13" rx="2"/><path d="M0 21h24"/>
+            </svg>
+            <div>
+              <div class="text-xs font-semibold" style="color:var(--text);">MacBook Air 13" M4 · 2025</div>
+              <div class="text-[10px]" style="color:var(--dim);">macOS Tahoe 26.5</div>
+            </div>
+          </div>
+          <div>
+            <div class="spec-row">
+              <span class="spec-key flex items-center gap-1">
+                <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="12" height="12" rx="1.5"/><rect x="5" y="5" width="6" height="6" rx="0.5"/><line x1="5.5" y1="0" x2="5.5" y2="2"/><line x1="10.5" y1="0" x2="10.5" y2="2"/><line x1="5.5" y1="14" x2="5.5" y2="16"/><line x1="10.5" y1="14" x2="10.5" y2="16"/><line x1="0" y1="5.5" x2="2" y2="5.5"/><line x1="0" y1="10.5" x2="2" y2="10.5"/><line x1="14" y1="5.5" x2="16" y2="5.5"/><line x1="14" y1="10.5" x2="16" y2="10.5"/></svg>
+                cpu
+              </span>
+              <span class="spec-val">Apple M4 · 10-core CPU · 8-core GPU</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-key flex items-center gap-1">
+                <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="5" width="14" height="6" rx="1"/><line x1="4" y1="5" x2="4" y2="11"/><line x1="8" y1="5" x2="8" y2="11"/><line x1="12" y1="5" x2="12" y2="11"/><line x1="4" y1="3" x2="4" y2="5"/><line x1="8" y1="3" x2="8" y2="5"/><line x1="12" y1="3" x2="12" y2="5"/></svg>
+                ram
+              </span>
+              <span class="spec-val">16 GB unified memory</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-key flex items-center gap-1">
+                <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><ellipse cx="8" cy="5" rx="6" ry="2.5"/><path d="M2 5v6c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5V5"/><path d="M2 8c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5"/></svg>
+                disk
+              </span>
+              <span class="spec-val">228 GB SSD</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-key flex items-center gap-1">
+                <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="2" width="14" height="10" rx="1.5"/><path d="M5 14h6M8 12v2"/></svg>
+                disp
+              </span>
+              <span class="spec-val">Apple Retina · 2560×1664 · 60Hz</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Linux PC -->
+        <div class="uses-card">
+          <div class="flex items-center gap-3 mb-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.7;">
+              <rect x="2" y="3" width="20" height="13" rx="2"/><path d="M8 21h8M12 16v5"/>
+            </svg>
+            <div>
+              <div class="text-xs font-semibold" style="color:var(--text);">Desktop · ASRock B550M Steel Legend</div>
+              <div class="text-[10px]" style="color:var(--dim);">Omarchy · Arch Linux 7.0.1 <span class="text-[9px]" style="color:var(--dim);">(I use arch btw)</span></div>
+            </div>
+          </div>
+          <div>
+            <div class="spec-row">
+              <span class="spec-key flex items-center gap-1">
+                <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="12" height="12" rx="1.5"/><rect x="5" y="5" width="6" height="6" rx="0.5"/><line x1="5.5" y1="0" x2="5.5" y2="2"/><line x1="10.5" y1="0" x2="10.5" y2="2"/><line x1="5.5" y1="14" x2="5.5" y2="16"/><line x1="10.5" y1="14" x2="10.5" y2="16"/><line x1="0" y1="5.5" x2="2" y2="5.5"/><line x1="0" y1="10.5" x2="2" y2="10.5"/><line x1="14" y1="5.5" x2="16" y2="5.5"/><line x1="14" y1="10.5" x2="16" y2="10.5"/></svg>
+                cpu
+              </span>
+              <span class="spec-val">AMD Ryzen 5 5600G</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-key flex items-center gap-1">
+                <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="4" width="14" height="8" rx="1"/><rect x="3" y="6" width="2" height="4" rx="0.5"/><rect x="7" y="6" width="2" height="4" rx="0.5"/><line x1="11" y1="6" x2="13" y2="6"/><line x1="11" y1="8" x2="13" y2="8"/><line x1="11" y1="10" x2="13" y2="10"/></svg>
+                gpu
+              </span>
+              <span class="spec-val">EVGA GeForce RTX 3060</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-key flex items-center gap-1">
+                <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="5" width="14" height="6" rx="1"/><line x1="4" y1="5" x2="4" y2="11"/><line x1="8" y1="5" x2="8" y2="11"/><line x1="12" y1="5" x2="12" y2="11"/><line x1="4" y1="3" x2="4" y2="5"/><line x1="8" y1="3" x2="8" y2="5"/><line x1="12" y1="3" x2="12" y2="5"/></svg>
+                ram
+              </span>
+              <span class="spec-val">32 GB DDR4 4000MHz</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-key flex items-center gap-1">
+                <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><ellipse cx="8" cy="5" rx="6" ry="2.5"/><path d="M2 5v6c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5V5"/><path d="M2 8c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5"/></svg>
+                disk
+              </span>
+              <span class="spec-val">1 TB NVMe M.2 PCIe Gen3</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Displays -->
+      <div class="uses-card mb-6">
+        <div class="flex items-center gap-3 mb-4">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.7;">
+            <rect x="2" y="3" width="20" height="13" rx="2"/><path d="M8 21h8M12 16v5"/>
+          </svg>
+          <div>
+            <div class="text-xs font-semibold" style="color:var(--text);">Samsung LS24A600U</div>
+            <div class="text-[10px]" style="color:var(--dim);">2560×1440 · 75Hz · shared between both machines</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tools -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="tool-card">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-2" style="opacity:0.8;">
+            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+          </svg>
+          <div class="text-[9px] uppercase tracking-[0.15em] mb-1" style="color:var(--dim);">editor</div>
+          <div class="text-xs font-medium" style="color:var(--text);">Antigravity IDE</div>
+          <div class="text-[10px] mt-0.5" style="color:var(--dim);">+ VSCode</div>
+        </div>
+        <div class="tool-card">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-2" style="opacity:0.8;">
+            <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <div class="text-[9px] uppercase tracking-[0.15em] mb-1" style="color:var(--dim);">browser</div>
+          <div class="text-xs font-medium" style="color:var(--text);">Zen Browser</div>
+          <div class="text-[9px] mt-0.5" style="color:var(--dim);">(Firefox rules)</div>
+        </div>
+        <div class="tool-card">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-2" style="opacity:0.8;">
+            <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
+          </svg>
+          <div class="text-[9px] uppercase tracking-[0.15em] mb-1" style="color:var(--dim);">shell</div>
+          <div class="text-xs font-medium" style="color:var(--text);">fish</div>
+        </div>
+        <div class="tool-card">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--accent)" class="mb-2" style="opacity:0.8;">
+            <path d={siClaudecode.path}/>
+          </svg>
+          <div class="text-[9px] uppercase tracking-[0.15em] mb-1" style="color:var(--dim);">ai</div>
+          <div class="text-xs font-medium" style="color:var(--text);">Claude Code</div>
+          <div class="text-[10px] mt-0.5" style="color:var(--dim);">+ Antigravity CLI</div>
+        </div>
       </div>
     </section>
 
     <!-- Footer -->
     <footer class="relative z-10 max-w-4xl mx-auto px-4 md:px-8 pb-8">
-      <div class="flex justify-between items-center text-[10px] pt-4" style="border-top:1px solid #111; color:#2a2a2a;">
-        <span class="prompt">Bogotá, Colombia · GMT-5</span>
-        <span>built with Astro · <a href="https://github.com/gabotachak/gabotachak-dev" target="_blank" style="color:#333; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#00d9ff'" onmouseout="this.style.color='#333'">source</a></span>
+      <div class="flex justify-between items-center text-[10px] pt-4" style="border-top: 1px solid var(--footer-border); color: var(--footer-color);">
+        <span class="prompt" id="bogota-clock">Bogotá, Colombia · GMT-5</span>
+        <span>built with Astro · <a href="https://github.com/gabotachak/gabotachak-dev" target="_blank" class="footer-src-link" style="text-decoration:none; transition:color 0.2s;">source</a></span>
       </div>
     </footer>
   </div>
@@ -285,8 +499,8 @@ const stack = [
       align-items: center;
       gap: 10px;
       padding: 8px 12px;
-      background: rgba(10,10,10,0.92);
-      border: 1px solid #1e1e1e;
+      background: var(--widget-bg);
+      border: 1px solid var(--widget-border);
       border-radius: 12px;
       backdrop-filter: blur(12px);
       text-decoration: none;
@@ -295,7 +509,7 @@ const stack = [
       max-width: min(280px, calc(100vw - 32px));
     "
     onmouseover="this.style.borderColor='rgba(0,217,255,0.3)'; this.style.boxShadow='0 0 20px rgba(0,217,255,0.06)'"
-    onmouseout="this.style.borderColor='#1e1e1e'; this.style.boxShadow='none'"
+    onmouseout="this.style.borderColor=''; this.style.boxShadow='none'"
   >
     <!-- Album art -->
     <div style="position:relative; flex-shrink:0;">
@@ -304,19 +518,22 @@ const stack = [
         src="" alt=""
         style="width:36px;height:36px;border-radius:6px;object-fit:cover;display:none;"
       />
-      <div id="lfm-art-placeholder" style="width:36px;height:36px;border-radius:6px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+      <div id="lfm-art-placeholder" style="width:36px;height:36px;border-radius:6px;background:var(--art-placeholder-bg);display:flex;align-items:center;justify-content:center;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <circle cx="12" cy="12" r="10" style="stroke: var(--muted);"/>
+          <circle cx="12" cy="12" r="3" style="stroke: var(--muted);"/>
+        </svg>
       </div>
     </div>
 
     <!-- Track info -->
     <div style="flex:1; min-width:0;">
       <div style="display:flex; align-items:center; gap:6px; margin-bottom:2px;">
-        <span id="lfm-status-dot" style="width:6px;height:6px;border-radius:50%;background:#333;flex-shrink:0;"></span>
-        <span id="lfm-status-text" style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:#444;">loading…</span>
+        <span id="lfm-status-dot" style="width:6px;height:6px;border-radius:50%;background:var(--muted);flex-shrink:0;"></span>
+        <span id="lfm-status-text" style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tag-color);">loading…</span>
       </div>
-      <div id="lfm-track"  style="font-size:11px;font-weight:600;color:#e4e4e7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;">—</div>
-      <div id="lfm-artist" style="font-size:10px;color:#555;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;">—</div>
+      <div id="lfm-track"  style="font-size:11px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;">—</div>
+      <div id="lfm-artist" style="font-size:10px;color:var(--tag-color);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;">—</div>
     </div>
 
     <!-- Last.fm logo -->
@@ -326,7 +543,54 @@ const stack = [
   </a>
 </Layout>
 
+<style>
+  .footer-src-link { color: var(--muted); }
+  .footer-src-link:hover { color: var(--accent); }
+</style>
+
 <script>
+  // ── Theme toggle ──
+  const toggle    = document.getElementById('theme-toggle');
+  const iconSun   = document.getElementById('icon-sun');
+  const iconMoon  = document.getElementById('icon-moon');
+  const iconAuto  = document.getElementById('icon-auto');
+  const CYCLE: Array<'dark' | 'light' | 'system'> = ['dark', 'light', 'system'];
+
+  function resolveLight(mode: string): boolean {
+    if (mode === 'light')  return true;
+    if (mode === 'system') return window.matchMedia('(prefers-color-scheme: light)').matches;
+    return false; // 'dark' or unknown → dark
+  }
+
+  function updateIcons(mode: string) {
+    if (iconMoon) iconMoon.style.display = mode === 'dark'   ? 'block' : 'none';
+    if (iconSun)  iconSun.style.display  = mode === 'light'  ? 'block' : 'none';
+    if (iconAuto) iconAuto.style.display = mode === 'system' ? 'inline' : 'none';
+  }
+
+  function applyMode(mode: 'dark' | 'light' | 'system') {
+    document.documentElement.classList.toggle('light', resolveLight(mode));
+    localStorage.setItem('theme', mode);
+    updateIcons(mode);
+  }
+
+  // Sync icons on load (HTML class already applied by anti-FOUC script)
+  const savedMode = (localStorage.getItem('theme') || 'dark') as 'dark' | 'light' | 'system';
+  updateIcons(savedMode);
+
+  toggle?.addEventListener('click', () => {
+    const current = (localStorage.getItem('theme') || 'dark') as 'dark' | 'light' | 'system';
+    const next = CYCLE[(CYCLE.indexOf(current) + 1) % CYCLE.length];
+    applyMode(next);
+  });
+
+  // React to OS preference change when in system mode
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+    if (localStorage.getItem('theme') === 'system') {
+      document.documentElement.classList.toggle('light', e.matches);
+    }
+  });
+
   // ── Typing animation ──
   const roles = ["Backend Engineer", "IAM Specialist", "Go Developer", "Python Dev", "Bogotá 🇨🇴"];
   const el = document.getElementById('role-text');
@@ -381,8 +645,8 @@ const stack = [
   async function fetchNowPlaying() {
     const widget = document.getElementById('lastfm-widget');
     if (!widget) return;
-    const user = widget.dataset.user;
-    const key  = widget.dataset.key;
+    const user = (widget as HTMLElement).dataset.user;
+    const key  = (widget as HTMLElement).dataset.key;
     if (!key || key === 'placeholder') return;
 
     try {
@@ -418,8 +682,8 @@ const stack = [
       } else {
         const ts = track.date?.uts ? parseInt(track.date.uts) * 1000 : null;
         const ago = ts ? timeAgo(ts) : 'recently';
-        if (dot)    { dot.style.background = '#444'; }
-        if (status) { status.textContent = `last played ${ago}`; (status as HTMLElement).style.color = '#555'; }
+        if (dot)    { dot.style.background = ''; dot.style.animation = ''; }
+        if (status) { status.textContent = `last played ${ago}`; (status as HTMLElement).style.color = ''; }
       }
     } catch (e) { /* silent fail */ }
   }
@@ -449,4 +713,17 @@ const stack = [
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Live Bogotá clock ──
+  function updateClock() {
+    const el = document.getElementById('bogota-clock');
+    if (!el) return;
+    const t = new Date().toLocaleTimeString('en-US', {
+      timeZone: 'America/Bogota',
+      hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false,
+    });
+    el.textContent = `Bogotá, Colombia · ${t}`;
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
 </script>
