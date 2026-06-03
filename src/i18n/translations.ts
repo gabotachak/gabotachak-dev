@@ -11,6 +11,7 @@ export const translations = {
       projects: "projects",
       stack: "stack",
       uses: "uses",
+      interests: "interests",
       contact: "contact",
       langSwitch: "es",
       langSwitchHref: "/es/",
@@ -26,6 +27,7 @@ export const translations = {
       projects: "projects",
       stack: "stack",
       uses: "uses",
+      interests: "interests",
     },
     experience: {
       activeBadge: "active",
@@ -54,6 +56,32 @@ export const translations = {
       shellLabel: "shell",
       aiLabel: "ai",
     },
+    interests: [
+      {
+        emoji: "🤖",
+        title: "Open & Local AI",
+        desc: "Passionate about ethical, sustainable AI development. Privacy-first mindset — I run local models via Ollama and follow the open source AI ecosystem closely.",
+        tags: ["Ollama", "open source", "privacy", "local LLMs"],
+      },
+      {
+        emoji: "⚡",
+        title: "The ARM Era",
+        desc: "Excited by the RISC paradigm reshaping personal computing. Apple Silicon proved the point; now Nvidia Project DIGITS and ARM-native laptops are making it mainstream.",
+        tags: ["RISC", "ARM", "Apple Silicon", "Nvidia Spark"],
+      },
+      {
+        emoji: "🎵",
+        title: "Music & Vinyl",
+        desc: "Fan of Rock, Pop, Indie, and Electronic. Vinyl collector.",
+        tags: ["Rock", "Indie", "Electro", "vinyl"],
+      },
+      {
+        emoji: "🎮",
+        title: "Gaming",
+        desc: "Switch for Nintendo (Mario, Zelda). Steam for AAA single-player and indie platformers.",
+        tags: ["Nintendo Switch", "Steam", "Zelda", "indie"],
+      },
+    ],
     footer: {
       source: "source",
       builtWith: "built with Astro",
@@ -83,6 +111,7 @@ export const translations = {
       projects: "proyectos",
       stack: "stack",
       uses: "setup",
+      interests: "intereses",
       contact: "contacto",
       langSwitch: "en",
       langSwitchHref: "/",
@@ -98,6 +127,7 @@ export const translations = {
       projects: "proyectos",
       stack: "stack",
       uses: "setup",
+      interests: "intereses",
     },
     experience: {
       activeBadge: "activo",
@@ -126,6 +156,32 @@ export const translations = {
       shellLabel: "shell",
       aiLabel: "ia",
     },
+    interests: [
+      {
+        emoji: "🤖",
+        title: "IA Local y Open Source",
+        desc: "Apasionado por el desarrollo ético y sostenible de la IA. Mentalidad privacy-first — corro modelos locales con Ollama y sigo de cerca el ecosistema de IA open source.",
+        tags: ["Ollama", "open source", "privacidad", "LLMs locales"],
+      },
+      {
+        emoji: "⚡",
+        title: "La Era ARM",
+        desc: "Entusiasmado con el paradigma RISC rediseñando la computación personal. Apple Silicon demostró el punto; ahora Nvidia Project DIGITS y los portátiles ARM-nativos lo masifican.",
+        tags: ["RISC", "ARM", "Apple Silicon", "Nvidia Spark"],
+      },
+      {
+        emoji: "🎵",
+        title: "Música y Vinilos",
+        desc: "Fan del Rock, Pop, Indie y Electrónica. Coleccionista de vinilos.",
+        tags: ["Rock", "Indie", "Electro", "vinilos"],
+      },
+      {
+        emoji: "🎮",
+        title: "Videojuegos",
+        desc: "Switch para Nintendo (Mario, Zelda). Steam para AAA single-player e indie plataformeros.",
+        tags: ["Nintendo Switch", "Steam", "Zelda", "indie"],
+      },
+    ],
     footer: {
       source: "código",
       builtWith: "construido con Astro",

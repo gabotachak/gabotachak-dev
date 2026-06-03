@@ -186,6 +186,7 @@ const scriptVars = {
         <a href="#projects"   class="nav-link hidden sm:inline">{t.nav.projects}</a>
         <a href="#stack"      class="nav-link hidden sm:inline">{t.nav.stack}</a>
         <a href="#uses"       class="nav-link hidden sm:inline">{t.nav.uses}</a>
+        <a href="#interests"  class="nav-link hidden sm:inline">{t.nav.interests}</a>
         <a href="mailto:hi@gabotachak.dev" class="nav-link" style="color: var(--accent);">{t.nav.contact}</a>
         <!-- Lang switcher -->
         <a href={t.nav.langSwitchHref} class="nav-link text-[10px] tracking-widest border px-1.5 py-0.5 rounded" style="border-color: var(--border); color: var(--dim);" title={lang === 'en' ? 'Versión en español' : 'English version'}>{t.nav.langSwitch}</a>
@@ -492,6 +493,30 @@ const scriptVars = {
       </div>
     </section>
 
+    <!-- Interests -->
+    <section id="interests" class="relative z-10 max-w-4xl mx-auto px-4 md:px-8 pb-24 reveal">
+      <div class="section-label">{t.sections.interests}</div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {t.interests.map((item) => (
+          <div class="interest-card">
+            <div class="flex items-start gap-3 mb-3">
+              <span class="text-2xl" style="line-height:1;">{item.emoji}</span>
+              <h3 class="text-sm font-semibold pt-0.5" style="color: var(--text);">{item.title}</h3>
+            </div>
+            <p class="text-xs leading-relaxed mb-3" style="color: var(--exp-desc);">{item.desc}</p>
+            <div class="flex flex-wrap gap-1.5">
+              {item.tags.map(tag => (
+                <span class="text-[10px] px-2 py-0.5 rounded" style="background: var(--tag-bg); color: var(--tag-color); border: 1px solid var(--tag-border);">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
     <!-- Footer -->
     <footer class="relative z-10 max-w-4xl mx-auto px-4 md:px-8 pb-8">
       <div class="flex justify-between items-center text-[10px] pt-4" style="border-top: 1px solid var(--footer-border); color: var(--footer-color);">
@@ -561,6 +586,18 @@ const scriptVars = {
 <style>
   .footer-src-link { color: var(--muted); }
   .footer-src-link:hover { color: var(--accent); }
+
+  .interest-card {
+    padding: 1.25rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .interest-card:hover {
+    border-color: rgba(0, 217, 255, 0.25);
+    box-shadow: 0 0 24px rgba(0, 217, 255, 0.04);
+  }
 </style>
 
 <script define:vars={scriptVars}>
