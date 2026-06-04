@@ -47,8 +47,8 @@ export const translations = {
       "Full Go project from MercadoLibre bootcamp. Hexagonal architecture, multiple domains, unit tests.",
     ],
     uses: {
-      macSub: "macOS Tahoe 26.5",
-      desktopSub: "Omarchy · Arch Linux 7.0.1",
+      macSub: "macOS Tahoe",
+      desktopSub: "Omarchy · Arch Linux",
       archBtw: "(I use arch btw)",
       displaySub: "2560×1440 · 75Hz · shared between both machines",
       editorLabel: "editor",
@@ -147,8 +147,8 @@ export const translations = {
       "Proyecto completo en Go del bootcamp de MercadoLibre. Arquitectura hexagonal, múltiples dominios, pruebas unitarias.",
     ],
     uses: {
-      macSub: "macOS Tahoe 26.5",
-      desktopSub: "Omarchy · Arch Linux 7.0.1",
+      macSub: "macOS Tahoe",
+      desktopSub: "Omarchy · Arch Linux",
       archBtw: "(I use arch btw)",
       displaySub: "2560×1440 · 75Hz · compartida entre ambas máquinas",
       editorLabel: "editor",

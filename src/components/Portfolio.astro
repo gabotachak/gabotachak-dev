@@ -179,30 +179,47 @@ const scriptVars = {
     <div class="hero-glow"></div>
 
     <!-- Nav -->
-    <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 md:px-8 py-4 backdrop-blur-sm" style="background: var(--nav-bg); border-bottom: 1px solid var(--nav-border);">
-      <span class="text-xs tracking-widest font-bold" style="color: var(--accent);">gabotachak<span style="color: var(--muted);">.dev</span></span>
-      <div class="flex gap-3 md:gap-6 items-center">
-        <a href="#experience" class="nav-link hidden sm:inline">{t.nav.exp}</a>
-        <a href="#projects"   class="nav-link hidden sm:inline">{t.nav.projects}</a>
-        <a href="#stack"      class="nav-link hidden sm:inline">{t.nav.stack}</a>
-        <a href="#uses"       class="nav-link hidden sm:inline">{t.nav.uses}</a>
-        <a href="#interests"  class="nav-link hidden sm:inline">{t.nav.interests}</a>
-        <a href="mailto:hi@gabotachak.dev" class="nav-link" style="color: var(--accent);">{t.nav.contact}</a>
-        <!-- Lang switcher -->
-        <a href={t.nav.langSwitchHref} class="nav-link text-[10px] tracking-widest border px-1.5 py-0.5 rounded" style="border-color: var(--border); color: var(--dim);" title={lang === 'en' ? 'Versión en español' : 'English version'}>{t.nav.langSwitch}</a>
-        <button id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
-          <svg id="icon-moon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-          </svg>
-          <svg id="icon-sun" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
-            <circle cx="12" cy="12" r="5"/>
-            <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-          </svg>
-          <span id="icon-auto" style="display:none; font-size:10px; letter-spacing:0.05em;">auto</span>
-        </button>
+    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm" style="background: var(--nav-bg); border-bottom: 1px solid var(--nav-border);">
+      <div class="flex justify-between items-center px-4 md:px-8 py-4">
+        <span class="text-xs tracking-widest font-bold" style="color: var(--accent);">gabotachak<span style="color: var(--muted);">.dev</span></span>
+        <div class="flex gap-3 md:gap-6 items-center">
+          <a href="#experience" class="nav-link hidden sm:inline">{t.nav.exp}</a>
+          <a href="#projects"   class="nav-link hidden sm:inline">{t.nav.projects}</a>
+          <a href="#stack"      class="nav-link hidden sm:inline">{t.nav.stack}</a>
+          <a href="#uses"       class="nav-link hidden sm:inline">{t.nav.uses}</a>
+          <a href="#interests"  class="nav-link hidden sm:inline">{t.nav.interests}</a>
+          <a href="mailto:hi@gabotachak.dev" class="nav-link hidden sm:inline" style="color: var(--accent);">{t.nav.contact}</a>
+          <!-- Lang switcher -->
+          <a href={t.nav.langSwitchHref} class="nav-link text-[10px] tracking-widest border px-1.5 py-0.5 rounded" style="border-color: var(--border); color: var(--dim);" title={lang === 'en' ? 'Versión en español' : 'English version'}>{t.nav.langSwitch}</a>
+          <button id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+            <svg id="icon-moon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            <svg id="icon-sun" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <span id="icon-auto" style="display:none; font-size:10px; letter-spacing:0.05em;">auto</span>
+          </button>
+          <!-- Hamburger (mobile only) -->
+          <button id="menu-toggle" class="sm:hidden flex flex-col gap-[4px] p-1" aria-label="Toggle menu">
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="sm:hidden hidden px-4 pb-4 flex flex-col gap-3">
+        <a href="#experience" class="nav-link mobile-nav-link">{t.nav.exp}</a>
+        <a href="#projects"   class="nav-link mobile-nav-link">{t.nav.projects}</a>
+        <a href="#stack"      class="nav-link mobile-nav-link">{t.nav.stack}</a>
+        <a href="#uses"       class="nav-link mobile-nav-link">{t.nav.uses}</a>
+        <a href="#interests"  class="nav-link mobile-nav-link">{t.nav.interests}</a>
+        <a href="mailto:hi@gabotachak.dev" class="nav-link mobile-nav-link" style="color: var(--accent);">{t.nav.contact}</a>
       </div>
     </nav>
 
@@ -213,7 +230,7 @@ const scriptVars = {
         <!-- Avatar -->
         <div class="avatar-ring flex-shrink-0">
           <img
-            src="https://avatars.githubusercontent.com/u/42346365?v=4"
+            src="/avatar.jpg"
             alt="Gabriel Anzola Tachak"
             width="120" height="120"
             style="border-radius:50%; display:block; position:relative; z-index:1;"
@@ -387,7 +404,7 @@ const scriptVars = {
                 <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><ellipse cx="8" cy="5" rx="6" ry="2.5"/><path d="M2 5v6c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5V5"/><path d="M2 8c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5"/></svg>
                 disk
               </span>
-              <span class="spec-val">228 GB SSD</span>
+              <span class="spec-val">256 GB SSD</span>
             </div>
             <div class="spec-row">
               <span class="spec-key flex items-center gap-1">
@@ -587,6 +604,23 @@ const scriptVars = {
   .footer-src-link { color: var(--muted); }
   .footer-src-link:hover { color: var(--accent); }
 
+  .hamburger-bar {
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    background: var(--muted);
+    border-radius: 1px;
+    transition: background 0.2s;
+  }
+  #menu-toggle:hover .hamburger-bar { background: var(--accent); }
+
+  .mobile-nav-link {
+    font-size: 0.8rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .mobile-nav-link:last-child { border-bottom: none; }
+
   .interest-card {
     padding: 1.25rem;
     border-radius: 8px;
@@ -601,6 +635,16 @@ const scriptVars = {
 </style>
 
 <script define:vars={scriptVars}>
+  // ── Mobile menu ──
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuToggle && menuToggle.addEventListener('click', function() {
+    mobileMenu && mobileMenu.classList.toggle('hidden');
+  });
+  mobileMenu && mobileMenu.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() { mobileMenu.classList.add('hidden'); });
+  });
+
   // ── Theme toggle ──
   const toggle    = document.getElementById('theme-toggle');
   const iconSun   = document.getElementById('icon-sun');
