@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Gabriel Andres Anzola Tachak
+N:Anzola Tachak;Gabriel Andres;;;
+EMAIL;TYPE=INTERNET,PREF:hi@gabotachak.dev
+TEL;TYPE=CELL,VOICE:+573337500436
+URL:https://gabotachak.dev
+ORG:Workstate
+TITLE:Backend Engineer
+NOTE:Go · Python · IAM · Microservices · Bogotá\, Colombia
+END:VCARD

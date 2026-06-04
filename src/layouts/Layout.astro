@@ -11,24 +11,49 @@ const {
   description = "Gabriel Anzola Tachak — Backend Engineer. Go, Python, IAM. Bogotá.",
   lang = "en",
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Gabriel Andres Anzola Tachak",
+  "url": "https://gabotachak.dev",
+  "email": "hi@gabotachak.dev",
+  "telephone": "+573337500436",
+  "jobTitle": "Backend Engineer",
+  "description": "Backend engineer with 4+ years at MercadoLibre in Identity & Access Management. Go and Python. Available for remote roles.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Bogotá",
+    "addressCountry": "CO"
+  },
+  "sameAs": [
+    "https://github.com/gabotachak",
+    "https://linkedin.com/in/gabotachak"
+  ],
+  "knowsAbout": ["Go", "Python", "IAM", "OAuth2", "Microservices", "Backend Engineering", "GCP", "AWS"]
+};
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} class="no-js">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="author" content="Gabriel Anzola Tachak" />
+    <link rel="canonical" href={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://gabotachak.dev/" />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content="https://gabotachak.dev/avatar.jpg" />
     <meta property="og:image:width" content="200" />
     <meta property="og:image:height" content="200" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:image" content="https://gabotachak.dev/avatar.jpg" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -41,13 +66,14 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <title>{title}</title>
-    <!-- Anti-FOUC: apply saved theme before first paint -->
+    <!-- Anti-FOUC: apply saved theme + remove no-js class before first paint -->
     <script is:inline>
       (function () {
         const saved = localStorage.getItem('theme') || 'dark';
         const isLight = saved === 'light' ||
           (saved === 'system' && window.matchMedia('(prefers-color-scheme: light)').matches);
         if (isLight) document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('no-js');
       })();
     </script>
   </head>

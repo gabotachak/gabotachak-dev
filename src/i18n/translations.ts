@@ -13,6 +13,7 @@ export const translations = {
       uses: "uses",
       interests: "interests",
       contact: "contact",
+      cv: "cv",
       langSwitch: "es",
       langSwitchHref: "/es/",
     },
@@ -20,6 +21,7 @@ export const translations = {
       badge: "identity_verified",
       bio: "Backend engineer with 4+ years at MercadoLibre in Identity & Access Management. Go and Python. Now building at Workstate for Compass, US real estate at scale. UNAL Systems Engineering.",
       location: "Coffee-flavored backend ☕ · Bogotá, Colombia 🇨🇴",
+      saveContact: "Save Contact",
     },
     roles: ["Backend Engineer", "IAM Specialist", "Go Developer", "Python Dev", "Bogotá 🇨🇴"],
     sections: {
@@ -113,6 +115,7 @@ export const translations = {
       uses: "setup",
       interests: "intereses",
       contact: "contacto",
+      cv: "cv",
       langSwitch: "en",
       langSwitchHref: "/",
     },
@@ -120,6 +123,7 @@ export const translations = {
       badge: "identidad_verificada",
       bio: "Ingeniero backend con 4+ años en MercadoLibre en Identity & Access Management. Go y Python. Actualmente construyendo en Workstate para Compass, inmobiliaria a escala en EE.UU. Ing. Sistemas, UNAL.",
       location: "Backend con sabor a café ☕ · Bogotá, Colombia 🇨🇴",
+      saveContact: "Guardar Contacto",
     },
     roles: ["Ingeniero Backend", "Especialista IAM", "Desarrollador Go", "Dev Python", "Bogotá 🇨🇴"],
     sections: {

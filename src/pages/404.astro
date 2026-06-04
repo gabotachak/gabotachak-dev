@@ -1,0 +1,14 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+<Layout title="404 — gabotachak.dev" description="Page not found">
+  <div style="min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; font-family: var(--font);">
+    <span style="font-size:3rem; color: var(--accent); font-weight:700;">404</span>
+    <p style="color: var(--dim); font-size:0.75rem; letter-spacing:0.1em;">page not found</p>
+    <a href="/" style="color: var(--accent); font-size:0.7rem; text-decoration:none; border:1px solid var(--border); padding:0.4rem 1rem; border-radius:4px; margin-top:0.5rem; transition:border-color 0.2s;"
+      onmouseover="this.style.borderColor='var(--accent)'"
+      onmouseout="this.style.borderColor='var(--border)'">
+      ~/
+    </a>
+  </div>
+</Layout>

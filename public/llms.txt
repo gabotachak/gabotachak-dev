@@ -1,0 +1,42 @@
+# Gabriel Andres Anzola Tachak — Backend Engineer
+
+> Backend Engineer with 4+ years building scalable APIs and IAM systems in Go and Python. Currently working at Workstate for Compass (US real estate platform). Open to new remote opportunities. Based in Bogotá, Colombia (GMT-5). Available for full-time, consulting, or contract roles.
+
+## About
+
+- [Portfolio](https://gabotachak.dev/): Full profile, experience, projects, and stack
+- [CV / Resume](https://gabotachak.dev/cv.pdf): Downloadable PDF with full work history
+- [LinkedIn](https://linkedin.com/in/gabotachak): Professional network
+- [GitHub](https://github.com/gabotachak): Open source projects and contributions
+
+## Skills & Stack
+
+- Backend: Go, Python, TypeScript, Bash
+- IAM & Security: OAuth2, JWT, RBAC, SOX/PCI compliance
+- Cloud & Infra: GCP, AWS, Docker, Terraform, GitHub Actions, Vault
+- Databases: PostgreSQL, MySQL, MongoDB, Redis
+- AI/LLM: Claude, Gemini, Ollama (local LLMs)
+
+## Experience
+
+- **Workstate / Compass** (Apr 2026 – present): Mid Backend Engineer — high-performance Go APIs for US real estate at scale
+- **NEORIS / The Home Depot US** (Dec 2025 – Mar 2026): Senior Backend Developer — Go microservices on GCP
+- **Personally AI** (Oct – Nov 2025): Backend Developer Consultant — Python APIs, WhatsApp Business, GPT workflows
+- **MercadoLibre** (Jun 2021 – Sep 2025): Cybersecurity Developer — IAM — 4+ years automating identity provisioning for Latin America's largest e-commerce across AWS, GCP, and 100+ internal systems
+
+## Projects
+
+- [tax-time](https://github.com/gabotachak/tax-time): Colombian AI tax advisor, 100% local via Ollama
+- [pokemon-agent](https://github.com/gabotachak/pokemon-agent): Multi-LLM agent framework using Claude + Gemini
+- [logi-hyprland](https://github.com/gabotachak/logi-hyprland): Pure evdev gesture daemon for Logitech on Hyprland
+- [picas-fijas](https://github.com/gabotachak/picas-fijas): Mastermind solver using Knuth's minimax (≤5 guesses guaranteed)
+
+## Contact & Availability
+
+- Email: hi@gabotachak.dev
+- Phone / WhatsApp: +57 333 750 0436
+- CV: https://gabotachak.dev/cv.pdf
+- Contact card (vCard): https://gabotachak.dev/gabriel-anzola.vcf
+- Available for: remote full-time, consulting, contract
+- Timezone: GMT-5 (Bogotá, Colombia)
+- Languages: Spanish (native), English (B2)
