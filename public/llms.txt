@@ -26,7 +26,7 @@
 
 ## Projects
 
-- [tax-time](https://github.com/gabotachak/tax-time): Colombian AI tax advisor, 100% local via Ollama
+- [tax-time](https://taxtime.gabotachak.dev/): Colombian AI tax advisor, 100% local via Ollama
 - [pokemon-agent](https://github.com/gabotachak/pokemon-agent): Multi-LLM agent framework using Claude + Gemini
 - [logi-hyprland](https://github.com/gabotachak/logi-hyprland): Pure evdev gesture daemon for Logitech on Hyprland
 - [picas-fijas](https://github.com/gabotachak/picas-fijas): Mastermind solver using Knuth's minimax (≤5 guesses guaranteed)
