@@ -2,13 +2,53 @@
 import Layout from "../layouts/Layout.astro";
 ---
 <Layout title="404 — gabotachak.dev" description="Page not found">
-  <div style="min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; font-family: var(--font);">
-    <span style="font-size:3rem; color: var(--accent); font-weight:700;">404</span>
-    <p style="color: var(--dim); font-size:0.75rem; letter-spacing:0.1em;">page not found</p>
-    <a href="/" style="color: var(--accent); font-size:0.7rem; text-decoration:none; border:1px solid var(--border); padding:0.4rem 1rem; border-radius:4px; margin-top:0.5rem; transition:border-color 0.2s;"
-      onmouseover="this.style.borderColor='var(--accent)'"
-      onmouseout="this.style.borderColor='var(--border)'">
-      ~/
-    </a>
-  </div>
+  <main class="notfound">
+    <span class="notfound-code">404</span>
+    <p class="notfound-text">page not found</p>
+    <a href="/" class="notfound-home" aria-label="Back to home">~/</a>
+  </main>
 </Layout>
+
+<style>
+  .notfound {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-family: var(--font);
+  }
+
+  .notfound-code {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+  }
+
+  .notfound-text {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--dim);
+  }
+
+  .notfound-home {
+    margin-top: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    font-size: 0.8rem;
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    transition: border-color 0.2s, transform 100ms ease-out;
+  }
+  .notfound-home:hover { border-color: var(--accent); }
+  .notfound-home:active { transform: scale(0.97); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .notfound-home { transition: border-color 0.2s; }
+    .notfound-home:active { transform: none; }
+  }
+</style>

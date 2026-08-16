@@ -16,6 +16,11 @@ export const translations = {
       cv: "cv",
       langSwitch: "es",
       langSwitchHref: "/es/",
+      skip: "Skip to content",
+      menuOpen: "Open menu",
+      menuClose: "Close menu",
+      themeLabel: "Theme",
+      themeModes: { dark: "dark", light: "light", system: "system" },
     },
     hero: {
       badge: "identity_verified",
@@ -118,6 +123,11 @@ export const translations = {
       cv: "cv",
       langSwitch: "en",
       langSwitchHref: "/",
+      skip: "Saltar al contenido",
+      menuOpen: "Abrir menú",
+      menuClose: "Cerrar menú",
+      themeLabel: "Tema",
+      themeModes: { dark: "oscuro", light: "claro", system: "sistema" },
     },
     hero: {
       badge: "identidad_verificada",
