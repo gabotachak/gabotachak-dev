@@ -24,7 +24,7 @@ export const translations = {
     },
     hero: {
       badge: "identity_verified",
-      bio: "Backend engineer with 4+ years at MercadoLibre in Identity & Access Management. Go and Python. Now building at Workstate for Compass, US real estate at scale. UNAL Systems Engineering.",
+      bio: "Backend engineer with 4+ years at MercadoLibre in Identity & Access Management. Go and Python. Most recently at Workstate, building for Compass, US real estate at scale. UNAL Systems Engineering.",
       location: "Coffee-flavored backend ☕ · Bogotá, Colombia 🇨🇴",
       saveContact: "Save Contact",
     },
@@ -55,7 +55,7 @@ export const translations = {
     ],
     uses: {
       macSub: "macOS Tahoe",
-      desktopSub: "Omarchy · Arch Linux",
+      desktopSub: "CachyOS · Arch Linux",
       archBtw: "(I use arch btw)",
       displaySub: "2560×1440 · 75Hz · shared between both machines",
       editorLabel: "editor",
@@ -131,7 +131,7 @@ export const translations = {
     },
     hero: {
       badge: "identidad_verificada",
-      bio: "Ingeniero backend con 4+ años en MercadoLibre en Identity & Access Management. Go y Python. Actualmente construyendo en Workstate para Compass, inmobiliaria a escala en EE.UU. Ing. Sistemas, UNAL.",
+      bio: "Ingeniero backend con 4+ años en MercadoLibre en Identity & Access Management. Go y Python. Más recientemente en Workstate, construyendo para Compass, inmobiliaria a escala en EE.UU. Ing. Sistemas, UNAL.",
       location: "Backend con sabor a café ☕ · Bogotá, Colombia 🇨🇴",
       saveContact: "Guardar Contacto",
     },
@@ -162,7 +162,7 @@ export const translations = {
     ],
     uses: {
       macSub: "macOS Tahoe",
-      desktopSub: "Omarchy · Arch Linux",
+      desktopSub: "CachyOS · Arch Linux",
       archBtw: "(I use arch btw)",
       displaySub: "2560×1440 · 75Hz · compartida entre ambas máquinas",
       editorLabel: "editor",
