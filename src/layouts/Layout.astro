@@ -1,44 +1,46 @@
 ---
+import "@fontsource-variable/ibm-plex-sans/wght.css";
+import "@fontsource-variable/jetbrains-mono/wght.css";
+import plexLatin from "@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-latin-wght-normal.woff2?url";
 import "../styles/global.css";
+import { chrome } from "../i18n/chrome";
+import { localeHref } from "../i18n/format";
+import type { Lang } from "../i18n/translations";
+
 interface Props {
-  title?: string;
-  description?: string;
-  lang?: string;
+  title: string;
+  description: string;
+  lang?: Lang;
+  /** Language-neutral page path: "" for home, "uses" for /uses. Omit for pages with no canonical (404). */
+  path?: string;
+  noindex?: boolean;
 }
 
-const {
-  title = "gabotachak",
-  description = "Gabriel Anzola Tachak, Senior Backend Engineer. Go and Python APIs, microservices and IAM. Bogotá, Colombia.",
-  lang = "en",
-} = Astro.props;
-
-const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+const { title, description, lang = "en", path, noindex = false } = Astro.props;
+const c = chrome[lang];
+const site = "https://gabotachak.dev";
+const abs = (l: Lang) => site + localeHref(l, path);
+const canonicalURL = path === undefined ? undefined : abs(lang);
+const ogImage = `${site}/og-${lang}.png`;
+// Browser chrome colors. Must match --bg in global.css.
+const themeColor = { dark: "#0b0c0e", light: "#fafafa" };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Gabriel Andres Anzola Tachak",
   "alternateName": "Gabriel Anzola Tachak",
-  "url": "https://gabotachak.dev",
+  "url": site,
   "email": "hi@gabotachak.dev",
   "telephone": ["+573005653204"],
-  "jobTitle": "Senior Backend Engineer",
-  "description": "Senior backend engineer with 4+ years building APIs and microservices in Go and Python, including identity and access management at Mercado Libre. Open to remote roles.",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Bogotá",
-    "addressCountry": "CO"
-  },
-  "sameAs": [
-    "https://github.com/gabotachak",
-    "https://linkedin.com/in/gabotachak"
-  ],
-  "alumniOf": {
-    "@type": "CollegeOrUniversity",
-    "name": "Universidad Nacional de Colombia"
-  },
+  "jobTitle": c.jsonLd.jobTitle,
+  "description": c.jsonLd.description,
+  "inLanguage": lang,
+  "address": { "@type": "PostalAddress", "addressLocality": "Bogotá", "addressCountry": "CO" },
+  "sameAs": ["https://github.com/gabotachak", "https://linkedin.com/in/gabotachak"],
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "Universidad Nacional de Colombia" },
   "knowsLanguage": ["es", "en"],
-  "knowsAbout": ["Go", "Python", "IAM", "OAuth2", "RBAC", "gRPC", "REST APIs", "Microservices", "Backend Engineering", "GCP", "Kubernetes"]
+  "knowsAbout": ["Go", "Python", "IAM", "OAuth2", "RBAC", "gRPC", "REST APIs", "Microservices", "Backend Engineering", "GCP", "Kubernetes"],
 };
 ---
 
@@ -47,43 +49,70 @@ const jsonLd = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content="Gabriel Anzola Tachak" />
-    <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content={themeColor.dark} media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content={themeColor.light} media="(prefers-color-scheme: light)" />
+    {canonicalURL && <link rel="canonical" href={canonicalURL} />}
+    {path !== undefined && (
+      <>
+        <link rel="alternate" hreflang="en" href={abs("en")} />
+        <link rel="alternate" hreflang="es" href={abs("es")} />
+        <link rel="alternate" hreflang="x-default" href={abs("en")} />
+      </>
+    )}
+    <meta property="og:site_name" content="gabotachak.dev" />
+    <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalURL} />
-    <meta property="og:image" content="https://gabotachak.dev/avatar.jpg" />
-    <meta property="og:image:width" content="200" />
-    <meta property="og:image:height" content="200" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:image" content="https://gabotachak.dev/avatar.jpg" />
+    {canonicalURL && <meta property="og:url" content={canonicalURL} />}
+    <meta property="og:locale" content={c.ogLocale} />
+    <meta property="og:locale:alternate" content={chrome[lang === "en" ? "es" : "en"].ogLocale} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={c.ogAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={c.ogAlt} />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Color+Emoji&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="alternate" hreflang="en" href="https://gabotachak.dev/" />
-    <link rel="alternate" hreflang="es" href="https://gabotachak.dev/es/" />
-    <link rel="alternate" hreflang="x-default" href="https://gabotachak.dev/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <title>{title}</title>
-    <!-- Anti-FOUC: apply saved theme + remove no-js class before first paint -->
+    <link rel="preload" href={plexLatin} as="font" type="font/woff2" crossorigin />
+    <!-- Theme before first paint. First visit follows the OS; a saved click wins; dark if anything fails.
+         Exposes window.setTheme(isLight, persist) for the nav toggle. Storage is optional everywhere. -->
     <script is:inline>
       (function () {
-        const saved = localStorage.getItem('theme') || 'dark';
-        const isLight = saved === 'light' ||
-          (saved === 'system' && window.matchMedia('(prefers-color-scheme: light)').matches);
-        if (isLight) document.documentElement.classList.add('light');
-        document.documentElement.classList.remove('no-js');
+        var root = document.documentElement;
+        var metas = document.querySelectorAll('meta[name="theme-color"]');
+        var colors = {};
+        metas.forEach(function (m) {
+          colors[/dark/.test(m.media) ? 'dark' : 'light'] = m.content;
+        });
+        function apply(light) {
+          root.classList.toggle('light', light);
+          // The OS-based media queries can't see a manual choice, so pin both metas to it.
+          metas.forEach(function (m) { m.content = light ? colors.light : colors.dark; });
+        }
+        window.setTheme = function (light, persist) {
+          apply(light);
+          if (persist) { try { localStorage.setItem('theme', light ? 'light' : 'dark'); } catch (e) {} }
+        };
+        var saved = null, light = false;
+        try { saved = localStorage.getItem('theme'); } catch (e) {}
+        try {
+          light = saved === 'light' || (saved !== 'dark' && matchMedia('(prefers-color-scheme: light)').matches);
+        } catch (e) {}
+        apply(light);
+        root.classList.remove('no-js');
       })();
     </script>
   </head>
-  <body class="min-h-screen font-mono antialiased">
+  <body>
     <slot />
   </body>
 </html>

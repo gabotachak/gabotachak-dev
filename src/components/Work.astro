@@ -1,0 +1,39 @@
+---
+import { translations, type Lang } from "../i18n/translations";
+import { nb } from "../i18n/format";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = translations[lang];
+
+// PLACEHOLDER data. The work agent replaces this with the four case studies and the "Other projects" list.
+// tax-time and SIA Bridge have no url on purpose: the site must not link their hosted apps.
+const projects = [
+  { name: "tax-time",      desc: t.projectDesc[0], url: null, tags: ["Python", "Ollama", "RAG"] },
+  { name: "SIA Bridge",    desc: t.projectDesc[1], url: "https://github.com/gabotachak/sia-unal-bridge", tags: ["Go", "Docker"] },
+  { name: "pokemon-agent", desc: t.projectDesc[2], url: "https://github.com/gabotachak/pokemon-agent", tags: ["Python", "Claude", "Gemini"] },
+  { name: "logi-hyprland", desc: t.projectDesc[3], url: "https://github.com/gabotachak/logi-hyprland", tags: ["Python", "evdev", "Linux"] },
+  { name: "picas-fijas",   desc: t.projectDesc[4], url: "https://github.com/gabotachak/picas-fijas", tags: ["Python", "Minimax", "algorithms"] },
+];
+---
+
+<section class="section" id="work" aria-labelledby="work-title">
+  <div class="container">
+    <h2 class="section-title" id="work-title">{t.sections.projects}</h2>
+    <ul class="projects">
+      {projects.map((p) => (
+        <li>
+          <h3>{p.url ? <a class="link" href={p.url} target="_blank" rel="noopener noreferrer">{p.name}</a> : p.name}</h3>
+          <p class="meta">{nb(p.desc)}</p>
+          <ul class="tech-line">{p.tags.map((tag) => <li>{tag}</li>)}</ul>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .projects { list-style: none; margin: 0; padding: 0; }
+  .projects > li { display: grid; gap: 0.5rem; padding-block: 1.25rem; border-top: 1px solid var(--border); }
+  h3 { font-size: var(--fs-lede); }
+</style>

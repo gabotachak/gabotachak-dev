@@ -1,0 +1,37 @@
+---
+import { translations, type Lang } from "../i18n/translations";
+import { nb } from "../i18n/format";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = translations[lang];
+---
+
+<!-- PLACEHOLDER: renders the old metrics. The proof agent replaces them with the spec's four figures. -->
+<section class="proof" aria-label={lang === "es" ? "Cifras" : "Numbers"}>
+  <div class="container">
+    <dl class="figures">
+      {t.metrics.map((m) => (
+        <div class="figure">
+          <dt>{nb(m.label)}</dt>
+          <dd class="num">{nb(m.value)}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
+
+<style>
+  .proof { padding-bottom: clamp(4rem, 8vw, 6rem); }
+  .figures { display: grid; grid-template-columns: repeat(2, 1fr); margin: 0; border-block: 1px solid var(--border); }
+  @media (min-width: 768px) { .figures { grid-template-columns: repeat(4, 1fr); } }
+  .figure { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 0.5rem; padding: 1.25rem 1rem; }
+  .figure:nth-child(even) { border-left: 1px solid var(--border); }
+  .figure:nth-child(n + 3) { border-top: 1px solid var(--border); }
+  @media (min-width: 768px) {
+    .figure:nth-child(n) { border-top: 0; border-left: 1px solid var(--border); }
+    .figure:first-child { border-left: 0; padding-left: 0; }
+  }
+  dt { font-size: var(--fs-meta); line-height: 1.4; color: var(--text-2); }
+  dd { margin: 0; font-size: var(--fs-h2); font-weight: 500; line-height: 1.1; white-space: nowrap; }
+</style>

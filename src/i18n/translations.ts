@@ -3,7 +3,7 @@ export type Lang = 'en' | 'es';
 export const translations = {
   en: {
     meta: {
-      title: "gabotachak.dev",
+      title: "Gabriel Anzola Tachak · Senior Backend Engineer",
       description: "Gabriel Anzola Tachak, Senior Backend Engineer. Go and Python APIs, microservices and IAM. Bogotá, Colombia.",
     },
     nav: {
@@ -209,7 +209,7 @@ export const translations = {
   },
   es: {
     meta: {
-      title: "gabotachak.dev",
+      title: "Gabriel Anzola Tachak · Ingeniero Backend Senior",
       description: "Gabriel Anzola Tachak, Ingeniero Backend Senior. APIs en Go y Python, microservicios e IAM. Bogotá, Colombia.",
     },
     nav: {

@@ -1,0 +1,45 @@
+---
+import { chrome } from "../i18n/chrome";
+import { localeHref } from "../i18n/format";
+import type { Lang } from "../i18n/translations";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const f = chrome[lang].footer;
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>{f.location}</p>
+    <p><a href={localeHref(lang, "uses")}>{f.uses}</a></p>
+    <p>
+      {f.builtWith} ·
+      <a class="ext" href="https://github.com/gabotachak/gabotachak-dev" target="_blank" rel="noopener noreferrer">{f.source}</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding-block: 2rem;
+    font-size: var(--fs-meta);
+    color: var(--text-2);
+  }
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+  }
+  a {
+    display: inline-block;
+    padding-block: 0.5rem;
+    color: var(--text-2);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  @media (hover: hover) {
+    a:hover { color: var(--text); }
+  }
+</style>
