@@ -7,11 +7,16 @@ import {
   siPostgresql, siMysql, siMongodb, siRedis,
   siClaude, siClaudecode, siGooglegemini, siOllama,
   siLinux, siSelenium, siWhatsapp, siOpenid,
+  siKubernetes, siGrafana, siGooglepubsub, siSpinnaker, siGnubash,
 } from 'simple-icons';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = translations[lang];
+
+// Source text uses a plain space as the thousands separator ("1 000"); render it as a
+// non-breaking space so a number never splits across lines.
+const nb = (s: string) => s.replace(/(\d) (?=\d{3}\b)/g, '$1\u00A0');
 
 const LASTFM_USER = import.meta.env.PUBLIC_LASTFM_USER ?? "RobotDogger";
 const LASTFM_KEY  = import.meta.env.PUBLIC_LASTFM_API_KEY ?? "";
@@ -20,11 +25,16 @@ const iconMap: Record<string, string> = {
   'Go':             siGo.path,
   'Python':         siPython.path,
   'TypeScript':     siTypescript.path,
+  'Bash':           siGnubash.path,
   'GCP':            siGooglecloud.path,
+  'Pub/Sub':        siGooglepubsub.path,
   'Docker':         siDocker.path,
+  'Kubernetes':     siKubernetes.path,
   'Terraform':      siTerraform.path,
   'Vault':          siVault.path,
   'GitHub Actions': siGithubactions.path,
+  'Spinnaker':      siSpinnaker.path,
+  'Grafana':        siGrafana.path,
   'PostgreSQL':     siPostgresql.path,
   'MySQL':          siMysql.path,
   'MongoDB':        siMongodb.path,
@@ -38,59 +48,57 @@ const iconMap: Record<string, string> = {
   'OAuth2':         siOpenid.path,
 };
 
-const experience = [
+// Role titles, bullets and work mode live in translations; this holds the language-neutral facts.
+// Tech lists languages and tools only. Frameworks belong in the skills table.
+const jobMeta = [
   {
     company: "Workstate",
     client: "Compass",
-    role: lang === 'es' ? "Ingeniero Backend Mid" : "Mid Backend Engineer",
-    period: "Apr — Jun 2026",
-    active: false,
-    desc: t.experienceDesc[0],
-    tags: ["Go", "microservices", "REST API"],
+    period: "Apr 2026 - Jul 2026",
+    tech: ["Go", "gRPC", "GCP", "Kubernetes", "Grafana"],
   },
   {
     company: "NEORIS",
     client: "The Home Depot US",
-    role: lang === 'es' ? "Desarrollador Backend Senior" : "Senior Backend Developer",
-    period: "Dec 2025 — Mar 2026",
-    active: false,
-    desc: t.experienceDesc[1],
-    tags: ["Go", "microservices", "GCP"],
+    period: "Dec 2025 - Mar 2026",
+    tech: ["Go", "gRPC", "GCP", "Pub/Sub", "Redis", "Vault", "Terraform", "GitHub Actions", "Spinnaker", "Grafana"],
   },
   {
     company: "Personally AI",
     client: null,
-    role: lang === 'es' ? "Consultor Backend Developer" : "Backend Developer Consultant",
-    period: "Oct — Nov 2025",
-    active: false,
-    desc: t.experienceDesc[2],
-    tags: ["Python", "WhatsApp API", "GPT", "Selenium"],
+    period: "Oct 2025 - Nov 2025",
+    tech: ["Python", "Ollama", "RAG", "Selenium", "Twilio", "WhatsApp API"],
   },
   {
     company: "Mercado Libre",
     client: null,
-    role: lang === 'es' ? "Desarrollador Ciberseguridad — IAM" : "Cybersecurity Developer — IAM",
-    period: "Jun 2021 — Sep 2025",
-    active: false,
-    desc: t.experienceDesc[3],
-    tags: ["Go", "Python", "OAuth2", "RBAC", "AWS", "GCP", "SOX"],
-    highlight: true,
+    period: "Jun 2021 - Sep 2025",
+    tech: ["Go", "Python", "REST APIs", "IAM", "RBAC", "OAuth2", "AWS", "GCP"],
   },
 ];
+const experience = jobMeta.map((m, i) => ({ ...m, ...t.experience.jobs[i], active: false }));
 
 const projects = [
   {
     name: "tax-time",
     emoji: "🧾",
     desc: t.projectDesc[0],
-    url: "https://taxtime.gabotachak.dev/",
-    tags: ["Python", "Ollama", "LLM"],
+    url: "https://tax-time.gabotachak.dev/",
+    tags: ["Python", "Ollama", "RAG"],
     accent: "#00ff88",
+  },
+  {
+    name: "SIA Bridge",
+    emoji: "🎓",
+    desc: t.projectDesc[1],
+    url: "https://sia.gabotachak.dev/",
+    tags: ["Go", "Docker", "UI/UX"],
+    accent: "#00ADD8",
   },
   {
     name: "pokemon-agent",
     emoji: "🤖",
-    desc: t.projectDesc[1],
+    desc: t.projectDesc[2],
     url: "https://github.com/gabotachak/pokemon-agent",
     tags: ["Python", "Claude", "Gemini"],
     accent: "#00d9ff",
@@ -98,7 +106,7 @@ const projects = [
   {
     name: "logi-hyprland",
     emoji: "🖱️",
-    desc: t.projectDesc[2],
+    desc: t.projectDesc[3],
     url: "https://github.com/gabotachak/logi-hyprland",
     tags: ["Python", "evdev", "Linux"],
     accent: "#a78bfa",
@@ -106,7 +114,7 @@ const projects = [
   {
     name: "picas-fijas",
     emoji: "🧠",
-    desc: t.projectDesc[3],
+    desc: t.projectDesc[4],
     url: "https://github.com/gabotachak/picas-fijas",
     tags: ["Python", "Minimax", "algorithms"],
     accent: "#fbbf24",
@@ -114,7 +122,7 @@ const projects = [
   {
     name: "crypto-workshops",
     emoji: "🔐",
-    desc: t.projectDesc[4],
+    desc: t.projectDesc[5],
     url: "https://github.com/gabotachak/crypto-workshops",
     tags: ["Python", "cryptography"],
     accent: "#f87171",
@@ -122,36 +130,49 @@ const projects = [
   {
     name: "bootcamp_go_project",
     emoji: "📦",
-    desc: t.projectDesc[5],
+    desc: t.projectDesc[6],
     url: "https://github.com/gabotachak/bootcamp_go_project",
     tags: ["Go", "hexagonal", "tests"],
     accent: "#00ADD8",
   },
 ];
 
-const stack = [
-  { label: "Go",             cls: "go",    icon: siGo.path          },
-  { label: "Python",         cls: "python",icon: siPython.path       },
-  { label: "TypeScript",     cls: "ts",    icon: siTypescript.path   },
-  { label: "SQL",            cls: "db",    icon: null                },
-  { label: "Bash",           cls: "",      icon: null                },
-  { label: "OAuth2",         cls: "iam",   icon: siOpenid.path       },
-  { label: "JWT",            cls: "iam",   icon: null                },
-  { label: "RBAC",           cls: "iam",   icon: null                },
-  { label: "SOX / PCI",      cls: "iam",   icon: null                },
-  { label: "GCP",            cls: "infra", icon: siGooglecloud.path  },
-  { label: "AWS",            cls: "infra", icon: null                },
-  { label: "Docker",         cls: "infra", icon: siDocker.path       },
-  { label: "Terraform",      cls: "infra", icon: siTerraform.path    },
-  { label: "Vault",          cls: "infra", icon: siVault.path        },
-  { label: "GitHub Actions", cls: "infra", icon: siGithubactions.path},
-  { label: "PostgreSQL",     cls: "db",    icon: siPostgresql.path   },
-  { label: "MySQL",          cls: "db",    icon: siMysql.path        },
-  { label: "MongoDB",        cls: "db",    icon: siMongodb.path      },
-  { label: "Redis",          cls: "db",    icon: siRedis.path        },
-  { label: "Claude",         cls: "ai",    icon: siClaude.path       },
-  { label: "Ollama",         cls: "ai",    icon: siOllama.path       },
-  { label: "Gemini",         cls: "ai",    icon: siGooglegemini.path },
+// Self-assessed ratings, taken from the CV. Do not drop the ratings.
+type Cat = keyof typeof t.stackTable.categories;
+const skills: { cat: Cat; skill: string; rating: number; cls: string }[] = [
+  { cat: "languages",    skill: "Go",                                 rating: 5, cls: "go"     },
+  { cat: "languages",    skill: "Python",                             rating: 5, cls: "python" },
+  { cat: "languages",    skill: "SQL",                                rating: 4, cls: "db"     },
+  { cat: "frameworks",   skill: "Gin / Gorilla Mux",                  rating: 5, cls: "go"     },
+  { cat: "frameworks",   skill: "FastAPI / Django / Flask",           rating: 5, cls: "python" },
+  { cat: "protocols",    skill: "gRPC & REST APIs",                   rating: 5, cls: ""       },
+  { cat: "architecture", skill: "Distributed Systems",                rating: 4, cls: ""       },
+  { cat: "databases",    skill: "PostgreSQL / MySQL",                 rating: 4, cls: "db"     },
+  { cat: "databases",    skill: "Redis / MongoDB",                    rating: 4, cls: "db"     },
+  { cat: "cloud",        skill: "GCP (Pub/Sub, Workflows, Storage)",  rating: 4, cls: "infra"  },
+  { cat: "devops",       skill: "Docker & Linux",                     rating: 4, cls: "infra"  },
+  { cat: "devops",       skill: "Kubernetes",                         rating: 4, cls: "infra"  },
+  { cat: "devops",       skill: "GitHub Actions & CI/CD",             rating: 4, cls: "infra"  },
+  { cat: "devops",       skill: "Terraform",                          rating: 4, cls: "infra"  },
+  { cat: "devops",       skill: "Grafana",                            rating: 4, cls: "infra"  },
+  { cat: "devops",       skill: "Spinnaker",                          rating: 3, cls: "infra"  },
+  { cat: "security",     skill: "OAuth2, JWT & RBAC",                 rating: 4, cls: "iam"    },
+  { cat: "security",     skill: "Vault",                              rating: 4, cls: "iam"    },
+  { cat: "ai",           skill: "Ollama",                             rating: 3, cls: "ai"     },
+  { cat: "ai",           skill: "LlamaIndex",                         rating: 3, cls: "ai"     },
+  { cat: "tools",        skill: "Selenium",                           rating: 3, cls: ""       },
+  { cat: "tools",        skill: "Twilio",                             rating: 3, cls: ""       },
+];
+const half = Math.ceil(skills.length / 2);
+const skillColumns = [skills.slice(0, half), skills.slice(half)];
+
+// On the page already, but without a self-assessment, so they stay out of the rated table.
+const alsoUsed = [
+  { label: "TypeScript", cls: "ts",    icon: siTypescript.path    },
+  { label: "Bash",       cls: "",      icon: siGnubash.path       },
+  { label: "AWS",        cls: "infra", icon: null                 },
+  { label: "Claude",     cls: "ai",    icon: siClaude.path        },
+  { label: "Gemini",     cls: "ai",    icon: siGooglegemini.path  },
 ];
 
 // Pass i18n vars to client script
@@ -192,8 +213,9 @@ const scriptVars = {
           <a href="#experience" class="nav-link hidden sm:inline">{t.nav.exp}</a>
           <a href="#projects"   class="nav-link hidden sm:inline">{t.nav.projects}</a>
           <a href="#stack"      class="nav-link hidden sm:inline">{t.nav.stack}</a>
-          <a href="#uses"       class="nav-link hidden sm:inline">{t.nav.uses}</a>
-          <a href="#interests"  class="nav-link hidden sm:inline">{t.nav.interests}</a>
+          <a href="#approach"   class="nav-link hidden md:inline">{t.nav.approach}</a>
+          <a href="#uses"       class="nav-link hidden lg:inline">{t.nav.uses}</a>
+          <a href="#interests"  class="nav-link hidden lg:inline">{t.nav.interests}</a>
           <a href="/cv.pdf" target="_blank" rel="noopener noreferrer" class="nav-link hidden sm:inline">{t.nav.cv}</a>
           <a href="mailto:hi@gabotachak.dev" class="nav-link hidden sm:inline" style="color: var(--accent);">{t.nav.contact}</a>
           <!-- Lang switcher -->
@@ -233,6 +255,7 @@ const scriptVars = {
             <a href="#experience" class="nav-link mobile-nav-link">{t.nav.exp}</a>
             <a href="#projects"   class="nav-link mobile-nav-link">{t.nav.projects}</a>
             <a href="#stack"      class="nav-link mobile-nav-link">{t.nav.stack}</a>
+            <a href="#approach"   class="nav-link mobile-nav-link">{t.nav.approach}</a>
             <a href="#uses"       class="nav-link mobile-nav-link">{t.nav.uses}</a>
             <a href="#interests"  class="nav-link mobile-nav-link">{t.nav.interests}</a>
             <a href="/cv.pdf" target="_blank" rel="noopener noreferrer" class="nav-link mobile-nav-link">{t.nav.cv}</a>
@@ -251,7 +274,7 @@ const scriptVars = {
         <div class="avatar-ring flex-shrink-0 self-start md:self-auto">
           <img
             src="/avatar.jpg"
-            alt="Gabriel Anzola Tachak"
+            alt="Gabriel Anzola"
             width="120" height="120"
             style="border-radius:50%; display:block; position:relative; z-index:1;"
           />
@@ -264,8 +287,8 @@ const scriptVars = {
           </div>
 
           <h1 class="hero-title text-4xl md:text-5xl font-bold mb-2" style="color: var(--text);">
-            <span class="sr-only">Gabriel Anzola Tachak</span>
-            <span id="hero-name" aria-hidden="true">Gabriel Anzola Tachak</span>
+            <span class="sr-only">Gabriel Anzola</span>
+            <span id="hero-name" aria-hidden="true">Gabriel Anzola</span>
           </h1>
 
           <div class="flex items-center gap-3 mb-5" style="height:28px;">
@@ -279,8 +302,12 @@ const scriptVars = {
             <span class="sr-only">{t.roles[0]}</span>
           </div>
 
-          <p class="text-sm leading-relaxed mb-3 max-w-lg" style="color: var(--hero-subdesc);">
+          <p class="text-sm leading-relaxed mb-3 max-w-xl" style="color: var(--hero-subdesc);">
             {t.hero.bio}
+          </p>
+          <p class="text-xs mb-2 flex items-center gap-2" style="color: var(--text);">
+            <span class="status-dot" aria-hidden="true"></span>
+            {t.hero.availability}
           </p>
           <p class="text-xs mb-6" style="color: var(--dim); font-family: var(--font), 'Noto Color Emoji';">
             {t.hero.location}
@@ -308,7 +335,7 @@ const scriptVars = {
 
           <!-- Row 2: direct contact -->
           <div class="flex flex-wrap gap-3 text-xs items-center">
-            <span class="text-[10px] tracking-widest uppercase" style="color: var(--muted);">contact</span>
+            <span class="text-[10px] tracking-widest uppercase" style="color: var(--muted);">{t.hero.contactLabel}</span>
             <a href="tel:+573005653204" class="hero-contact-chip is-primary">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1 19.79 19.79 0 0 1 1.61 4.56 2 2 0 0 1 3.6 2.36h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.1 6.1l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               <span class="whitespace-nowrap">+57 300 565 3204</span>
@@ -324,6 +351,19 @@ const scriptVars = {
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- Metrics -->
+    <section aria-label={lang === 'es' ? 'Cifras' : 'Numbers'} class="relative z-10 max-w-4xl mx-auto px-4 md:px-8 pb-24 reveal">
+      <dl class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {t.metrics.map(m => (
+          <div class="metric-card">
+            <dt class="sr-only">{nb(m.label)}</dt>
+            <dd class="metric-value" aria-hidden="true">{nb(m.value)}</dd>
+            <dd class="metric-label"><span class="sr-only">{nb(m.value)} </span>{nb(m.label)}</dd>
+          </div>
+        ))}
+      </dl>
     </section>
 
     <!-- Experience -->
@@ -346,11 +386,16 @@ const scriptVars = {
                     {job.client && <span class="text-xs" style="color: var(--tag-color);"> · {job.client}</span>}
                     {job.active && <span class="ml-2 text-[10px] px-1.5 py-0.5 rounded" style="background: var(--badge-bg); color: var(--accent); border: 1px solid var(--badge-border);">{t.experience.activeBadge}</span>}
                   </div>
-                  <span class="text-xs shrink-0" style="color: var(--exp-period); font-family:inherit;">{job.period}</span>
+                  <span class="text-xs shrink-0 text-left sm:text-right" style="color: var(--exp-period); font-family:inherit;">
+                    {job.period}<span class="block text-[10px]" style="color: var(--dim);">{job.mode}</span>
+                  </span>
                 </div>
-                <p class="text-xs leading-relaxed mb-3" style="color: var(--exp-desc);">{job.desc}</p>
-                <div class="flex flex-wrap gap-1.5">
-                  {job.tags.map(tag => (
+                <ul class="exp-bullets mb-3">
+                  {job.bullets.map(b => <li>{nb(b)}</li>)}
+                </ul>
+                <div class="flex flex-wrap gap-1.5 items-center">
+                  <span class="text-[10px] uppercase tracking-[0.15em] mr-1" style="color: var(--muted);">{t.experience.techLabel}</span>
+                  {job.tech.map(tag => (
                     <span class="text-[10px] px-2 py-0.5 rounded inline-flex items-center gap-1" style="background: var(--tag-bg); color: var(--tag-color); border: 1px solid var(--tag-border);">
                       {iconMap[tag] && (
                         <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0; opacity:0.8;">
@@ -380,7 +425,7 @@ const scriptVars = {
               <svg class="opacity-0 group-hover:opacity-100 transition-opacity" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </div>
             <h3 class="text-sm font-semibold mb-2 group-hover:text-[var(--card-accent)] transition-colors font-mono" style="color: var(--text);">{p.name}</h3>
-            <p class="text-xs leading-relaxed mb-3" style="color: var(--project-desc);">{p.desc}</p>
+            <p class="text-xs leading-relaxed mb-3" style="color: var(--project-desc);">{nb(p.desc)}</p>
             <div class="flex flex-wrap gap-1">
               {p.tags.map(tag => (
                 <span class="text-[10px] px-1.5 py-0.5 rounded inline-flex items-center gap-1" style="background: var(--project-tag-bg); color: var(--project-tag-color); border: 1px solid var(--project-tag-border);">
@@ -399,11 +444,41 @@ const scriptVars = {
     </section>
 
     <!-- Stack -->
-    <section id="stack" class="relative z-10 max-w-4xl mx-auto px-4 md:px-8 pb-32 reveal">
+    <section id="stack" class="relative z-10 max-w-4xl mx-auto px-4 md:px-8 pb-24 reveal">
       <h2 class="section-label">{t.sections.stack}</h2>
+      <p class="text-xs leading-relaxed mb-6 max-w-xl" style="color: var(--exp-desc);">{t.sections.stackNote}</p>
 
-      <div class="flex flex-wrap gap-2">
-        {stack.map(s => (
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-0 mb-8">
+        {skillColumns.map((col, ci) => (
+          <table class={`skills-table ${ci === 1 ? 'md:mt-0 skills-table-cont' : ''}`}>
+            <thead class={ci === 1 ? 'md:table-header-group hidden' : ''}>
+              <tr>
+                <th scope="col">{t.stackTable.category}</th>
+                <th scope="col">{t.stackTable.skill}</th>
+                <th scope="col" class="text-right">{t.stackTable.rating}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {col.map(row => (
+                <tr>
+                  <td class="skill-cat">{t.stackTable.categories[row.cat]}</td>
+                  <td class={`skill-name ${row.cls}`}>{row.skill}</td>
+                  <td class="skill-rating">
+                    <span class="rating-dots" aria-hidden="true">
+                      {[1,2,3,4,5].map(n => <span class={`rating-dot ${n <= row.rating ? 'on' : ''}`}></span>)}
+                    </span>
+                    <span class="rating-num">{row.rating}/5</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ))}
+      </div>
+
+      <div class="flex flex-wrap gap-2 items-center">
+        <span class="text-[10px] uppercase tracking-[0.15em] mr-1" style="color: var(--muted);">{t.sections.alsoLabel}</span>
+        {alsoUsed.map(s => (
           <span class={`chip ${s.cls}`}>
             {s.icon && (
               <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;">
@@ -413,6 +488,48 @@ const scriptVars = {
             {s.label}
           </span>
         ))}
+      </div>
+    </section>
+
+    <!-- Approach -->
+    <section id="approach" class="relative z-10 max-w-4xl mx-auto px-4 md:px-8 pb-24 reveal">
+      <h2 class="section-label">{t.sections.approach}</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {t.approach.map((item) => (
+          <div class="interest-card">
+            <div class="flex items-start gap-3 mb-3">
+              <span class="text-2xl" style="line-height:1;" aria-hidden="true">{item.emoji}</span>
+              <h3 class="text-sm font-semibold pt-0.5" style="color: var(--text);">{item.title}</h3>
+            </div>
+            <p class="text-xs leading-relaxed" style="color: var(--exp-desc);">{nb(item.desc)}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="relative z-10 max-w-4xl mx-auto px-4 md:px-8 pb-24 reveal">
+      <h2 class="section-label">{t.sections.education}</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="uses-card md:col-span-2">
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
+            <span class="font-semibold text-sm" style="color: var(--text);">{t.education.degree}</span>
+            <span class="text-xs shrink-0" style="color: var(--exp-period);">{t.education.period}</span>
+          </div>
+          <div class="text-sm mb-2" style="color: var(--accent);">{t.education.school}</div>
+          <p class="text-xs" style="color: var(--exp-desc);">{t.education.note}</p>
+        </div>
+        <div class="uses-card">
+          <div class="text-[10px] uppercase tracking-[0.15em] mb-3" style="color: var(--dim);">{t.education.languagesLabel}</div>
+          {t.education.languages.map(l => (
+            <div class="spec-row" style="grid-template-columns: 64px 1fr;">
+              <span class="spec-val font-semibold">{l.name}</span>
+              <span class="text-[11px]" style="color: var(--exp-desc);">{l.level}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
 
@@ -460,7 +577,7 @@ const scriptVars = {
                 <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="2" width="14" height="10" rx="1.5"/><path d="M5 14h6M8 12v2"/></svg>
                 disp
               </span>
-              <span class="spec-val">Apple Retina · 2560×1664 · 60Hz</span>
+              <span class="spec-val">Apple Retina · 2 560×1 664 · 60 Hz</span>
             </div>
           </div>
         </div>
@@ -496,7 +613,7 @@ const scriptVars = {
                 <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="5" width="14" height="6" rx="1"/><line x1="4" y1="5" x2="4" y2="11"/><line x1="8" y1="5" x2="8" y2="11"/><line x1="12" y1="5" x2="12" y2="11"/><line x1="4" y1="3" x2="4" y2="5"/><line x1="8" y1="3" x2="8" y2="5"/><line x1="12" y1="3" x2="12" y2="5"/></svg>
                 ram
               </span>
-              <span class="spec-val">32 GB DDR4 4000MHz</span>
+              <span class="spec-val">32 GB DDR4 4 000 MHz</span>
             </div>
             <div class="spec-row">
               <span class="spec-key flex items-center gap-1">
@@ -622,8 +739,8 @@ const scriptVars = {
         <span id="lfm-status-dot" style="width:6px;height:6px;border-radius:50%;background:var(--muted);flex-shrink:0;"></span>
         <span id="lfm-status-text" style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tag-color);">{t.lfm.loading}</span>
       </div>
-      <div id="lfm-track"  style="font-size:11px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;">—</div>
-      <div id="lfm-artist" style="font-size:10px;color:var(--tag-color);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;">—</div>
+      <div id="lfm-track"  style="font-size:11px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;">…</div>
+      <div id="lfm-artist" style="font-size:10px;color:var(--tag-color);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;">…</div>
     </div>
 
     <svg style="flex-shrink:0;opacity:0.25;" width="14" height="14" viewBox="0 0 24 24" fill="#d51007">
@@ -709,7 +826,7 @@ const scriptVars = {
   }
   .menu-toggle:hover .hamburger-bar { background: var(--accent); }
 
-  /* Hamburger morphs into an X — same path in and out (§7) */
+  /* Hamburger morphs into an X, same path in and out (§7) */
   .menu-toggle[aria-expanded="true"] .hamburger-bar:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
   .menu-toggle[aria-expanded="true"] .hamburger-bar:nth-child(2) { opacity: 0; }
   .menu-toggle[aria-expanded="true"] .hamburger-bar:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
@@ -770,6 +887,127 @@ const scriptVars = {
   }
   @media (max-width: 380px) {
     .lastfm-widget { display: none; }
+  }
+
+  .status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent2);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent2) 18%, transparent);
+  }
+
+  .metric-card {
+    padding: 1rem 1.1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .metric-card dd { margin: 0; }
+  .metric-value {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .metric-label {
+    font-family: var(--font-prose);
+    font-size: 0.72rem;
+    line-height: 1.45;
+    color: var(--exp-desc);
+  }
+  @media (max-width: 380px) {
+    .metric-value { font-size: 1.1rem; }
+  }
+
+  .exp-bullets {
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .exp-bullets li {
+    position: relative;
+    padding-left: 14px;
+    font-family: var(--font-prose);
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: var(--exp-desc);
+  }
+  .exp-bullets li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    opacity: 0.7;
+  }
+
+  .skills-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+  }
+  .skills-table th {
+    text-align: left;
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0 0 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .skills-table th.text-right { text-align: right; }
+  .skills-table td {
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  .skill-cat {
+    color: var(--dim);
+    width: 32%;
+    padding-right: 10px !important;
+  }
+  .skill-name { color: var(--text); padding-right: 10px !important; }
+  .skill-name.go     { color: #00ADD8; }
+  .skill-name.python { color: #4B8BBE; }
+  html.light .skill-name.go     { color: #007d9c; }
+  html.light .skill-name.python { color: #306998; }
+  .skill-rating {
+    text-align: right;
+    white-space: nowrap;
+  }
+  .rating-dots {
+    display: inline-flex;
+    gap: 3px;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+  .rating-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 2px;
+    border: 1px solid var(--tag-border);
+    background: transparent;
+  }
+  .rating-dot.on {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .rating-num {
+    color: var(--dim);
+    font-variant-numeric: tabular-nums;
+  }
+  @media (max-width: 767px) {
+    .skills-table-cont tbody tr:first-child td { border-top: none; }
   }
 
   .interest-card {
@@ -935,8 +1173,8 @@ const scriptVars = {
       widget.style.display = 'flex';
 
       const nowPlaying = track['@attr'] && track['@attr'].nowplaying === 'true';
-      const name   = track.name || '—';
-      const artist = (track.artist && track.artist['#text']) || '—';
+      const name   = track.name || '…';
+      const artist = (track.artist && track.artist['#text']) || '…';
       const art    = track.image && track.image.find(function(i) { return i.size === 'medium'; });
 
       const dot       = document.getElementById('lfm-status-dot');

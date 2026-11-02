@@ -8,7 +8,7 @@ interface Props {
 
 const {
   title = "gabotachak",
-  description = "Gabriel Anzola Tachak — Backend Engineer. Go, Python, IAM. Bogotá.",
+  description = "Gabriel Anzola, Senior Backend Engineer. Go and Python APIs, microservices and IAM. Bogotá, Colombia.",
   lang = "en",
 } = Astro.props;
 
@@ -18,11 +18,12 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Gabriel Andres Anzola Tachak",
+  "alternateName": "Gabriel Anzola",
   "url": "https://gabotachak.dev",
   "email": "hi@gabotachak.dev",
   "telephone": ["+573005653204"],
-  "jobTitle": "Backend Engineer",
-  "description": "Backend engineer with 4+ years at MercadoLibre in Identity & Access Management. Go and Python. Available for remote roles.",
+  "jobTitle": "Senior Backend Engineer",
+  "description": "Senior backend engineer with 4+ years building APIs and microservices in Go and Python, including identity and access management at Mercado Libre. Open to remote roles.",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Bogotá",
@@ -32,7 +33,12 @@ const jsonLd = {
     "https://github.com/gabotachak",
     "https://linkedin.com/in/gabotachak"
   ],
-  "knowsAbout": ["Go", "Python", "IAM", "OAuth2", "Microservices", "Backend Engineering", "GCP", "AWS"]
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Universidad Nacional de Colombia"
+  },
+  "knowsLanguage": ["es", "en"],
+  "knowsAbout": ["Go", "Python", "IAM", "OAuth2", "RBAC", "gRPC", "REST APIs", "Microservices", "Backend Engineering", "GCP", "Kubernetes"]
 };
 ---
 
@@ -42,7 +48,7 @@ const jsonLd = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="author" content="Gabriel Anzola Tachak" />
+    <meta name="author" content="Gabriel Anzola" />
     <link rel="canonical" href={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
