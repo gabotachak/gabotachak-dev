@@ -5,68 +5,43 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = translations[lang];
 
-// PLACEHOLDER: ratings still render here on purpose. The stack agent removes them and regroups
-// by category in its own commit, so the change can be reverted alone.
+// Grouped by category, in CV order. Ratings stay in the CV only.
 type Cat = keyof typeof t.stackTable.categories;
-const skills: { cat: Cat; skill: string; rating: number }[] = [
-  { cat: "languages",    skill: "Go",                                 rating: 5 },
-  { cat: "languages",    skill: "Python",                             rating: 5 },
-  { cat: "languages",    skill: "SQL",                                rating: 4 },
-  { cat: "frameworks",   skill: "Gin / Gorilla Mux",                  rating: 5 },
-  { cat: "frameworks",   skill: "FastAPI / Django / Flask",           rating: 5 },
-  { cat: "protocols",    skill: "gRPC & REST APIs",                   rating: 5 },
-  { cat: "architecture", skill: "Distributed Systems",                rating: 4 },
-  { cat: "databases",    skill: "PostgreSQL / MySQL",                 rating: 4 },
-  { cat: "databases",    skill: "Redis / MongoDB",                    rating: 4 },
-  { cat: "cloud",        skill: "GCP (Pub/Sub, Workflows, Storage)",  rating: 4 },
-  { cat: "devops",       skill: "Docker & Linux",                     rating: 4 },
-  { cat: "devops",       skill: "Kubernetes",                         rating: 4 },
-  { cat: "devops",       skill: "GitHub Actions & CI/CD",             rating: 4 },
-  { cat: "devops",       skill: "Terraform",                          rating: 4 },
-  { cat: "devops",       skill: "Grafana",                            rating: 4 },
-  { cat: "devops",       skill: "Spinnaker",                          rating: 3 },
-  { cat: "security",     skill: "OAuth2, JWT & RBAC",                 rating: 4 },
-  { cat: "security",     skill: "Vault",                              rating: 4 },
-  { cat: "ai",           skill: "Ollama",                             rating: 3 },
-  { cat: "ai",           skill: "LlamaIndex",                         rating: 3 },
-  { cat: "tools",        skill: "Selenium",                           rating: 3 },
-  { cat: "tools",        skill: "Twilio",                             rating: 3 },
+const groups: { cat: Cat; skills: string[] }[] = [
+  { cat: "languages",  skills: ["Go", "Python", "SQL"] },
+  { cat: "frameworks", skills: ["Gin / Gorilla Mux", "FastAPI / Django / Flask"] },
+  { cat: "protocols",  skills: ["gRPC & REST APIs", "Distributed Systems"] },
+  { cat: "databases",  skills: ["PostgreSQL / MySQL", "Redis / MongoDB"] },
+  { cat: "cloud",      skills: ["GCP (Pub/Sub, Workflows, Storage)", "Docker & Linux", "Kubernetes", "GitHub Actions & CI/CD", "Terraform", "Grafana", "Spinnaker"] },
+  { cat: "security",   skills: ["OAuth2, JWT & RBAC", "Vault"] },
+  { cat: "ai",         skills: ["Ollama", "LlamaIndex"] },
+  { cat: "tools",      skills: ["Selenium", "Twilio"] },
 ];
-// Used on the page but without a self-assessment.
 const alsoUsed = ["TypeScript", "Bash", "AWS", "Claude", "Gemini"];
 ---
 
 <section class="section" id="stack" aria-labelledby="stack-title">
   <div class="container">
     <h2 class="section-title" id="stack-title">{t.sections.stack}</h2>
-    <p class="meta note">{t.sections.stackNote}</p>
-    <table>
-      <thead>
-        <tr>
-          <th scope="col">{t.stackTable.category}</th>
-          <th scope="col">{t.stackTable.skill}</th>
-          <th scope="col">{t.stackTable.rating}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {skills.map((s) => (
-          <tr>
-            <td>{t.stackTable.categories[s.cat]}</td>
-            <td>{s.skill}</td>
-            <td class="num">{s.rating}/5</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <p class="note">{t.sections.stackNote}</p>
+    <dl class="groups">
+      {groups.map((g) => (
+        <div>
+          <dt class="eyebrow">{t.stackTable.categories[g.cat]}</dt>
+          <dd><ul class="tech-line">{g.skills.map((s) => <li>{s}</li>)}</ul></dd>
+        </div>
+      ))}
+    </dl>
     <p class="meta also">{t.sections.alsoLabel}: {alsoUsed.join(" · ")}</p>
   </div>
 </section>
 
 <style>
-  .note { margin-bottom: 1.5rem; }
-  table { width: 100%; border-collapse: collapse; font-size: var(--fs-meta); }
-  th { text-align: left; font-weight: 400; font-size: var(--fs-label); color: var(--text-3); }
-  th, td { padding: 0.5rem 0.75rem 0.5rem 0; border-bottom: 1px solid var(--border); }
-  td:first-child { color: var(--text-2); }
-  .also { margin-top: 1.25rem; }
+  .note { max-width: var(--measure); color: var(--text-2); margin: 0 0 1.5rem; }
+  .groups { margin: 0; display: grid; gap: 0 3rem; }
+  @media (min-width: 768px) { .groups { grid-template-columns: 1fr 1fr; } }
+  .groups > div { padding-block: 1rem; border-top: 1px solid var(--border); }
+  dt { margin-bottom: 0.375rem; }
+  dd { margin: 0; }
+  .also { max-width: none; margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--border); }
 </style>
