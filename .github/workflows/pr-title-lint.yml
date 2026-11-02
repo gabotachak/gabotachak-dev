@@ -1,0 +1,32 @@
+name: pr-title-lint
+
+# El merge por squash usa el título del PR como mensaje final en master,
+# no los commits individuales: por eso el título también tiene que cumplir
+# Conventional Commits.
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+    branches: [master]
+
+permissions:
+  pull-requests: read
+
+jobs:
+  pr-title-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: amannn/action-semantic-pull-request@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            refactor
+            perf
+            docs
+            test
+            build
+            ci
+            chore
+            style

@@ -1,0 +1,57 @@
+name: ci
+
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          # Astro 7 exige Node >=22.23.4 (engines): check-latest evita quedarse con
+          # un 22.x más viejo que ya venga cacheado en la imagen del runner.
+          node-version: 22
+          check-latest: true
+          cache: npm
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm audit --audit-level=high
+      - run: npm run build
+
+  hooks:
+    runs-on: ubuntu-latest
+    env:
+      # Ya los cubre el job "checks"; acá quedan los hooks que necesitan binarios
+      # propios (gitleaks, actionlint) y los de higiene de archivos.
+      SKIP: prettier,oxlint,astro-check,npm-audit
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # gitleaks recorre todo el historial.
+          fetch-depth: 0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.x"
+      - run: pip install pre-commit
+      - run: pre-commit run --all-files
+      # El hook "gitleaks" normal solo mira lo staged (nada en CI); este recorre el historial.
+      - run: pre-commit run gitleaks-history --hook-stage manual --all-files
+
+  # Solo en PRs: compara las dependencias del PR contra la base y falla si
+  # alguna nueva trae una vulnerabilidad conocida.
+  dependency-review:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/dependency-review-action@v5.0.0
