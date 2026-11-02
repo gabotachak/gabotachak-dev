@@ -257,7 +257,7 @@ export const translations = {
     },
     hero: {
       eyebrow: "Ingeniero Backend Senior · Go y Python",
-      tagline: "Backend con sabor a café",
+      tagline: "Backend con notas de café",
       lede: "Construyo las APIs que deciden quién puede entrar a qué, y las hago rápidas. Cuatro años en la plataforma de identidad de Mercado Libre y después contratos backend para The Home Depot US y Compass.",
       availability: "Abierto a roles backend senior. Remoto, tiempo completo o contrato.",
       location: "Bogotá, Colombia · UTC−5",
