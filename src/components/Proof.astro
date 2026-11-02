@@ -13,8 +13,8 @@ const t = translations[lang];
       {t.metrics.map((m) => (
         <div class="figure">
           <dt>{nb(m.label)}</dt>
-          <dd class="num">
-            {m.sr ? <><span aria-hidden="true">{m.value}</span><span class="sr-only">{m.sr}</span></> : nb(m.value)}
+          <dd>
+            {m.sr ? <><span aria-hidden="true">{m.value.split(" → ")[0]}<svg class="arrow" viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M2 6h19M16 1.5 21 6l-5 4.5" /></svg>{m.value.split(" → ")[1]}</span><span class="sr-only">{m.sr}</span></> : nb(m.value)}
           </dd>
         </div>
       ))}
@@ -24,18 +24,30 @@ const t = translations[lang];
 
 <style>
   .proof { padding-bottom: clamp(4rem, 8vw, 6rem); }
-  /* The arrow falls back to a font narrower than its advance, which eats the space after it. */
-  .figure span[aria-hidden] { word-spacing: 0.2em; }
+  /* Fraunces has no arrow glyph, so it is drawn instead of falling back to a system font. */
+  .figure span[aria-hidden] { white-space: nowrap; }
+  /* At 320px the figure is wider than its cell: let it wrap instead of overflowing. */
+  @media (max-width: 359px) { .figure span[aria-hidden] { white-space: normal; } }
+  .arrow { display: inline-block; width: 0.6em; height: 0.3em; margin-inline: 0.3em; vertical-align: 0.2em; }
   .figures { display: grid; grid-template-columns: repeat(2, 1fr); margin: 0; border-block: 1px solid var(--border); }
   /* Value above label visually; DOM order stays dt then dd so the term is read once. */
   .figure { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 0.5rem; padding: 1.25rem 1rem; min-width: 0; }
   .figure:nth-child(even) { border-left: 1px solid var(--border); }
   .figure:nth-child(n + 3) { border-top: 1px solid var(--border); }
   @media (min-width: 768px) {
-    .figures { grid-template-columns: repeat(4, 1fr); }
+    .figures { grid-template-columns: 1fr 1fr 1fr 1.35fr; }
     .figure:nth-child(n) { border-top: 0; border-left: 1px solid var(--border); }
     .figure:first-child { border-left: 0; padding-left: 0; }
   }
   dt { font-size: var(--fs-meta); line-height: 1.4; color: var(--text-2); }
-  dd { margin: 0; font-size: clamp(1.25rem, 5vw, 1.5rem); font-weight: 500; line-height: 1.1; }
+  dd {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 560;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-size: clamp(1.75rem, 7vw, 2.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+  }
 </style>

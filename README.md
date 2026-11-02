@@ -6,7 +6,7 @@ Personal portfolio of Gabriel Anzola Tachak, Senior Backend Engineer. Static sit
 
 - [Astro](https://astro.build) 6, static output, with `@astrojs/sitemap`
 - [Tailwind CSS](https://tailwindcss.com) v4 plus shared tokens and primitives in `src/styles/global.css`
-- Fonts self-hosted through Fontsource: IBM Plex Sans for text, JetBrains Mono for figures and tech lists
+- Fonts self-hosted through Fontsource: Fraunces for headings, the tagline and key figures, IBM Plex Sans for text, JetBrains Mono for tech lists and small labels
 - No UI framework. JavaScript only enhances (theme toggle, mobile menu, active nav link, copy email, Last.fm); the content works without it and prints cleanly.
 
 ## Pages

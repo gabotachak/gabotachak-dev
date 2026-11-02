@@ -2,6 +2,7 @@
 
 @theme {
   --font-sans: "IBM Plex Sans Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Fraunces Variable", ui-serif, Georgia, "Times New Roman", serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
@@ -11,24 +12,26 @@
 :root {
   color-scheme: dark;
 
-  --bg:      #0b0c0e;
-  --surface: #121417;
-  --border:  #26292e;
-  --text:    #e8e9eb;
-  --text-2:  #a6abb3;
-  --text-3:  #8b9099;
-  --accent:  #5cc8dc;
-  --ok:      #4cc38a;
+  --bg:      #15110e;
+  --surface: #1e1814;
+  --border:  #352b24;
+  --text:    #f3ebe1;
+  --text-2:  #c4b7a8;
+  --text-3:  #a39485;
+  --accent:  #e3a857;
+  --ok:      #9ccb8a;
 
   --accent-strong: color-mix(in srgb, var(--accent) 78%, var(--text));
   --nav-bg:        color-mix(in srgb, var(--bg) 86%, transparent);
+  --band:          color-mix(in srgb, var(--accent) 11%, var(--bg));
 
   --fs-label: 0.75rem;
   --fs-meta:  0.875rem;
   --fs-body:  1rem;
   --fs-lede:  1.25rem;
-  --fs-h2:    1.75rem;
-  --fs-h1:    clamp(2.5rem, 6vw, 3.5rem);
+  --fs-h2:    clamp(2rem, 5vw, 2.75rem);
+  --fs-h1:    clamp(2.5rem, 7vw, 3.5rem);
+  --fs-hero:  clamp(2.75rem, 7vw, 4.5rem);
 
   --header-h: 4rem;
   --radius:   6px;
@@ -38,26 +41,26 @@
 html.light {
   color-scheme: light;
 
-  --bg:      #fafafa;
-  --surface: #ffffff;
-  --border:  #e2e4e8;
-  --text:    #15171a;
-  --text-2:  #4a4f57;
-  --text-3:  #646a73;
-  --accent:  #006b82;
-  --ok:      #14794f;
+  --bg:      #f8f3ea;
+  --surface: #fffdf8;
+  --border:  #e3d8c8;
+  --text:    #241a13;
+  --text-2:  #5b4c40;
+  --text-3:  #75655a;
+  --accent:  #a4481f;
+  --ok:      #2f6b3f;
 }
 
 @media (prefers-contrast: more) {
   :root {
-    --border: #8b9099;
-    --text-2: #c4c8cf;
-    --text-3: #b0b5bd;
+    --border: #8e7f71;
+    --text-2: #dccfc0;
+    --text-3: #c9bcad;
   }
   html.light {
-    --border: #6b7078;
-    --text-2: #2e3238;
-    --text-3: #3d424a;
+    --border: #7a6a5d;
+    --text-2: #3b2d23;
+    --text-3: #4a3b30;
   }
 }
 
@@ -93,6 +96,7 @@ body {
   line-height: 1.15;
   text-wrap: balance;
 }
+:where(h1, h2) { font-family: var(--font-display); font-weight: 560; }
 :where(h1) { font-size: var(--fs-h1); letter-spacing: -0.02em; line-height: 1.08; }
 :where(h3) { font-size: var(--fs-lede); line-height: 1.3; }
 :where(p) { margin: 0; max-width: var(--measure); text-wrap: pretty; }
@@ -118,10 +122,14 @@ body {
 /* <section class="section"><div class="container">…</div></section> */
 .section { padding-block: clamp(4rem, 8vw, 6rem); }
 
+/* Full-bleed surface band, to break the page rhythm. */
+.band-surface { background: var(--surface); border-block: 1px solid var(--border); }
+
 .section-title {
   font-size: var(--fs-h2);
-  font-weight: 600;
-  line-height: 1.2;
+  font-weight: 560;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
   margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
 }
 
@@ -280,8 +288,9 @@ body {
     --text: #000000;
     --text-2: #222222;
     --text-3: #444444;
-    --accent: #00566a;
-    --ok: #00566a;
+    --accent: #7a3410;
+    --ok: #1f5a2e;
+    --band: #ffffff;
   }
   html { scroll-padding-top: 0; }
   body { font-size: 11pt; line-height: 1.45; }

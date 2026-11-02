@@ -1,7 +1,10 @@
 ---
 import "@fontsource-variable/ibm-plex-sans/wght.css";
 import "@fontsource-variable/jetbrains-mono/wght.css";
+import "@fontsource-variable/fraunces/wght.css";
+import "@fontsource-variable/fraunces/wght-italic.css";
 import plexLatin from "@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-latin-wght-normal.woff2?url";
+import frauncesLatin from "@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2?url";
 import "../styles/global.css";
 import { chrome } from "../i18n/chrome";
 import { localeHref } from "../i18n/format";
@@ -23,7 +26,7 @@ const abs = (l: Lang) => site + localeHref(l, path);
 const canonicalURL = path === undefined ? undefined : abs(lang);
 const ogImage = `${site}/og-${lang}.png`;
 // Browser chrome colors. Must match --bg in global.css.
-const themeColor = { dark: "#0b0c0e", light: "#fafafa" };
+const themeColor = { dark: "#15110e", light: "#f8f3ea" };
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -82,6 +85,7 @@ const jsonLd = {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="preload" href={plexLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={frauncesLatin} as="font" type="font/woff2" crossorigin />
     <!-- Theme before first paint. First visit follows the OS; a saved click wins; dark if anything fails.
          Exposes window.setTheme(isLight, persist) for the nav toggle. Storage is optional everywhere. -->
     <script is:inline>

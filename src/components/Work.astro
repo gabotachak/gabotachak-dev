@@ -99,8 +99,16 @@ const other: Record<string, { url: string | null; tech: string[] }> = {
 <style>
   .cases { display: grid; gap: 1.5rem; }
   .case { display: grid; gap: 1.25rem; }
-  .case h3 { font-size: var(--fs-lede); }
-  .case:first-child h3 { font-size: 1.5rem; }
+  .case h3, .other-title { font-family: var(--font-display); font-weight: 560; letter-spacing: -0.01em; }
+  .case h3 { font-size: 1.625rem; line-height: 1.15; }
+  /* The flagship leads: accent rule, warmer surface, bigger title, more room. */
+  .case:first-child {
+    border-top: 3px solid var(--accent);
+    background: color-mix(in srgb, var(--surface) 94%, var(--accent));
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+    gap: 1.75rem;
+  }
+  .case:first-child h3 { font-size: clamp(2rem, 5vw, 2.75rem); line-height: 1.05; letter-spacing: -0.02em; }
   .case header { display: grid; gap: 0.25rem; }
 
   .rows { display: grid; gap: 1rem; margin: 0; }
@@ -144,7 +152,7 @@ const other: Record<string, { url: string | null; tech: string[] }> = {
     .bar { background: CanvasText; }
   }
 
-  .other-title { margin-top: clamp(3rem, 6vw, 4rem); margin-bottom: 0.5rem; }
+  .other-title { font-size: 1.75rem; margin-top: clamp(3.5rem, 7vw, 5rem); margin-bottom: 0.75rem; }
   .other { list-style: none; margin: 0; padding: 0; }
   .other > li { display: grid; gap: 0.5rem; padding-block: 1.25rem; border-top: 1px solid var(--border); }
   .other > li:last-child { border-bottom: 1px solid var(--border); }

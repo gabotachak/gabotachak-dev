@@ -8,9 +8,9 @@ const c = t.contact;
 const email = "hi@gabotachak.dev";
 ---
 
-<section class="section" id="contact" aria-labelledby="contact-title">
+<section class="section band" id="contact" aria-labelledby="contact-title">
   <div class="container">
-    <h2 class="section-title" id="contact-title">{c.title}</h2>
+    <h2 class="section-title big" id="contact-title">{c.title}</h2>
     <p class="lede">{t.hero.availability}</p>
     <div class="main-action">
       <a class="btn btn-primary email" href={`mailto:${email}`}>{email}</a>
@@ -46,6 +46,10 @@ const email = "hi@gabotachak.dev";
 </script>
 
 <style>
+  /* Full-bleed closing band: accent tint over the page background. */
+  .band { background: var(--band); border-block: 1px solid var(--border); padding-block: clamp(4rem, 10vw, 8rem); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .big { font-size: clamp(3.25rem, 13vw, 7.5rem); line-height: 0.95; letter-spacing: -0.03em; margin-bottom: clamp(1.25rem, 3vw, 2rem); }
+  .band .btn-secondary:hover { background: var(--bg); }
   .main-action { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
   .email { min-height: 3.25rem; padding-inline: 1.5rem; font-size: var(--fs-lede); font-family: var(--font-mono); font-weight: 500; }
   .main-action button[hidden] { display: none; }
