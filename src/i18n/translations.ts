@@ -4,7 +4,7 @@ export const translations = {
   en: {
     meta: {
       title: "gabotachak.dev",
-      description: "Gabriel Anzola, Senior Backend Engineer. Go and Python APIs, microservices and IAM. Bogotá, Colombia.",
+      description: "Gabriel Anzola Tachak, Senior Backend Engineer. Go and Python APIs, microservices and IAM. Bogotá, Colombia.",
     },
     nav: {
       exp: "exp",
@@ -210,7 +210,7 @@ export const translations = {
   es: {
     meta: {
       title: "gabotachak.dev",
-      description: "Gabriel Anzola, Ingeniero Backend Senior. APIs en Go y Python, microservicios e IAM. Bogotá, Colombia.",
+      description: "Gabriel Anzola Tachak, Ingeniero Backend Senior. APIs en Go y Python, microservicios e IAM. Bogotá, Colombia.",
     },
     nav: {
       exp: "exp",
