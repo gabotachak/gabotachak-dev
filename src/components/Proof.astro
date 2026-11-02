@@ -14,7 +14,7 @@ const t = translations[lang];
         <div class="figure">
           <dt>{nb(m.label)}</dt>
           <dd>
-            {m.sr ? <><span aria-hidden="true">{m.value.split(" → ")[0]}<svg class="arrow" viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M2 6h19M16 1.5 21 6l-5 4.5" /></svg>{m.value.split(" → ")[1]}</span><span class="sr-only">{m.sr}</span></> : nb(m.value)}
+            {"sr" in m ? <><span aria-hidden="true">{m.value.split(" → ")[0]}<svg class="arrow" viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M2 6h19M16 1.5 21 6l-5 4.5" /></svg>{m.value.split(" → ")[1]}</span><span class="sr-only">{m.sr}</span></> : nb(m.value)}
           </dd>
         </div>
       ))}
