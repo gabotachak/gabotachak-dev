@@ -30,11 +30,11 @@
 
 ## Projects
 
-- [tax-time](https://tax-time.gabotachak.dev/): Colombian AI tax advisor that runs 100% locally on Ollama
-- [SIA Bridge](https://sia.gabotachak.dev/): Course-scheduling assistant for Universidad Nacional de Colombia, about 1 ms per query against about 2 s on the official system
-- [pokemon-agent](https://github.com/gabotachak/pokemon-agent): Multi-LLM agent framework using Claude + Gemini
-- [logi-hyprland](https://github.com/gabotachak/logi-hyprland): Pure evdev gesture daemon for Logitech on Hyprland
-- [picas-fijas](https://github.com/gabotachak/picas-fijas): Mastermind solver using Knuth's minimax (at most 5 guesses)
+- tax-time (private repository, no link): Colombian AI tax advisor that runs 100% locally on Ollama
+- [SIA Bridge](https://github.com/gabotachak/sia-unal-bridge): JSON API and web app for Universidad Nacional de Colombia's course system, which has no API of its own. Go, Postgres cache, React. Queries that take about 2 s on the official system come back in about 1 ms
+- [pokemon-agent](https://github.com/gabotachak/pokemon-agent): Q-Learning agent that learns to win Pokémon Showdown battles, with K-Means and XGBoost over 484 130 real human battles
+- [logi-hyprland](https://github.com/gabotachak/logi-hyprland): Gesture daemon for the Logitech M720 on Hyprland, pure evdev
+- [picas-fijas](https://github.com/gabotachak/picas-fijas): Bulls and Cows agent that uses Knuth-style minimax over the 5 040 possible codes
 
 ## Education
 

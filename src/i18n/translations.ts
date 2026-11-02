@@ -112,15 +112,84 @@ export const translations = {
         },
       ],
     },
-    projectDesc: [
-      "Colombian AI tax advisor. 100% local: no internet, no subscriptions. Runs entirely on Ollama.",
-      "Course-scheduling assistant for Universidad Nacional de Colombia's registration system. Queries that take about 2 s on the university's own system come back in about 1 ms.",
-      "Multi-LLM AI agent framework using Claude + Gemini. No further context needed.",
-      "Pure evdev gesture daemon for Logitech M720 on Hyprland. Zero Logitech Options dependency.",
-      "Mastermind solver using Knuth's minimax algorithm. Guaranteed ≤5 guesses.",
-      "Classical cipher implementations: Caesar, Hill, OTP, Playfair, Vigenère, Turning Grille.",
-      "Full Go project from the Mercado Libre bootcamp. Hexagonal architecture, multiple domains, unit tests.",
-    ],
+    work: {
+      title: "Selected work",
+      otherTitle: "Other projects",
+      privateRepo: "Private repo",
+      sourceLink: "SIA Bridge source on GitHub",
+      cases: [
+        {
+          id: "meli",
+          title: "Identity and access at Mercado Libre",
+          context: "Cybersecurity Developer, IAM · Jun 2021 to Sep 2025 · Hybrid, full-time",
+          rows: [
+            { label: "Scale", items: ["The platform's APIs handle 1 000 000+ requests a day from 40 000+ employees and 100 000+ external partners."] },
+            { label: "What I did", items: [
+              "Built and scaled the Go and Python microservices behind the identity and access platform.",
+              "Automated provisioning, deprovisioning and access rotation for employees across AWS, GCP and 100+ internal systems.",
+              "Built an internal engine that automates periodic access reviews.",
+              "Implemented regional data segmentation so identity data meets LATAM regulatory requirements.",
+            ] },
+            { label: "Result", items: ["Cut API response times by 35% by reworking query plans and indexes on the busiest endpoints."] },
+          ],
+        },
+        {
+          id: "compass",
+          title: "Rebuilding a core Go service for Compass",
+          context: "Backend Engineer at Workstate, for Compass · Apr 2026 to Jul 2026 · Remote, contract · No public code",
+          rows: [
+            { label: "Problem", items: ["A bottleneck kept coming back in the platform's request pipeline."] },
+            { label: "What I did", items: [
+              "Rebuilt a core Go microservice.",
+              "Built Go services and REST APIs for Compass, one of the leading real estate platforms in the US, working with distributed international teams.",
+            ] },
+            { label: "Result", items: ["Cut P95 response times by 90% and removed the bottleneck."] },
+          ],
+        },
+        {
+          id: "sia",
+          title: "SIA Bridge",
+          context: "Independent project, not affiliated with the Universidad Nacional de Colombia",
+          rows: [
+            { label: "Problem", items: ["The university's student information system (the SIA) is an Oracle ADF web app with no API. Seeing the sections of one course takes four chained dropdowns, and every step is a POST against a server session that expires after about four minutes of inactivity."] },
+            { label: "What I did", items: [
+              "Reverse-engineered the ADF protocol in Go. The API replays the partial-page POSTs a browser would send and returns clean JSON.",
+              "Kept a pool of live ADF sessions instead of a plain HTTP client, and load-tested it against production to find the concurrency ceiling.",
+              "Cached in Postgres according to how each kind of data changes: catalogs are served stale-while-revalidate, and every seat count says how old it is.",
+              "Built a React and TypeScript web app on the same public API to plan a semester, with schedule-clash detection and calendar export.",
+            ] },
+            { label: "Result", items: ["Queries that take about 2 s on the official system come back in about 1 ms. Only a cache miss waits for the SIA."] },
+          ],
+          latency: {
+            caption: "The same course query, approximate values, linear scale. At true scale the second bar is about 1/2 000 of the first, so it is drawn at a minimum width to stay visible.",
+            slow: "Official system",
+            fast: "SIA Bridge, cached",
+            slowValue: "~2 s",
+            fastValue: "~1 ms",
+            text: "About 2 seconds on the official system against about 1 millisecond on SIA Bridge when the answer is cached, roughly 2 000 times faster.",
+          },
+        },
+        {
+          id: "rag",
+          title: "WhatsApp RAG chatbot for a presidential campaign",
+          context: "Backend Developer Consultant at Personally AI · Oct 2025 to Nov 2025 · Remote, contract · No public code",
+          rows: [
+            { label: "What I did", items: [
+              "Built a RAG chatbot on WhatsApp that runs a local model through Ollama, with Twilio handling the messaging.",
+              "Wrote a hostility filter that catches abusive messages and prompt-injection attempts before they reach the model.",
+              "Kept the knowledge base current with Selenium scrapers on a 24-hour refresh.",
+            ] },
+            { label: "Result", items: ["The bot served 1 000+ active users."] },
+          ],
+        },
+      ],
+      other: [
+        { id: "tax-time", desc: "Colombian AI tax advisor that runs 100% locally on Ollama. No internet, no subscriptions." },
+        { id: "pokemon-agent", desc: "Q-Learning agent that learns to win Pokémon Showdown battles, with K-Means and XGBoost over 484 130 real human battles. University course project." },
+        { id: "logi-hyprland", desc: "Gesture daemon for the Logitech M720 on Hyprland. Pure evdev, no Logitech software. Runs as a systemd user service." },
+        { id: "picas-fijas", desc: "Bulls and Cows agent that picks each guess with Knuth-style minimax over the 5 040 possible codes." },
+      ],
+    },
     approach: [
       {
         title: "Measure, then fix",
@@ -320,15 +389,84 @@ export const translations = {
         },
       ],
     },
-    projectDesc: [
-      "Asesor tributario colombiano con IA. 100% local: sin internet, sin suscripciones. Corre completamente en Ollama.",
-      "Asistente de horarios para el sistema de inscripciones de la Universidad Nacional de Colombia. Las consultas que tardan cerca de 2 s en el sistema de la universidad responden en cerca de 1 ms.",
-      "Framework de agentes IA multi-LLM con Claude + Gemini. No necesita más contexto.",
-      "Daemon de gestos evdev puro para Logitech M720 en Hyprland. Sin dependencia de Logitech Options.",
-      "Solucionador de Mastermind con el algoritmo minimax de Knuth. Garantía de ≤5 intentos.",
-      "Implementaciones de cifrados clásicos: César, Hill, OTP, Playfair, Vigenère, Reja girante.",
-      "Proyecto completo en Go del bootcamp de Mercado Libre. Arquitectura hexagonal, múltiples dominios, pruebas unitarias.",
-    ],
+    work: {
+      title: "Trabajo destacado",
+      otherTitle: "Otros proyectos",
+      privateRepo: "Repo privado",
+      sourceLink: "Código de SIA Bridge en GitHub",
+      cases: [
+        {
+          id: "meli",
+          title: "Identidad y accesos en Mercado Libre",
+          context: "Desarrollador de Ciberseguridad, IAM · jun 2021 a sep 2025 · Híbrido, tiempo completo",
+          rows: [
+            { label: "Escala", items: ["Las APIs de la plataforma reciben 1 000 000+ solicitudes al día de 40 000+ empleados y 100 000+ socios externos."] },
+            { label: "Qué hice", items: [
+              "Construí y escalé los microservicios en Go y Python de la plataforma de identidad y accesos.",
+              "Automaticé el aprovisionamiento, el desaprovisionamiento y la rotación de accesos de los empleados en AWS, GCP y 100+ sistemas internos.",
+              "Construí un motor interno que automatiza las revisiones periódicas de acceso.",
+              "Implementé segmentación regional de datos para que la información de identidad cumpla las regulaciones de LATAM.",
+            ] },
+            { label: "Resultado", items: ["Reduje en un 35% los tiempos de respuesta de la API ajustando planes de consulta e índices en los endpoints con más tráfico."] },
+          ],
+        },
+        {
+          id: "compass",
+          title: "Reconstruir un servicio central en Go para Compass",
+          context: "Ingeniero Backend en Workstate, para Compass · abr 2026 a jul 2026 · Remoto, contrato · Sin código público",
+          rows: [
+            { label: "Problema", items: ["Un cuello de botella reaparecía una y otra vez en el pipeline de solicitudes de la plataforma."] },
+            { label: "Qué hice", items: [
+              "Reconstruí un microservicio central en Go.",
+              "Construí servicios en Go y APIs REST para Compass, una de las principales plataformas inmobiliarias de EE. UU., trabajando con equipos internacionales distribuidos.",
+            ] },
+            { label: "Resultado", items: ["Reduje un 90% los tiempos de respuesta P95 y eliminé el cuello de botella."] },
+          ],
+        },
+        {
+          id: "sia",
+          title: "SIA Bridge",
+          context: "Proyecto independiente, sin afiliación con la Universidad Nacional de Colombia",
+          rows: [
+            { label: "Problema", items: ["El sistema de información académica de la universidad (el SIA) es una aplicación web Oracle ADF sin API. Ver los grupos de una sola materia exige cuatro menús encadenados, y cada paso es un POST contra una sesión del servidor que caduca tras unos cuatro minutos de inactividad."] },
+            { label: "Qué hice", items: [
+              "Hice ingeniería inversa del protocolo ADF en Go. La API repite los POST parciales que enviaría un navegador y devuelve JSON limpio.",
+              "Mantuve un pool de sesiones ADF vivas en lugar de un cliente HTTP simple, y le hice pruebas de carga contra producción para hallar el techo de concurrencia.",
+              "Guardé en Postgres según cómo cambia cada tipo de dato: los catálogos se sirven con stale-while-revalidate y cada cupo indica qué tan viejo es.",
+              "Construí una aplicación web en React y TypeScript sobre la misma API pública para planear un semestre, con detección de cruces de horario y exportación al calendario.",
+            ] },
+            { label: "Resultado", items: ["Las consultas que tardan cerca de 2 s en el sistema oficial responden en cerca de 1 ms. Solo un fallo de caché espera al SIA."] },
+          ],
+          latency: {
+            caption: "La misma consulta de materias, valores aproximados, escala lineal. A escala real la segunda barra mide cerca de 1/2 000 de la primera, así que se dibuja con un ancho mínimo para que se vea.",
+            slow: "Sistema oficial",
+            fast: "SIA Bridge, en caché",
+            slowValue: "~2 s",
+            fastValue: "~1 ms",
+            text: "Cerca de 2 segundos en el sistema oficial frente a cerca de 1 milisegundo en SIA Bridge cuando la respuesta está en caché, unas 2 000 veces más rápido.",
+          },
+        },
+        {
+          id: "rag",
+          title: "Chatbot RAG en WhatsApp para una campaña presidencial",
+          context: "Consultor de Desarrollo Backend en Personally AI · oct 2025 a nov 2025 · Remoto, contrato · Sin código público",
+          rows: [
+            { label: "Qué hice", items: [
+              "Construí un chatbot RAG en WhatsApp que corre un modelo local con Ollama, con Twilio para la mensajería.",
+              "Escribí un filtro de hostilidad que detecta mensajes abusivos e intentos de inyección de prompts antes de que lleguen al modelo.",
+              "Mantuve actualizada la base de conocimiento con scrapers en Selenium que se refrescan cada 24 horas.",
+            ] },
+            { label: "Resultado", items: ["El bot atendió a más de 1 000 usuarios activos."] },
+          ],
+        },
+      ],
+      other: [
+        { id: "tax-time", desc: "Asesor tributario colombiano con IA que corre 100% en local sobre Ollama. Sin internet y sin suscripciones." },
+        { id: "pokemon-agent", desc: "Agente de Q-Learning que aprende a ganar combates de Pokémon Showdown, con K-Means y XGBoost sobre 484 130 batallas reales de jugadores humanos. Proyecto de un curso universitario." },
+        { id: "logi-hyprland", desc: "Daemon de gestos para el Logitech M720 en Hyprland. Evdev puro, sin software de Logitech, como servicio de usuario de systemd." },
+        { id: "picas-fijas", desc: "Agente de Picas y Fijas que elige cada jugada con minimax al estilo de Knuth sobre los 5 040 códigos posibles." },
+      ],
+    },
     approach: [
       {
         title: "Primero medir, después arreglar",
