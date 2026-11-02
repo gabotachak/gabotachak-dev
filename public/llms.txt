@@ -1,6 +1,6 @@
 # Gabriel Anzola Tachak: Senior Backend Engineer
 
-> Gabriel Andres Anzola Tachak (professional name: Gabriel Anzola Tachak). Senior backend engineer with 4+ years building APIs and microservices, mostly in Go and Python. Four of those years were on Mercado Libre's identity and access management team. Based in Bogotá, Colombia (GMT-5). Open to senior backend roles: remote, full-time or contract.
+> Senior backend engineer with 4+ years building APIs and microservices, mostly in Go and Python. Four of those years were on Mercado Libre's identity and access management team. Based in Bogotá, Colombia (GMT-5). Open to senior backend roles: remote, full-time or contract.
 
 ## About
 
