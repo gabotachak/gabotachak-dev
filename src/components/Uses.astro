@@ -2,7 +2,9 @@
 import { translations, type Lang } from "../i18n/translations";
 import { nb } from "../i18n/format";
 
-interface Props { lang: Lang }
+interface Props {
+  lang: Lang;
+}
 const { lang } = Astro.props;
 const t = translations[lang];
 const u = t.uses;
@@ -49,16 +51,29 @@ const lfmUser = import.meta.env.PUBLIC_LASTFM_USER ?? "RobotDogger";
 
 <section class="section" aria-labelledby="machines-title">
   <div class="container">
-    <h2 class="section-title" id="machines-title">{u.machinesTitle}</h2>
+    <h2 class="section-title" id="machines-title">
+      {u.machinesTitle}
+    </h2>
     <div class="machines">
       {machines.map((m) => (
         <article>
           <p class="eyebrow">{m.kind}</p>
           <h3>{m.name}</h3>
-          <p class="meta">{m.sub}{m.archBtw && <> <span class="arch">{m.archBtw}</span></>}</p>
+          <p class="meta">
+            {m.sub}
+            {m.archBtw && (
+              <>
+                {" "}
+                <span class="arch">{m.archBtw}</span>
+              </>
+            )}
+          </p>
           <dl class="rows">
             {m.specs.map(([key, value]) => (
-              <div><dt class="eyebrow">{key}</dt><dd>{nb(value)}</dd></div>
+              <div>
+                <dt class="eyebrow">{key}</dt>
+                <dd>{nb(value)}</dd>
+              </div>
             ))}
           </dl>
         </article>
@@ -74,12 +89,17 @@ const lfmUser = import.meta.env.PUBLIC_LASTFM_USER ?? "RobotDogger";
 
 <section class="section" aria-labelledby="tools-title">
   <div class="container">
-    <h2 class="section-title" id="tools-title">{u.toolsTitle}</h2>
+    <h2 class="section-title" id="tools-title">
+      {u.toolsTitle}
+    </h2>
     <dl class="rows">
       {u.tools.map((tool) => (
         <div>
           <dt class="eyebrow">{tool.label}</dt>
-          <dd>{tool.name}{tool.note && <span class="note"> {tool.note}</span>}</dd>
+          <dd>
+            {tool.name}
+            {tool.note && <span class="note"> {tool.note}</span>}
+          </dd>
         </div>
       ))}
     </dl>
@@ -88,51 +108,80 @@ const lfmUser = import.meta.env.PUBLIC_LASTFM_USER ?? "RobotDogger";
 
 <section class="section" aria-labelledby="interests-title">
   <div class="container">
-    <h2 class="section-title" id="interests-title">{u.interestsTitle}</h2>
+    <h2 class="section-title" id="interests-title">
+      {u.interestsTitle}
+    </h2>
     <ul class="interests">
       {t.interests.map((item) => (
         <li>
           <h3>{item.title}</h3>
           <p>{item.desc}</p>
-          <ul class="tech-line">{item.tags.map((tag) => <li>{tag}</li>)}</ul>
+          <ul class="tech-line">
+            {item.tags.map((tag) => (
+              <li>{tag}</li>
+            ))}
+          </ul>
         </li>
       ))}
     </ul>
 
     {lfmKey && (
-      <div
-        class="lfm"
-        hidden
-        data-key={lfmKey}
-        data-user={lfmUser}
-        data-lang={lang}
-        data-now={t.lfm.nowPlaying}
-        data-last={t.lfm.lastPlayed}
-      >
+      <div class="lfm" hidden data-key={lfmKey} data-user={lfmUser} data-lang={lang} data-now={t.lfm.nowPlaying} data-last={t.lfm.lastPlayed}>
         <p class="eyebrow">{t.lfm.title}</p>
-        <p class="lfm-track"><span data-track></span> <span class="note" data-artist></span></p>
-        <p class="meta"><span data-status></span> · <a class="link" href={`https://www.last.fm/user/${encodeURIComponent(lfmUser)}`} target="_blank" rel="noopener noreferrer">{t.lfm.profile}</a></p>
+        <p class="lfm-track">
+          <span data-track></span> <span class="note" data-artist></span>
+        </p>
+        <p class="meta">
+          <span data-status></span> ·{" "}
+          <a class="link" href={`https://www.last.fm/user/${encodeURIComponent(lfmUser)}`} target="_blank" rel="noopener noreferrer">
+            {t.lfm.profile}
+          </a>
+        </p>
       </div>
     )}
   </div>
 </section>
 
 <style>
-  .section + .section { padding-top: 0; }
-  .page-head { padding-top: clamp(2.5rem, 6vw, 4.5rem); }
-  .page-head h1 { margin-bottom: 1rem; }
-
-  .machines { display: grid; gap: 2.5rem; }
-  @media (min-width: 768px) {
-    .machines { grid-template-columns: 1fr 1fr; gap: 3rem; }
-    .display { grid-column: 1 / -1; }
+  .section + .section {
+    padding-top: 0;
   }
-  article h3 { margin-top: 0.25rem; }
-  .arch { color: var(--text-3); }
-  .note { color: var(--text-2); }
+  .page-head {
+    padding-top: clamp(2.5rem, 6vw, 4.5rem);
+  }
+  .page-head h1 {
+    margin-bottom: 1rem;
+  }
 
-  .rows { margin: 0; }
-  article .rows { margin-top: 1.25rem; }
+  .machines {
+    display: grid;
+    gap: 2.5rem;
+  }
+  @media (min-width: 768px) {
+    .machines {
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .display {
+      grid-column: 1 / -1;
+    }
+  }
+  article h3 {
+    margin-top: 0.25rem;
+  }
+  .arch {
+    color: var(--text-3);
+  }
+  .note {
+    color: var(--text-2);
+  }
+
+  .rows {
+    margin: 0;
+  }
+  article .rows {
+    margin-top: 1.25rem;
+  }
   .rows > div {
     display: grid;
     grid-template-columns: 6.5rem 1fr;
@@ -140,9 +189,15 @@ const lfmUser = import.meta.env.PUBLIC_LASTFM_USER ?? "RobotDogger";
     padding-block: 0.625rem;
     border-top: 1px solid var(--border);
   }
-  .rows > div:last-child { border-bottom: 1px solid var(--border); }
-  .rows dt { padding-top: 0.2rem; }
-  .rows dd { margin: 0; }
+  .rows > div:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+  .rows dt {
+    padding-top: 0.2rem;
+  }
+  .rows dd {
+    margin: 0;
+  }
 
   .interests {
     list-style: none;
@@ -151,13 +206,31 @@ const lfmUser = import.meta.env.PUBLIC_LASTFM_USER ?? "RobotDogger";
     display: grid;
     gap: 2rem 3rem;
   }
-  @media (min-width: 768px) { .interests { grid-template-columns: 1fr 1fr; } }
-  .interests > li { border-top: 1px solid var(--border); padding-top: 1rem; }
-  .interests p { color: var(--text-2); margin-block: 0.5rem 0.75rem; }
+  @media (min-width: 768px) {
+    .interests {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .interests > li {
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+  }
+  .interests p {
+    color: var(--text-2);
+    margin-block: 0.5rem 0.75rem;
+  }
 
-  .lfm { margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 1rem; }
-  .lfm-track { margin-top: 0.25rem; }
-  .lfm-track .note:not(:empty)::before { content: "· "; }
+  .lfm {
+    margin-top: 3rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+  }
+  .lfm-track {
+    margin-top: 0.25rem;
+  }
+  .lfm-track .note:not(:empty)::before {
+    content: "· ";
+  }
 </style>
 
 <script>

@@ -1,0 +1,69 @@
+# Local hooks. Install with:
+#   pre-commit install --hook-type pre-commit --hook-type pre-push
+# CI runs the same file (job "hooks" in ci.yml), minus the local hooks that the
+# "checks" job already covers.
+default_install_hook_types: [pre-commit, pre-push]
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        # The vCard spec wants its line endings left alone.
+        exclude: ^public/.*\.vcf$
+      - id: end-of-file-fixer
+        exclude: ^public/.*\.vcf$
+      - id: check-merge-conflict
+      - id: check-added-large-files
+      - id: check-yaml
+      - id: check-json
+        # tsconfig.json and .vscode/*.json may carry comments (JSONC).
+        exclude: ^(tsconfig\.json|\.vscode/.*)$
+      - id: detect-private-key
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.0
+    hooks:
+      # Scans what is staged (commit time).
+      - id: gitleaks
+      # Scans the whole history; CI runs it with --hook-stage manual.
+      - id: gitleaks
+        alias: gitleaks-history
+        name: Detect hardcoded secrets (git history)
+        entry: gitleaks git --redact --verbose
+        stages: [manual]
+
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.12
+    hooks:
+      - id: actionlint
+
+  - repo: local
+    hooks:
+      - id: prettier
+        name: prettier
+        entry: npx --no-install prettier --write --ignore-unknown
+        language: system
+        types: [text]
+
+      - id: oxlint
+        name: oxlint
+        entry: npx --no-install oxlint
+        language: system
+        files: \.(ts|js|mjs|astro)$
+
+      - id: astro-check
+        name: astro check
+        entry: npm run typecheck
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]
+
+      - id: npm-audit
+        name: npm audit
+        entry: npm audit --audit-level=high
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]

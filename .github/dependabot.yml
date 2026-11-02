@@ -1,0 +1,30 @@
+version: 2
+
+# Cada ecosistema abre UN solo PR semanal con todo lo menor/patch agrupado.
+# Si fuera un PR por paquete, como todos tocan el mismo lockfile
+# (package-lock.json), mergear uno dejaría a los demás en conflicto.
+# Los major siguen yendo en PR aparte: son los que pueden romper algo y se
+# revisan de a uno.
+updates:
+  # package.json, raíz del repo — Astro, Tailwind y las herramientas de lint/formato.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "chore"
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+
+  # Versiones de las Actions en .github/workflows/*.yml — avisa de
+  # actions/checkout@v7 etc. antes de que aparezca como warning en un run.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "chore"
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]

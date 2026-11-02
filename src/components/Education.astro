@@ -1,24 +1,34 @@
 ---
 import { translations, type Lang } from "../i18n/translations";
 
-interface Props { lang: Lang }
+interface Props {
+  lang: Lang;
+}
 const { lang } = Astro.props;
 const t = translations[lang];
 ---
 
 <section class="section" id="education" aria-labelledby="education-title">
   <div class="container">
-    <h2 class="section-title" id="education-title">{t.sections.education}</h2>
+    <h2 class="section-title" id="education-title">
+      {t.sections.education}
+    </h2>
     <div class="cols">
       <div>
         <h3>{t.education.degree}</h3>
-        <p class="meta">{t.education.school} · {t.education.period}</p>
+        <p class="meta">
+          {t.education.school} · {t.education.period}
+        </p>
         <p class="meta">{t.education.note}</p>
       </div>
       <div>
         <h3>{t.education.languagesLabel}</h3>
         <ul class="langs">
-          {t.education.languages.map((l) => <li>{l.name} · <span class="meta">{l.level}</span></li>)}
+          {t.education.languages.map((l) => (
+            <li>
+              {l.name} · <span class="meta">{l.level}</span>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
@@ -26,9 +36,27 @@ const t = translations[lang];
 </section>
 
 <style>
-  .cols { display: grid; gap: 2rem 3rem; border-top: 1px solid var(--border); padding-top: 1.5rem; }
-  @media (min-width: 768px) { .cols { grid-template-columns: 3fr 2fr; } }
-  h3 { font-size: var(--fs-body); margin: 0 0 0.375rem; }
-  .meta { margin: 0; }
-  .langs { list-style: none; margin: 0; padding: 0; }
+  .cols {
+    display: grid;
+    gap: 2rem 3rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .cols {
+      grid-template-columns: 3fr 2fr;
+    }
+  }
+  h3 {
+    font-size: var(--fs-body);
+    margin: 0 0 0.375rem;
+  }
+  .meta {
+    margin: 0;
+  }
+  .langs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 </style>

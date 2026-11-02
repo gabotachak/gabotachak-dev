@@ -2,7 +2,9 @@
 import { translations, type Lang } from "../i18n/translations";
 import { nb } from "../i18n/format";
 
-interface Props { lang: Lang }
+interface Props {
+  lang: Lang;
+}
 const { lang } = Astro.props;
 const t = translations[lang];
 ---
@@ -13,8 +15,9 @@ const t = translations[lang];
       {t.metrics.map((m) => (
         <div class="figure">
           <dt>{nb(m.label)}</dt>
+          {/* prettier-ignore */}
           <dd>
-            {m.sr ? <><span aria-hidden="true">{m.value.split(" → ")[0]}<svg class="arrow" viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M2 6h19M16 1.5 21 6l-5 4.5" /></svg>{m.value.split(" → ")[1]}</span><span class="sr-only">{m.sr}</span></> : nb(m.value)}
+            {"sr" in m ? <><span aria-hidden="true">{m.value.split(" → ")[0]}<svg class="arrow" viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M2 6h19M16 1.5 21 6l-5 4.5" /></svg>{m.value.split(" → ")[1]}</span><span class="sr-only">{m.sr}</span></> : nb(m.value)}
           </dd>
         </div>
       ))}
@@ -23,23 +26,65 @@ const t = translations[lang];
 </section>
 
 <style>
-  .proof { padding-bottom: clamp(4rem, 8vw, 6rem); }
-  /* Fraunces has no arrow glyph, so it is drawn instead of falling back to a system font. */
-  .figure span[aria-hidden] { white-space: nowrap; }
-  /* At 320px the figure is wider than its cell: let it wrap instead of overflowing. */
-  @media (max-width: 359px) { .figure span[aria-hidden] { white-space: normal; } }
-  .arrow { display: inline-block; width: 0.6em; height: 0.3em; margin-inline: 0.3em; vertical-align: 0.2em; }
-  .figures { display: grid; grid-template-columns: repeat(2, 1fr); margin: 0; border-block: 1px solid var(--border); }
-  /* Value above label visually; DOM order stays dt then dd so the term is read once. */
-  .figure { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 0.5rem; padding: 1.25rem 1rem; min-width: 0; }
-  .figure:nth-child(even) { border-left: 1px solid var(--border); }
-  .figure:nth-child(n + 3) { border-top: 1px solid var(--border); }
-  @media (min-width: 768px) {
-    .figures { grid-template-columns: 1fr 1fr 1fr 1.35fr; }
-    .figure:nth-child(n) { border-top: 0; border-left: 1px solid var(--border); }
-    .figure:first-child { border-left: 0; padding-left: 0; }
+  .proof {
+    padding-bottom: clamp(4rem, 8vw, 6rem);
   }
-  dt { font-size: var(--fs-meta); line-height: 1.4; color: var(--text-2); }
+  /* Fraunces has no arrow glyph, so it is drawn instead of falling back to a system font. */
+  .figure span[aria-hidden] {
+    white-space: nowrap;
+  }
+  /* At 320px the figure is wider than its cell: let it wrap instead of overflowing. */
+  @media (max-width: 359px) {
+    .figure span[aria-hidden] {
+      white-space: normal;
+    }
+  }
+  .arrow {
+    display: inline-block;
+    width: 0.6em;
+    height: 0.3em;
+    margin-inline: 0.3em;
+    vertical-align: 0.2em;
+  }
+  .figures {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 0;
+    border-block: 1px solid var(--border);
+  }
+  /* Value above label visually; DOM order stays dt then dd so the term is read once. */
+  .figure {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 1.25rem 1rem;
+    min-width: 0;
+  }
+  .figure:nth-child(even) {
+    border-left: 1px solid var(--border);
+  }
+  .figure:nth-child(n + 3) {
+    border-top: 1px solid var(--border);
+  }
+  @media (min-width: 768px) {
+    .figures {
+      grid-template-columns: 1fr 1fr 1fr 1.35fr;
+    }
+    .figure:nth-child(n) {
+      border-top: 0;
+      border-left: 1px solid var(--border);
+    }
+    .figure:first-child {
+      border-left: 0;
+      padding-left: 0;
+    }
+  }
+  dt {
+    font-size: var(--fs-meta);
+    line-height: 1.4;
+    color: var(--text-2);
+  }
   dd {
     margin: 0;
     font-family: var(--font-display);

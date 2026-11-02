@@ -6,5 +6,4 @@ export const nb = (s: string) => s.replace(/(\d) (?=\d{3}\b)/g, "$1 ");
 
 // Language-neutral page path ("" for home, "uses") to its localized URL path.
 // EN lives at /, ES at /es/. Always ends with a slash, as the static build emits directories.
-export const localeHref = (lang: Lang, path = "") =>
-  (lang === "es" ? "/es/" : "/") + (path ? `${path.replace(/^\/|\/$/g, "")}/` : "");
+export const localeHref = (lang: Lang, path = "") => (lang === "es" ? "/es/" : "/") + (path ? `${path.replace(/^\/|\/$/g, "")}/` : "");
