@@ -3,7 +3,9 @@ import { chrome } from "../i18n/chrome";
 import { localeHref } from "../i18n/format";
 import type { Lang } from "../i18n/translations";
 
-interface Props { lang: Lang }
+interface Props {
+  lang: Lang;
+}
 const { lang } = Astro.props;
 const f = chrome[lang].footer;
 ---
@@ -11,7 +13,9 @@ const f = chrome[lang].footer;
 <footer class="site-footer">
   <div class="container footer-inner">
     <p>{f.location}</p>
-    <p><a href={localeHref(lang, "uses")}>{f.uses}</a></p>
+    <p>
+      <a href={localeHref(lang, "uses")}>{f.uses}</a>
+    </p>
     {/* prettier-ignore */}
     <p>
       {f.builtWith} ·
@@ -41,6 +45,8 @@ const f = chrome[lang].footer;
     text-underline-offset: 0.2em;
   }
   @media (hover: hover) {
-    a:hover { color: var(--text); }
+    a:hover {
+      color: var(--text);
+    }
   }
 </style>

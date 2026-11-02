@@ -11,11 +11,11 @@ Personal portfolio of Gabriel Anzola Tachak, Senior Backend Engineer. Static sit
 
 ## Pages
 
-| Path | Content |
-|------|---------|
-| `/`, `/es/` | Home: hero, proof, selected work, experience, stack, how I work, education, contact |
-| `/uses/`, `/es/uses/` | Machines, tools, interests and a small "last listened" block from Last.fm |
-| `/404.html` | Bilingual not-found page, `noindex` |
+| Path                  | Content                                                                             |
+| --------------------- | ----------------------------------------------------------------------------------- |
+| `/`, `/es/`           | Home: hero, proof, selected work, experience, stack, how I work, education, contact |
+| `/uses/`, `/es/uses/` | Machines, tools, interests and a small "last listened" block from Last.fm           |
+| `/404.html`           | Bilingual not-found page, `noindex`                                                 |
 
 Copy lives in `src/i18n/translations.ts` (sections) and `src/i18n/chrome.ts` (nav, footer, metadata). `public/` holds the CV, vCard, `llms.txt`, favicons and the Open Graph images (`og-en.png`, `og-es.png`, 1200×630).
 
@@ -32,10 +32,10 @@ npm run preview   # serve ./dist
 
 Optional. Only the `/uses` page reads them; without the key the Last.fm block is not rendered.
 
-| Variable | Description |
-|----------|-------------|
+| Variable                | Description                                                            |
+| ----------------------- | ---------------------------------------------------------------------- |
 | `PUBLIC_LASTFM_API_KEY` | Last.fm API key ([create one](https://www.last.fm/api/account/create)) |
-| `PUBLIC_LASTFM_USER` | Last.fm username |
+| `PUBLIC_LASTFM_USER`    | Last.fm username                                                       |
 
 Copy `.env.example` to `.env` to set them locally. The key is read-only and ends up in the built HTML, so rotate it at last.fm/api if needed.
 

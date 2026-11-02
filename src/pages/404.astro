@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 ---
+
 <Layout title="404 · gabotachak.dev" description="Page not found. Página no encontrada." noindex>
   <Nav lang="en" />
   <main id="main" class="section">
@@ -11,13 +12,21 @@ import Footer from "../components/Footer.astro";
         <p class="eyebrow">404</p>
         <h1>Page not found</h1>
         <p class="lede">The page does not exist or it moved.</p>
-        <p><a class="btn btn-primary" href="/">Go to the home page</a></p>
+        <p>
+          <a class="btn btn-primary" href="/">
+            Go to the home page
+          </a>
+        </p>
       </section>
       <section lang="es">
         <p class="eyebrow">404</p>
         <h2>Página no encontrada</h2>
         <p class="lede">La página no existe o cambió de lugar.</p>
-        <p><a class="btn btn-secondary" href="/es/">Ir a la página de inicio</a></p>
+        <p>
+          <a class="btn btn-secondary" href="/es/">
+            Ir a la página de inicio
+          </a>
+        </p>
       </section>
     </div>
   </main>
@@ -25,11 +34,28 @@ import Footer from "../components/Footer.astro";
 </Layout>
 
 <style>
-  .notfound { display: grid; gap: 3rem; }
-  @media (min-width: 768px) {
-    .notfound { grid-template-columns: 1fr 1fr; gap: 4rem; }
-    .notfound > section + section { border-inline-start: 1px solid var(--border); padding-inline-start: 4rem; }
+  .notfound {
+    display: grid;
+    gap: 3rem;
   }
-  h1, h2 { font-size: var(--fs-h1); letter-spacing: -0.02em; line-height: 1.08; margin-block: 0.5rem 1rem; }
-  .lede + p { margin-top: 1.5rem; }
+  @media (min-width: 768px) {
+    .notfound {
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+    .notfound > section + section {
+      border-inline-start: 1px solid var(--border);
+      padding-inline-start: 4rem;
+    }
+  }
+  h1,
+  h2 {
+    font-size: var(--fs-h1);
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+    margin-block: 0.5rem 1rem;
+  }
+  .lede + p {
+    margin-top: 1.5rem;
+  }
 </style>

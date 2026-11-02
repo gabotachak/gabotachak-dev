@@ -31,18 +31,18 @@ const themeColor = { dark: "#15110e", light: "#f8f3ea" };
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  "name": "Gabriel Andres Anzola Tachak",
-  "alternateName": "Gabriel Anzola Tachak",
-  "url": site,
-  "email": "hi@gabotachak.dev",
-  "jobTitle": c.jsonLd.jobTitle,
-  "description": c.jsonLd.description,
-  "inLanguage": lang,
-  "address": { "@type": "PostalAddress", "addressLocality": "Bogotá", "addressCountry": "CO" },
-  "sameAs": ["https://github.com/gabotachak", "https://linkedin.com/in/gabotachak"],
-  "alumniOf": { "@type": "CollegeOrUniversity", "name": "Universidad Nacional de Colombia" },
-  "knowsLanguage": ["es", "en"],
-  "knowsAbout": ["Go", "Python", "IAM", "OAuth2", "RBAC", "gRPC", "REST APIs", "Microservices", "Backend Engineering", "GCP", "Kubernetes"],
+  name: "Gabriel Andres Anzola Tachak",
+  alternateName: "Gabriel Anzola Tachak",
+  url: site,
+  email: "hi@gabotachak.dev",
+  jobTitle: c.jsonLd.jobTitle,
+  description: c.jsonLd.description,
+  inLanguage: lang,
+  address: { "@type": "PostalAddress", addressLocality: "Bogotá", addressCountry: "CO" },
+  sameAs: ["https://github.com/gabotachak", "https://linkedin.com/in/gabotachak"],
+  alumniOf: { "@type": "CollegeOrUniversity", name: "Universidad Nacional de Colombia" },
+  knowsLanguage: ["es", "en"],
+  knowsAbout: ["Go", "Python", "IAM", "OAuth2", "RBAC", "gRPC", "REST APIs", "Microservices", "Backend Engineering", "GCP", "Kubernetes"],
 };
 ---
 
@@ -94,24 +94,33 @@ const jsonLd = {
         var metas = document.querySelectorAll('meta[name="theme-color"]');
         var colors = {};
         metas.forEach(function (m) {
-          colors[/dark/.test(m.media) ? 'dark' : 'light'] = m.content;
+          colors[/dark/.test(m.media) ? "dark" : "light"] = m.content;
         });
         function apply(light) {
-          root.classList.toggle('light', light);
+          root.classList.toggle("light", light);
           // The OS-based media queries can't see a manual choice, so pin both metas to it.
-          metas.forEach(function (m) { m.content = light ? colors.light : colors.dark; });
+          metas.forEach(function (m) {
+            m.content = light ? colors.light : colors.dark;
+          });
         }
         window.setTheme = function (light, persist) {
           apply(light);
-          if (persist) { try { localStorage.setItem('theme', light ? 'light' : 'dark'); } catch (e) {} }
+          if (persist) {
+            try {
+              localStorage.setItem("theme", light ? "light" : "dark");
+            } catch (e) {}
+          }
         };
-        var saved = null, light = false;
-        try { saved = localStorage.getItem('theme'); } catch (e) {}
+        var saved = null,
+          light = false;
         try {
-          light = saved === 'light' || (saved !== 'dark' && matchMedia('(prefers-color-scheme: light)').matches);
+          saved = localStorage.getItem("theme");
+        } catch (e) {}
+        try {
+          light = saved === "light" || (saved !== "dark" && matchMedia("(prefers-color-scheme: light)").matches);
         } catch (e) {}
         apply(light);
-        root.classList.remove('no-js');
+        root.classList.remove("no-js");
       })();
     </script>
   </head>
