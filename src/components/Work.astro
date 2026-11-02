@@ -132,6 +132,14 @@ const other: Record<string, { url: string | null; tech: string[] }> = {
   .bar-fast { width: max(3px, 0.05%); background: var(--accent); animation: grow 0.08s linear; }
   /* Only `from`, so reduced motion and print land on the final state. */
   @keyframes grow { from { transform: scaleX(0); } }
+  /* Plays as the figure scrolls into view, not at load when it is off-screen. Browsers without view timelines keep the load animation. */
+  @supports (animation-timeline: view()) {
+    @media screen and (prefers-reduced-motion: no-preference) {
+      /* Named on the figure: the track's overflow:hidden would make view() resolve to the track and never progress. */
+      .lat { view-timeline: --lat block; }
+      .bar-slow, .bar-fast { animation-timeline: --lat; animation-range: entry 20% cover 45%; animation-fill-mode: both; }
+    }
+  }
   @media (forced-colors: active) {
     .bar { background: CanvasText; }
   }

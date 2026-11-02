@@ -6,23 +6,6 @@ export const translations = {
       title: "Gabriel Anzola Tachak · Senior Backend Engineer",
       description: "Gabriel Anzola Tachak, Senior Backend Engineer. Go and Python APIs, microservices and IAM. Bogotá, Colombia.",
     },
-    nav: {
-      exp: "exp",
-      projects: "projects",
-      stack: "stack",
-      approach: "approach",
-      uses: "uses",
-      interests: "interests",
-      contact: "contact",
-      cv: "cv",
-      langSwitch: "es",
-      langSwitchHref: "/es/",
-      skip: "Skip to content",
-      menuOpen: "Open menu",
-      menuClose: "Close menu",
-      themeLabel: "Theme",
-      themeModes: { dark: "dark", light: "light", system: "system" },
-    },
     hero: {
       eyebrow: "Senior Backend Engineer · Go & Python",
       lede: "I build the APIs that decide who can reach what, and I make them fast. Four years on Mercado Libre's identity platform, then backend contracts for The Home Depot US and Compass.",
@@ -39,23 +22,19 @@ export const translations = {
       whatsapp: "WhatsApp",
       save: "Save contact",
     },
-    roles: ["Senior Backend Engineer", "Go & Python", "IAM & Security", "APIs & Microservices", "Bogotá 🇨🇴"],
     metrics: [
-      { value: "140 000+",      label: "employees and external partners served by the IAM platform I built on at Mercado Libre (40 000+ employees, 100 000+ partners)" },
+      { value: "140 000+",      label: "employees and external partners served by the IAM platform I built on at Mercado Libre" },
       { value: "100+",          label: "internal systems under automated provisioning and access rotation" },
       { value: "−90%",          label: "P95 latency after I rebuilt a core Go service for Compass" },
       { value: "~2 s → ~1 ms",  sr: "about 2 seconds to about 1 millisecond", label: "course queries on SIA Bridge against the university's own system" },
     ],
     sections: {
       experience: "Experience",
-      projects: "projects",
       stack: "Stack",
       stackNote: "Go and Python are my main languages; I pick whichever fits the problem and the team.",
       alsoLabel: "Also used",
       approach: "How I work",
       education: "Education and languages",
-      uses: "uses",
-      interests: "interests",
     },
     stackTable: {
       categories: {
@@ -136,7 +115,7 @@ export const translations = {
         {
           id: "compass",
           title: "Rebuilding a core Go service for Compass",
-          context: "Backend Engineer at Workstate, for Compass · Apr 2026 to Jul 2026 · Remote, contract · No public code",
+          context: "Backend Engineer at Workstate, for Compass · Apr 2026 to Jul 2026 · Remote, contract",
           rows: [
             { label: "Problem", items: ["A bottleneck kept coming back in the platform's request pipeline."] },
             { label: "What I did", items: [
@@ -172,7 +151,7 @@ export const translations = {
         {
           id: "rag",
           title: "WhatsApp RAG chatbot for a presidential campaign",
-          context: "Backend Developer Consultant at Personally AI · Oct 2025 to Nov 2025 · Remote, contract · No public code",
+          context: "Backend Developer Consultant at Personally AI · Oct 2025 to Nov 2025 · Remote, contract",
           rows: [
             { label: "What I did", items: [
               "Built a RAG chatbot on WhatsApp that runs a local model through Ollama, with Twilio handling the messaging.",
@@ -263,42 +242,17 @@ export const translations = {
         tags: ["Nintendo Switch", "Steam", "Zelda", "indie"],
       },
     ],
-    footer: {
-      source: "source",
-      builtWith: "built with Astro",
-    },
     lfm: {
       title: "Last listened",
       nowPlaying: "Now playing",
       lastPlayed: "Last played",
       profile: "Last.fm profile",
     },
-    clock: {
-      label: "Bogotá, Colombia",
-      locale: "en-US",
-    },
   },
   es: {
     meta: {
       title: "Gabriel Anzola Tachak · Ingeniero Backend Senior",
       description: "Gabriel Anzola Tachak, Ingeniero Backend Senior. APIs en Go y Python, microservicios e IAM. Bogotá, Colombia.",
-    },
-    nav: {
-      exp: "exp",
-      projects: "proyectos",
-      stack: "stack",
-      approach: "enfoque",
-      uses: "setup",
-      interests: "intereses",
-      contact: "contacto",
-      cv: "cv",
-      langSwitch: "en",
-      langSwitchHref: "/",
-      skip: "Saltar al contenido",
-      menuOpen: "Abrir menú",
-      menuClose: "Cerrar menú",
-      themeLabel: "Tema",
-      themeModes: { dark: "oscuro", light: "claro", system: "sistema" },
     },
     hero: {
       eyebrow: "Ingeniero Backend Senior · Go y Python",
@@ -316,23 +270,19 @@ export const translations = {
       whatsapp: "WhatsApp",
       save: "Guardar contacto",
     },
-    roles: ["Ingeniero Backend Senior", "Go & Python", "IAM y Seguridad", "APIs y Microservicios", "Bogotá 🇨🇴"],
     metrics: [
-      { value: "140 000+",      label: "empleados y socios externos atendidos por la plataforma IAM en la que trabajé en Mercado Libre (40 000+ empleados, 100 000+ socios)" },
+      { value: "140 000+",      label: "empleados y socios externos atendidos por la plataforma IAM en la que trabajé en Mercado Libre" },
       { value: "100+",          label: "sistemas internos con aprovisionamiento y rotación de accesos automatizados" },
       { value: "−90%",          label: "de latencia P95 tras reconstruir un servicio central en Go para Compass" },
       { value: "~2 s → ~1 ms",  sr: "unos 2 segundos a cerca de 1 milisegundo", label: "consultas de cursos en SIA Bridge, frente al sistema de la propia universidad" },
     ],
     sections: {
       experience: "Experiencia",
-      projects: "proyectos",
       stack: "Stack",
       stackNote: "Go y Python son mis lenguajes principales; uso el que mejor encaje con el problema y el equipo.",
       alsoLabel: "También he usado",
       approach: "Cómo trabajo",
       education: "Educación e idiomas",
-      uses: "setup",
-      interests: "intereses",
     },
     stackTable: {
       categories: {
@@ -413,7 +363,7 @@ export const translations = {
         {
           id: "compass",
           title: "Reconstruir un servicio central en Go para Compass",
-          context: "Ingeniero Backend en Workstate, para Compass · abr 2026 a jul 2026 · Remoto, contrato · Sin código público",
+          context: "Ingeniero Backend en Workstate, para Compass · abr 2026 a jul 2026 · Remoto, contrato",
           rows: [
             { label: "Problema", items: ["Un cuello de botella reaparecía una y otra vez en el pipeline de solicitudes de la plataforma."] },
             { label: "Qué hice", items: [
@@ -449,7 +399,7 @@ export const translations = {
         {
           id: "rag",
           title: "Chatbot RAG en WhatsApp para una campaña presidencial",
-          context: "Consultor de Desarrollo Backend en Personally AI · oct 2025 a nov 2025 · Remoto, contrato · Sin código público",
+          context: "Consultor Backend en Personally AI · oct 2025 a nov 2025 · Remoto, contrato",
           rows: [
             { label: "Qué hice", items: [
               "Construí un chatbot RAG en WhatsApp que corre un modelo local con Ollama, con Twilio para la mensajería.",
@@ -540,19 +490,11 @@ export const translations = {
         tags: ["Nintendo Switch", "Steam", "Zelda", "indie"],
       },
     ],
-    footer: {
-      source: "código",
-      builtWith: "construido con Astro",
-    },
     lfm: {
       title: "Lo último que escuché",
       nowPlaying: "Escuchando ahora",
       lastPlayed: "Última reproducción",
       profile: "Perfil de Last.fm",
-    },
-    clock: {
-      label: "Bogotá, Colombia",
-      locale: "es-CO",
     },
   },
 } as const;
