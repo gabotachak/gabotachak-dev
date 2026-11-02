@@ -1,42 +1,49 @@
-# Gabriel Andres Anzola Tachak — Backend Engineer
+# Gabriel Anzola Tachak: Senior Backend Engineer
 
-> Backend Engineer with 4+ years building scalable APIs and IAM systems in Go and Python. Currently working at Workstate for Compass (US real estate platform). Open to new remote opportunities. Based in Bogotá, Colombia (GMT-5). Available for full-time, consulting, or contract roles.
+> Senior backend engineer with 4+ years building APIs and microservices, mostly in Go and Python. Four of those years were on Mercado Libre's identity and access management team. Based in Bogotá, Colombia (GMT-5). Open to senior backend roles: remote, full-time or contract.
 
 ## About
 
-- [Portfolio](https://gabotachak.dev/): Full profile, experience, projects, and stack
-- [CV / Resume](https://gabotachak.dev/cv.pdf): Downloadable PDF with full work history
+- [Portfolio](https://gabotachak.dev/): Profile, experience, projects and skills
+- [CV / Resume](https://gabotachak.dev/cv.pdf): Downloadable PDF
 - [LinkedIn](https://linkedin.com/in/gabotachak): Professional network
-- [GitHub](https://github.com/gabotachak): Open source projects and contributions
+- [GitHub](https://github.com/gabotachak): Open source projects
 
-## Skills & Stack
+## Skills (self-assessed, 1 to 5)
 
-- Backend: Go, Python, TypeScript, Bash
-- IAM & Security: OAuth2, JWT, RBAC, SOX/PCI compliance
-- Cloud & Infra: GCP, AWS, Docker, Terraform, GitHub Actions, Vault
-- Databases: PostgreSQL, MySQL, MongoDB, Redis
-- AI/LLM: Claude, Gemini, Ollama (local LLMs)
+- Languages: Go 5, Python 5, SQL 4
+- Frameworks: Gin / Gorilla Mux 5, FastAPI / Django / Flask 5
+- Protocols and architecture: gRPC & REST APIs 5, Distributed Systems 4
+- Databases: PostgreSQL / MySQL 4, Redis / MongoDB 4
+- Cloud and DevOps: GCP 4, Docker & Linux 4, Kubernetes 4, GitHub Actions & CI/CD 4, Terraform 4, Grafana 4, Spinnaker 3
+- Security: OAuth2, JWT & RBAC 4, Vault 4
+- AI / LLM: Ollama 3, LlamaIndex 3
+- Tools: Selenium 3, Twilio 3
 
 ## Experience
 
-- **Workstate / Compass** (Apr 2026 – present): Mid Backend Engineer — high-performance Go APIs for US real estate at scale
-- **NEORIS / The Home Depot US** (Dec 2025 – Mar 2026): Senior Backend Developer — Go microservices on GCP
-- **Personally AI** (Oct – Nov 2025): Backend Developer Consultant — Python APIs, WhatsApp Business, GPT workflows
-- **MercadoLibre** (Jun 2021 – Sep 2025): Cybersecurity Developer — IAM — 4+ years automating identity provisioning for Latin America's largest e-commerce across AWS, GCP, and 100+ internal systems
+- **Workstate / Compass** (Apr 2026 to Jul 2026), Backend Engineer. Go services and REST APIs for a leading US real estate platform. Rebuilt a core Go microservice and cut P95 latency by 90%.
+- **NEORIS / The Home Depot US** (Dec 2025 to Mar 2026), Backend Developer. Led planning and development of Go gRPC microservices for inventory management on GCP.
+- **Personally AI** (Oct 2025 to Nov 2025), Backend Developer Consultant. RAG chatbot on WhatsApp for a presidential campaign, running a local model on Ollama, with 1 000+ active users.
+- **Mercado Libre** (Jun 2021 to Sep 2025), Cybersecurity Developer, IAM. Go and Python microservices for the identity and access platform: 1 000 000+ daily requests, 40 000+ employees and 100 000+ external partners.
 
 ## Projects
 
-- [tax-time](https://taxtime.gabotachak.dev/): Colombian AI tax advisor, 100% local via Ollama
+- [tax-time](https://tax-time.gabotachak.dev/): Colombian AI tax advisor that runs 100% locally on Ollama
+- [SIA Bridge](https://sia.gabotachak.dev/): Course-scheduling assistant for Universidad Nacional de Colombia, about 1 ms per query against about 2 s on the official system
 - [pokemon-agent](https://github.com/gabotachak/pokemon-agent): Multi-LLM agent framework using Claude + Gemini
 - [logi-hyprland](https://github.com/gabotachak/logi-hyprland): Pure evdev gesture daemon for Logitech on Hyprland
-- [picas-fijas](https://github.com/gabotachak/picas-fijas): Mastermind solver using Knuth's minimax (≤5 guesses guaranteed)
+- [picas-fijas](https://github.com/gabotachak/picas-fijas): Mastermind solver using Knuth's minimax (at most 5 guesses)
 
-## Contact & Availability
+## Education
+
+- B.Sc. Systems and Computing Engineering, Universidad Nacional de Colombia (Expected 2027)
+
+## Contact
 
 - Email: hi@gabotachak.dev
-- Phone / WhatsApp: +57 333 750 0436
-- CV: https://gabotachak.dev/cv.pdf
+- LinkedIn: https://linkedin.com/in/gabotachak
+- Phone / WhatsApp: +57 300 565 3204
 - Contact card (vCard): https://gabotachak.dev/gabriel-anzola.vcf
-- Available for: remote full-time, consulting, contract
 - Timezone: GMT-5 (Bogotá, Colombia)
 - Languages: Spanish (native), English (B2)

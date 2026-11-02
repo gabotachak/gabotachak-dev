@@ -384,7 +384,7 @@ html.light .project-card:hover {
   transition: background-color 0.25s ease;
 }
 
-/* Nav — translucent material, content scrolls under it */
+/* Nav: translucent material, content scrolls under it */
 .site-nav {
   background: var(--nav-bg);
   backdrop-filter: blur(20px) saturate(180%);
@@ -449,7 +449,7 @@ html.light .project-card:hover {
   inset: -6px;
 }
 
-/* Section label — rendered as <h2>, so reset the heading defaults */
+/* Section label: rendered as <h2>, so reset the heading defaults */
 .section-label {
   font-size: 11px;
   font-weight: 400;

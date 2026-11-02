@@ -4,9 +4,9 @@ Personal portfolio site. Built with Astro + Tailwind CSS v4.
 
 ## Stack
 
-- [Astro](https://astro.build) — static site generator
-- [Tailwind CSS v4](https://tailwindcss.com) — styling
-- Last.fm API — now playing widget (client-side, read-only)
+- [Astro](https://astro.build): static site generator
+- [Tailwind CSS v4](https://tailwindcss.com): styling
+- Last.fm API: now playing widget (client-side, read-only)
 
 ## Local development
 
@@ -23,7 +23,7 @@ npm run dev
 
 | Variable | Description |
 |----------|-------------|
-| `PUBLIC_LASTFM_API_KEY` | Last.fm API key — get one at [last.fm/api](https://www.last.fm/api/account/create) |
+| `PUBLIC_LASTFM_API_KEY` | Last.fm API key (get one at [last.fm/api](https://www.last.fm/api/account/create)) |
 | `PUBLIC_LASTFM_USER` | Last.fm username |
 
 ## Commands
@@ -36,7 +36,7 @@ npm run dev
 
 ## Deploy
 
-Build outputs to `dist/` — deploy to any static host (Netlify, Vercel, GitHub Pages).
+Build outputs to `dist/`. Deploy to any static host (Netlify, Vercel, GitHub Pages).
 
 > The Last.fm API key is embedded in the built HTML as a `data-*` attribute.
-> This is intentional — the key is read-only. Rotate it at last.fm/api if needed.
+> This is intentional: the key is read-only. Rotate it at last.fm/api if needed.
