@@ -1,0 +1,13 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Uses from "../components/Uses.astro";
+import Footer from "../components/Footer.astro";
+import { translations } from "../i18n/translations";
+const { title, description } = translations.en.uses.meta;
+---
+<Layout {title} {description} lang="en" path="uses">
+  <Nav lang="en" path="uses" />
+  <main id="main"><Uses lang="en" /></main>
+  <Footer lang="en" />
+</Layout>

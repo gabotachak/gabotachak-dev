@@ -1,0 +1,209 @@
+---
+import { translations, type Lang } from "../i18n/translations";
+import { nb } from "../i18n/format";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = translations[lang];
+const u = t.uses;
+const k = u.keys;
+
+// Hardware facts are language-neutral; only the labels come from translations.
+const machines = [
+  {
+    kind: u.mac.kind,
+    name: 'MacBook Air 13" M4 · 2025',
+    sub: u.mac.sub,
+    specs: [
+      [k.chip, "Apple M4 · 10-core CPU · 8-core GPU"],
+      [k.memory, "16 GB unified memory"],
+      [k.storage, "256 GB SSD"],
+      [k.screen, "Apple Retina · 2 560×1 664 · 60 Hz"],
+    ],
+  },
+  {
+    kind: u.desktop.kind,
+    name: "ASRock B550M Steel Legend",
+    sub: u.desktop.sub,
+    archBtw: u.archBtw,
+    specs: [
+      [k.cpu, "AMD Ryzen 5 5600G"],
+      [k.gpu, "EVGA GeForce RTX 3060"],
+      [k.memory, "32 GB DDR4 4 000 MHz"],
+      [k.storage, "1 TB NVMe M.2 PCIe Gen3"],
+    ],
+  },
+];
+
+// The key is public and read-only. Without it the Last.fm block is not rendered at all.
+const lfmKey = import.meta.env.PUBLIC_LASTFM_API_KEY;
+const lfmUser = import.meta.env.PUBLIC_LASTFM_USER ?? "RobotDogger";
+---
+
+<section class="section page-head">
+  <div class="container">
+    <h1>{u.title}</h1>
+    <p class="lede">{u.lede}</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="machines-title">
+  <div class="container">
+    <h2 class="section-title" id="machines-title">{u.machinesTitle}</h2>
+    <div class="machines">
+      {machines.map((m) => (
+        <article>
+          <p class="eyebrow">{m.kind}</p>
+          <h3>{m.name}</h3>
+          <p class="meta">{m.sub}{m.archBtw && <> <span class="arch">{m.archBtw}</span></>}</p>
+          <dl class="rows">
+            {m.specs.map(([key, value]) => (
+              <div><dt class="eyebrow">{key}</dt><dd>{nb(value)}</dd></div>
+            ))}
+          </dl>
+        </article>
+      ))}
+      <article class="display">
+        <p class="eyebrow">{u.display.title}</p>
+        <h3>Samsung LS24A600U</h3>
+        <p class="meta">{nb(u.display.sub)}</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="tools-title">
+  <div class="container">
+    <h2 class="section-title" id="tools-title">{u.toolsTitle}</h2>
+    <dl class="rows">
+      {u.tools.map((tool) => (
+        <div>
+          <dt class="eyebrow">{tool.label}</dt>
+          <dd>{tool.name}{tool.note && <span class="note"> {tool.note}</span>}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="interests-title">
+  <div class="container">
+    <h2 class="section-title" id="interests-title">{u.interestsTitle}</h2>
+    <ul class="interests">
+      {t.interests.map((item) => (
+        <li>
+          <h3>{item.title}</h3>
+          <p>{item.desc}</p>
+          <ul class="tech-line">{item.tags.map((tag) => <li>{tag}</li>)}</ul>
+        </li>
+      ))}
+    </ul>
+
+    {lfmKey && (
+      <div
+        class="lfm"
+        hidden
+        data-key={lfmKey}
+        data-user={lfmUser}
+        data-lang={lang}
+        data-now={t.lfm.nowPlaying}
+        data-last={t.lfm.lastPlayed}
+      >
+        <p class="eyebrow">{t.lfm.title}</p>
+        <p class="lfm-track"><span data-track></span> <span class="note" data-artist></span></p>
+        <p class="meta"><span data-status></span> · <a class="link" href={`https://www.last.fm/user/${encodeURIComponent(lfmUser)}`} target="_blank" rel="noopener noreferrer">{t.lfm.profile}</a></p>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .section + .section { padding-top: 0; }
+  .page-head { padding-top: clamp(2.5rem, 6vw, 4.5rem); }
+  .page-head h1 { margin-bottom: 1rem; }
+
+  .machines { display: grid; gap: 2.5rem; }
+  @media (min-width: 768px) {
+    .machines { grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .display { grid-column: 1 / -1; }
+  }
+  article h3 { margin-top: 0.25rem; }
+  .arch { color: var(--text-3); }
+  .note { color: var(--text-2); }
+
+  .rows { margin: 0; }
+  article .rows { margin-top: 1.25rem; }
+  .rows > div {
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    gap: 1rem;
+    padding-block: 0.625rem;
+    border-top: 1px solid var(--border);
+  }
+  .rows > div:last-child { border-bottom: 1px solid var(--border); }
+  .rows dt { padding-top: 0.2rem; }
+  .rows dd { margin: 0; }
+
+  .interests {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2rem 3rem;
+  }
+  @media (min-width: 768px) { .interests { grid-template-columns: 1fr 1fr; } }
+  .interests > li { border-top: 1px solid var(--border); padding-top: 1rem; }
+  .interests p { color: var(--text-2); margin-block: 0.5rem 0.75rem; }
+
+  .lfm { margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 1rem; }
+  .lfm-track { margin-top: 0.25rem; }
+  .lfm-track .note:not(:empty)::before { content: "· "; }
+</style>
+
+<script>
+  const box = document.querySelector<HTMLElement>(".lfm");
+  if (box) {
+    const { key = "", user = "", lang = "en", now = "", last = "" } = box.dataset;
+    const q = (s: string) => box.querySelector<HTMLElement>(s)!;
+    const rtf = new Intl.RelativeTimeFormat(lang, { numeric: "auto" });
+    const ago = (uts: number) => {
+      const s = Math.max(0, Math.round(Date.now() / 1000 - uts));
+      if (s < 60) return rtf.format(0, "second");
+      if (s < 3600) return rtf.format(-Math.floor(s / 60), "minute");
+      if (s < 86400) return rtf.format(-Math.floor(s / 3600), "hour");
+      return rtf.format(-Math.floor(s / 86400), "day");
+    };
+
+    const load = async () => {
+      try {
+        const params = new URLSearchParams({ method: "user.getrecenttracks", user, api_key: key, format: "json", limit: "1" });
+        const res = await fetch("https://ws.audioscrobbler.com/2.0/?" + params);
+        if (!res.ok) return;
+        const track = (await res.json())?.recenttracks?.track?.[0];
+        if (!track?.name) return;
+        const playing = track["@attr"]?.nowplaying === "true";
+        const uts = Number(track.date?.uts);
+        if (!playing && !uts) return;
+        q("[data-track]").textContent = track.name;
+        q("[data-artist]").textContent = track.artist?.["#text"] ?? "";
+        q("[data-status]").textContent = playing ? now : `${last} ${ago(uts)}`;
+        box.hidden = false;
+      } catch {
+        // Silent: the block simply stays as it was.
+      }
+    };
+
+    // One fetch on load, then a calm refresh only while the tab is visible.
+    const REFRESH_MS = 60_000;
+    let timer: number | undefined;
+    const start = () => {
+      load();
+      timer = window.setInterval(load, REFRESH_MS);
+    };
+    document.addEventListener("visibilitychange", () => {
+      window.clearInterval(timer);
+      if (!document.hidden) start();
+    });
+    if (!document.hidden) start();
+  }
+</script>

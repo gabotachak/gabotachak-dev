@@ -1,0 +1,165 @@
+---
+import { translations, type Lang } from "../i18n/translations";
+import { nb } from "../i18n/format";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const w = translations[lang].work;
+
+// Language-neutral facts. Only repos that are public get a url; tax-time is private on purpose.
+const caseTech: Record<string, string[]> = {
+  meli: ["Go", "Python", "REST APIs", "IAM", "RBAC", "OAuth2", "AWS", "GCP"],
+  compass: ["Go", "gRPC", "GCP", "Kubernetes", "Grafana"],
+  sia: ["Go", "Gin", "PostgreSQL", "Docker", "React", "TypeScript", "OpenAPI"],
+  rag: ["Python", "Ollama", "RAG", "Selenium", "Twilio", "WhatsApp API"],
+};
+const caseUrl: Record<string, string> = {
+  sia: "https://github.com/gabotachak/sia-unal-bridge",
+};
+const other: Record<string, { url: string | null; tech: string[] }> = {
+  "tax-time": { url: null, tech: ["Python", "Ollama", "RAG"] },
+  "pokemon-agent": { url: "https://github.com/gabotachak/pokemon-agent", tech: ["Python", "poke-env", "scikit-learn", "XGBoost", "FastAPI"] },
+  "logi-hyprland": { url: "https://github.com/gabotachak/logi-hyprland", tech: ["Python", "evdev", "Hyprland", "systemd"] },
+  "picas-fijas": { url: "https://github.com/gabotachak/picas-fijas", tech: ["Python", "Minimax"] },
+};
+---
+
+<section class="section" id="work" aria-labelledby="work-title">
+  <div class="container">
+    <h2 class="section-title" id="work-title">{w.title}</h2>
+
+    <div class="cases">
+      {w.cases.map((c) => (
+        <article class="card case" aria-labelledby={`case-${c.id}`}>
+          <header>
+            <h3 id={`case-${c.id}`}>{c.title}</h3>
+            <p class="meta">{nb(c.context)}</p>
+          </header>
+
+          <dl class="rows">
+            {c.rows.map((r) => (
+              <div class="row">
+                <dt class="eyebrow">{r.label}</dt>
+                <dd>
+                  {r.items.length > 1
+                    ? <ul>{r.items.map((i) => <li>{nb(i)}</li>)}</ul>
+                    : <p>{nb(r.items[0])}</p>}
+                </dd>
+              </div>
+            ))}
+          </dl>
+
+          {"latency" in c && (
+            <figure class="lat">
+              <div class="lat-rows" aria-hidden="true">
+                <div class="lat-row">
+                  <span>{c.latency.slow}</span>
+                  <span class="val slow">{c.latency.slowValue}</span>
+                  <div class="track"><span class="bar bar-slow"></span></div>
+                </div>
+                <div class="lat-row">
+                  <span>{c.latency.fast}</span>
+                  <span class="val num">{c.latency.fastValue}</span>
+                  <div class="track"><span class="bar bar-fast"></span></div>
+                </div>
+              </div>
+              <p class="sr-only">{nb(c.latency.text)}</p>
+              <figcaption class="meta">{nb(c.latency.caption)}</figcaption>
+            </figure>
+          )}
+
+          <ul class="tech-line">{caseTech[c.id].map((x) => <li>{x}</li>)}</ul>
+          {caseUrl[c.id] && (
+            <p><a class="link" href={caseUrl[c.id]} target="_blank" rel="noopener noreferrer">{w.sourceLink}</a></p>
+          )}
+        </article>
+      ))}
+    </div>
+
+    <h3 class="other-title" id="other-title">{w.otherTitle}</h3>
+    <ul class="other" aria-labelledby="other-title">
+      {w.other.map((p) => (
+        <li>
+          <div class="name">
+            {other[p.id].url
+              ? <a class="link" href={other[p.id].url!} target="_blank" rel="noopener noreferrer">{p.id}<span class="sr-only"> (GitHub)</span></a>
+              : <span>{p.id}</span>}
+            {!other[p.id].url && <span class="tag">{w.privateRepo}</span>}
+          </div>
+          <div class="body">
+            <p class="meta">{nb(p.desc)}</p>
+            <ul class="tech-line">{other[p.id].tech.map((x) => <li>{x}</li>)}</ul>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .cases { display: grid; gap: 1.5rem; }
+  .case { display: grid; gap: 1.25rem; }
+  .case h3, .other-title { font-family: var(--font-display); font-weight: 560; letter-spacing: -0.01em; }
+  .case h3 { font-size: 1.625rem; line-height: 1.15; }
+  /* The flagship leads: accent rule, warmer surface, bigger title, more room. */
+  .case:first-child {
+    border-top: 3px solid var(--accent);
+    background: color-mix(in srgb, var(--surface) 94%, var(--accent));
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+    gap: 1.75rem;
+  }
+  .case:first-child h3 { font-size: clamp(2rem, 5vw, 2.75rem); line-height: 1.05; letter-spacing: -0.02em; }
+  .case header { display: grid; gap: 0.25rem; }
+
+  .rows { display: grid; gap: 1rem; margin: 0; }
+  .row { display: grid; gap: 0.25rem; }
+  dt { margin: 0; }
+  dd { margin: 0; max-width: var(--measure); }
+  dd ul { margin: 0; padding-inline-start: 1.1rem; list-style: disc; display: grid; gap: 0.375rem; }
+  dd li::marker { color: var(--text-3); }
+  @media (min-width: 40rem) {
+    .row { grid-template-columns: 7.5rem 1fr; gap: 1.5rem; align-items: baseline; }
+  }
+
+  .lat { margin: 0; padding-block: 1rem; border-block: 1px solid var(--border); display: grid; gap: 0.75rem; }
+  .lat-rows { display: grid; gap: 0.75rem; max-width: 40rem; }
+  .lat-row { display: grid; grid-template-columns: 1fr auto; column-gap: 1rem; row-gap: 0.375rem; font-size: var(--fs-meta); }
+  .val { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .val.slow { color: var(--text-2); }
+  .track { grid-column: 1 / -1; height: 0.5rem; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .bar {
+    display: block;
+    height: 100%;
+    border-radius: 2px;
+    transform-origin: left;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .bar-slow { width: 100%; background: var(--text-3); animation: grow 1.2s cubic-bezier(0.2, 0.7, 0.2, 1); }
+  /* Linear scale makes this bar ~0.05% of the track; the 3px minimum keeps it visible (the caption says so). */
+  .bar-fast { width: max(3px, 0.05%); background: var(--accent); animation: grow 0.08s linear; }
+  /* Only `from`, so reduced motion and print land on the final state. */
+  @keyframes grow { from { transform: scaleX(0); } }
+  /* Plays as the figure scrolls into view, not at load when it is off-screen. Browsers without view timelines keep the load animation. */
+  @supports (animation-timeline: view()) {
+    @media screen and (prefers-reduced-motion: no-preference) {
+      /* Named on the figure: the track's overflow:hidden would make view() resolve to the track and never progress. */
+      .lat { view-timeline: --lat block; }
+      .bar-slow, .bar-fast { animation-timeline: --lat; animation-range: entry 20% cover 45%; animation-fill-mode: both; }
+    }
+  }
+  @media (forced-colors: active) {
+    .bar { background: CanvasText; }
+  }
+
+  .other-title { font-size: 1.75rem; margin-top: clamp(3.5rem, 7vw, 5rem); margin-bottom: 0.75rem; }
+  .other { list-style: none; margin: 0; padding: 0; }
+  .other > li { display: grid; gap: 0.5rem; padding-block: 1.25rem; border-top: 1px solid var(--border); }
+  .other > li:last-child { border-bottom: 1px solid var(--border); }
+  .name { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0.75rem; font-family: var(--font-mono); font-weight: 500; }
+  .tag { font-family: var(--font-mono); font-size: var(--fs-label); font-weight: 400; color: var(--text-2); border: 1px solid var(--border); border-radius: 999px; padding: 0 0.5rem; }
+  .body { display: grid; gap: 0.5rem; }
+  @media (min-width: 40rem) {
+    .other > li { grid-template-columns: 12rem 1fr; gap: 1.5rem; }
+  }
+</style>

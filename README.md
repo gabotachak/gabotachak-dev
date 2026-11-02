@@ -1,42 +1,44 @@
 # gabotachak.dev
 
-Personal portfolio site. Built with Astro + Tailwind CSS v4.
+Personal portfolio of Gabriel Anzola Tachak, Senior Backend Engineer. Static site, English and Spanish.
 
 ## Stack
 
-- [Astro](https://astro.build): static site generator
-- [Tailwind CSS v4](https://tailwindcss.com): styling
-- Last.fm API: now playing widget (client-side, read-only)
+- [Astro](https://astro.build) 6, static output, with `@astrojs/sitemap`
+- [Tailwind CSS](https://tailwindcss.com) v4 plus shared tokens and primitives in `src/styles/global.css`
+- Fonts self-hosted through Fontsource: Fraunces for headings, the tagline and key figures, IBM Plex Sans for text, JetBrains Mono for tech lists and small labels
+- No UI framework. JavaScript only enhances (theme toggle, mobile menu, active nav link, copy email, Last.fm); the content works without it and prints cleanly.
 
-## Local development
+## Pages
+
+| Path | Content |
+|------|---------|
+| `/`, `/es/` | Home: hero, proof, selected work, experience, stack, how I work, education, contact |
+| `/uses/`, `/es/uses/` | Machines, tools, interests and a small "last listened" block from Last.fm |
+| `/404.html` | Bilingual not-found page, `noindex` |
+
+Copy lives in `src/i18n/translations.ts` (sections) and `src/i18n/chrome.ts` (nav, footer, metadata). `public/` holds the CV, vCard, `llms.txt`, favicons and the Open Graph images (`og-en.png`, `og-es.png`, 1200×630).
+
+## Development
 
 ```bash
-cp .env.example .env
-# fill in your Last.fm API key in .env
-
 npm install
-npm run dev
-# → http://localhost:4321
+npm run dev       # http://localhost:4321
+npm run build     # static site in ./dist
+npm run preview   # serve ./dist
 ```
 
 ## Environment variables
 
+Optional. Only the `/uses` page reads them; without the key the Last.fm block is not rendered.
+
 | Variable | Description |
 |----------|-------------|
-| `PUBLIC_LASTFM_API_KEY` | Last.fm API key (get one at [last.fm/api](https://www.last.fm/api/account/create)) |
+| `PUBLIC_LASTFM_API_KEY` | Last.fm API key ([create one](https://www.last.fm/api/account/create)) |
 | `PUBLIC_LASTFM_USER` | Last.fm username |
 
-## Commands
-
-| Command | Action |
-|---------|--------|
-| `npm run dev` | Start dev server at `localhost:4321` |
-| `npm run build` | Build to `./dist/` |
-| `npm run preview` | Preview build locally |
+Copy `.env.example` to `.env` to set them locally. The key is read-only and ends up in the built HTML, so rotate it at last.fm/api if needed.
 
 ## Deploy
 
-Build outputs to `dist/`. Deploy to any static host (Netlify, Vercel, GitHub Pages).
-
-> The Last.fm API key is embedded in the built HTML as a `data-*` attribute.
-> This is intentional: the key is read-only. Rotate it at last.fm/api if needed.
+Pushing to `master` runs `.github/workflows/deploy.yml`, which builds the site and publishes `dist/` to GitHub Pages.

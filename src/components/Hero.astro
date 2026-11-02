@@ -1,0 +1,67 @@
+---
+import { translations, type Lang } from "../i18n/translations";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const h = translations[lang].hero;
+// "Bogotá, Colombia · UTC−5": the flag sits between place and offset.
+const [place, offset] = h.location.split(" · ");
+---
+
+<section class="section hero">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <p class="eyebrow">{h.eyebrow}</p>
+      <h1>Gabriel Anzola Tachak</h1>
+      <p class="tagline">
+        <em>{h.tagline}</em>
+        <svg class="cup" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M4 10h13v4.5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM17 11.5h1.5a2.5 2.5 0 0 1 0 5H17M8 3.5c-.8 1-.8 2 0 3M12 3.5c-.8 1-.8 2 0 3" />
+        </svg>
+      </p>
+      <p class="meta location">
+        {place}
+        <svg class="flag" viewBox="0 0 3 2" aria-hidden="true" focusable="false">
+          <rect width="3" height="1" fill="#fcd116" />
+          <rect y="1" width="3" height=".5" fill="#003893" />
+          <rect y="1.5" width="3" height=".5" fill="#ce1126" />
+        </svg>
+        · {offset}
+      </p>
+      <p class="lede">{h.lede}</p>
+      <p class="meta availability"><span class="status-dot" aria-hidden="true"></span>{h.availability}</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:hi@gabotachak.dev">{h.email}</a>
+        <a class="btn btn-secondary ext" href="/cv.pdf" target="_blank" rel="noopener noreferrer">{h.cv}</a>
+        <a class="link" href="https://github.com/gabotachak" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="link" href="https://linkedin.com/in/gabotachak" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </div>
+    <img class="photo" src="/avatar.jpg" alt="" width="460" height="460" fetchpriority="high" />
+  </div>
+</section>
+
+<style>
+  .hero { padding-top: clamp(2rem, 6vw, 4.5rem); padding-bottom: clamp(3rem, 6vw, 4.5rem); }
+  .hero-grid { display: grid; gap: 1.75rem; align-items: center; }
+  /* Photo first on phones, on the right from 768px. */
+  .photo { order: -1; width: 7.5rem; height: 7.5rem; border-radius: 14px; border: 1px solid var(--border); object-fit: cover; }
+  @media (min-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr auto; gap: 3.5rem; align-items: start; }
+    .photo { order: 0; width: 13.75rem; height: 13.75rem; margin-top: 1.5rem; }
+  }
+  h1 { font-size: var(--fs-hero); letter-spacing: -0.025em; line-height: 1.02; margin-block: 0.5rem 0.75rem; }
+  .tagline {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-family: var(--font-display); font-style: italic; font-weight: 450;
+    font-size: clamp(1.375rem, 4vw, 1.875rem); line-height: 1.2; color: var(--accent);
+  }
+  .cup { width: 1.1em; height: 1.1em; flex-shrink: 0; }
+  .location { display: flex; align-items: center; gap: 0.4rem; margin-top: 0.5rem; max-width: none; }
+  .flag { width: 1.125rem; height: 0.75rem; border-radius: 2px; box-shadow: 0 0 0 1px var(--border); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .lede { margin-top: 1.5rem; }
+  .availability { display: flex; align-items: center; gap: 0.5rem; margin-top: 1.25rem; max-width: none; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.5rem; margin-top: 1.75rem; }
+  .actions .btn-secondary { margin-inline-end: -0.25rem; }
+  .actions .link { display: inline-flex; align-items: center; min-height: 2.75rem; }
+</style>

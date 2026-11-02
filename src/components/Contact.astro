@@ -1,0 +1,60 @@
+---
+import { translations, type Lang } from "../i18n/translations";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = translations[lang];
+const c = t.contact;
+const email = "hi@gabotachak.dev";
+---
+
+<section class="section band" id="contact" aria-labelledby="contact-title">
+  <div class="container">
+    <h2 class="section-title big" id="contact-title">{c.title}</h2>
+    <p class="lede">{t.hero.availability}</p>
+    <div class="main-action">
+      <a class="btn btn-primary email" href={`mailto:${email}`}>{email}</a>
+      <button type="button" class="btn btn-secondary no-print" data-copy={email} data-ok={c.copied} data-fail={c.copyFailed} hidden>{c.copy}</button>
+    </div>
+    <p class="meta copy-status" role="status" aria-live="polite" data-copy-status></p>
+    <ul class="more">
+      <li><a class="btn btn-secondary ext" href="/cv.pdf" target="_blank" rel="noopener noreferrer">{t.hero.cv}</a></li>
+      <li><a class="btn btn-secondary ext" href="https://linkedin.com/in/gabotachak" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+      <li><a class="btn btn-secondary ext" href="https://github.com/gabotachak" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+      <li><a class="btn btn-secondary ext" href="https://wa.me/573005653204" target="_blank" rel="noopener noreferrer">{c.whatsapp}</a></li>
+      <li><a class="btn btn-secondary" href="/gabriel-anzola.vcf" download>{c.save}</a></li>
+    </ul>
+  </div>
+</section>
+
+<script>
+  // Enhancement only: the button stays hidden without JS. No storage, no fallback to execCommand.
+  const btn = document.querySelector<HTMLButtonElement>("[data-copy]");
+  const status = document.querySelector<HTMLElement>("[data-copy-status]");
+  if (btn && status && navigator.clipboard?.writeText) {
+    btn.hidden = false;
+    btn.addEventListener("click", async () => {
+      let msg = btn.dataset.ok!;
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copy!);
+      } catch {
+        msg = btn.dataset.fail!;
+      }
+      status.textContent = msg;
+    });
+  }
+</script>
+
+<style>
+  /* Full-bleed closing band: accent tint over the page background. */
+  .band { background: var(--band); border-block: 1px solid var(--border); padding-block: clamp(4rem, 10vw, 8rem); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .big { font-size: clamp(3.25rem, 13vw, 7.5rem); line-height: 0.95; letter-spacing: -0.03em; margin-bottom: clamp(1.25rem, 3vw, 2rem); }
+  .band .btn-secondary:hover { background: var(--bg); }
+  .main-action { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+  .email { min-height: 3.25rem; padding-inline: 1.5rem; font-size: var(--fs-lede); font-family: var(--font-mono); font-weight: 500; }
+  .main-action button[hidden] { display: none; }
+  .main-action button { min-height: 3.25rem; }
+  .copy-status { min-height: 1.5rem; margin-top: 0.5rem; }
+  .more { list-style: none; margin: 1rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  @media (max-width: 479px) { .email { width: 100%; font-size: var(--fs-body); padding-inline: 1rem; } }
+</style>
