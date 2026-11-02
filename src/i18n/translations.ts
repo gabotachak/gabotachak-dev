@@ -39,13 +39,13 @@ export const translations = {
       { value: "−35%",        label: "API response times after query and index work at Mercado Libre" },
     ],
     sections: {
-      experience: "experience",
+      experience: "Experience",
       projects: "projects",
-      stack: "stack",
+      stack: "Stack",
       stackNote: "Self-assessed, 1 to 5. Go and Python sit at the same level; I pick whichever fits the problem and the team.",
       alsoLabel: "also used",
-      approach: "how I work",
-      education: "education & languages",
+      approach: "How I work",
+      education: "Education and languages",
       uses: "uses",
       interests: "interests",
     },
@@ -67,8 +67,7 @@ export const translations = {
       },
     },
     experience: {
-      activeBadge: "active",
-      techLabel: "tech",
+      to: "to",
       jobs: [
         {
           role: "Backend Engineer",
@@ -121,22 +120,18 @@ export const translations = {
     ],
     approach: [
       {
-        emoji: "⚡",
         title: "Measure, then fix",
         desc: "I look at P95 latency and query plans before touching code. That's how a core Go service lost 90% of its P95, and how a registration query went from about 2 s to about 1 ms.",
       },
       {
-        emoji: "🔐",
         title: "Access rules first",
         desc: "Four years in IAM changed how I start a design. Before endpoints, I want to know who can reach what and how we prove it later. RBAC, OAuth2 and JWT, secrets in Vault.",
       },
       {
-        emoji: "🎨",
         title: "UX doesn't stop at the API",
         desc: "An API is a product for the developers who call it, so I care about clear contracts and predictable errors. On the front end I build for keyboard users, reduced motion and high contrast. This site is an example.",
       },
       {
-        emoji: "🤖",
         title: "Local AI when possible",
         desc: "I'd rather run models on hardware the user controls. tax-time runs fully on Ollama, and the campaign chatbot answered 1 000+ users with a local model.",
       },
@@ -146,10 +141,10 @@ export const translations = {
       school: "Universidad Nacional de Colombia",
       period: "Expected 2027",
       note: "Former Teaching Assistant, Numerical Methods (Python)",
-      languagesLabel: "languages",
+      languagesLabel: "Languages",
       languages: [
         { name: "Spanish", level: "Native" },
-        { name: "English", level: "B2, professional working" },
+        { name: "English", level: "B2" },
       ],
     },
     uses: {
@@ -245,13 +240,13 @@ export const translations = {
       { value: "−35%",        label: "en tiempos de respuesta de API tras ajustar consultas e índices en Mercado Libre" },
     ],
     sections: {
-      experience: "experiencia",
+      experience: "Experiencia",
       projects: "proyectos",
-      stack: "stack",
+      stack: "Stack",
       stackNote: "Autoevaluación de 1 a 5. Go y Python están al mismo nivel; uso el que mejor encaje con el problema y el equipo.",
       alsoLabel: "también he usado",
-      approach: "cómo trabajo",
-      education: "educación e idiomas",
+      approach: "Cómo trabajo",
+      education: "Educación e idiomas",
       uses: "setup",
       interests: "intereses",
     },
@@ -273,8 +268,7 @@ export const translations = {
       },
     },
     experience: {
-      activeBadge: "activo",
-      techLabel: "tech",
+      to: "a",
       jobs: [
         {
           role: "Ingeniero Backend",
@@ -327,22 +321,18 @@ export const translations = {
     ],
     approach: [
       {
-        emoji: "⚡",
         title: "Primero medir, después arreglar",
         desc: "Reviso la latencia P95 y los planes de consulta antes de tocar código. Así un servicio central en Go perdió el 90% de su P95, y una consulta de inscripciones pasó de cerca de 2 s a cerca de 1 ms.",
       },
       {
-        emoji: "🔐",
         title: "Las reglas de acceso van primero",
         desc: "Cuatro años en IAM cambiaron cómo empiezo un diseño. Antes de los endpoints quiero saber quién puede entrar a qué y cómo lo vamos a demostrar después. RBAC, OAuth2 y JWT, secretos en Vault.",
       },
       {
-        emoji: "🎨",
         title: "La UX no termina en la API",
         desc: "Una API es un producto para quienes la llaman, así que me importan los contratos claros y los errores predecibles. En el front construyo pensando en quien navega con teclado, en el movimiento reducido y en el alto contraste. Este sitio es un ejemplo.",
       },
       {
-        emoji: "🤖",
         title: "IA local cuando se puede",
         desc: "Prefiero correr los modelos en hardware que controla el usuario. tax-time corre completo sobre Ollama, y el chatbot de la campaña atendió a 1 000+ usuarios con un modelo local.",
       },
@@ -352,10 +342,10 @@ export const translations = {
       school: "Universidad Nacional de Colombia",
       period: "Grado esperado: 2027",
       note: "Ex monitor de Métodos Numéricos (Python)",
-      languagesLabel: "idiomas",
+      languagesLabel: "Idiomas",
       languages: [
         { name: "Español", level: "Nativo" },
-        { name: "Inglés", level: "B2, nivel profesional" },
+        { name: "Inglés", level: "B2" },
       ],
     },
     uses: {
