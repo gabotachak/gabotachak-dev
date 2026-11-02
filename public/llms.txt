@@ -9,16 +9,17 @@
 - [LinkedIn](https://linkedin.com/in/gabotachak): Professional network
 - [GitHub](https://github.com/gabotachak): Open source projects
 
-## Skills (self-assessed, 1 to 5)
+## Skills
 
-- Languages: Go 5, Python 5, SQL 4
-- Frameworks: Gin / Gorilla Mux 5, FastAPI / Django / Flask 5
-- Protocols and architecture: gRPC & REST APIs 5, Distributed Systems 4
-- Databases: PostgreSQL / MySQL 4, Redis / MongoDB 4
-- Cloud and DevOps: GCP 4, Docker & Linux 4, Kubernetes 4, GitHub Actions & CI/CD 4, Terraform 4, Grafana 4, Spinnaker 3
-- Security: OAuth2, JWT & RBAC 4, Vault 4
-- AI / LLM: Ollama 3, LlamaIndex 3
-- Tools: Selenium 3, Twilio 3
+- Languages: Go, Python, SQL
+- Frameworks: Gin / Gorilla Mux, FastAPI / Django / Flask
+- Protocols and architecture: gRPC & REST APIs, Distributed Systems
+- Databases: PostgreSQL / MySQL, Redis / MongoDB
+- Cloud and DevOps: GCP (Pub/Sub, Workflows, Storage), Docker & Linux, Kubernetes, GitHub Actions & CI/CD, Terraform, Grafana, Spinnaker
+- Security: OAuth2, JWT & RBAC, Vault
+- AI / LLM: Ollama, LlamaIndex
+- Tools: Selenium, Twilio
+- Also used: TypeScript, Bash, AWS, Claude, Gemini
 
 ## Experience
 
