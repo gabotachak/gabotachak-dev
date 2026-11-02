@@ -70,7 +70,10 @@ const other: Record<string, { url: string | null; tech: string[] }> = {
 
           <ul class="tech-line">{caseTech[c.id].map((x) => <li>{x}</li>)}</ul>
           {caseUrl[c.id] && (
-            <p><a class="link" href={caseUrl[c.id]} target="_blank" rel="noopener noreferrer">{w.sourceLink}</a></p>
+            <Fragment>
+              {/* prettier-ignore */}
+              <p><a class="link" href={caseUrl[c.id]} target="_blank" rel="noopener noreferrer">{w.sourceLink}</a></p>
+            </Fragment>
           )}
         </article>
       ))}
@@ -80,6 +83,7 @@ const other: Record<string, { url: string | null; tech: string[] }> = {
     <ul class="other" aria-labelledby="other-title">
       {w.other.map((p) => (
         <li>
+          {/* prettier-ignore */}
           <div class="name">
             {other[p.id].url
               ? <a class="link" href={other[p.id].url!} target="_blank" rel="noopener noreferrer">{p.id}<span class="sr-only"> (GitHub)</span></a>
